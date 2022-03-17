@@ -7,25 +7,44 @@ var ctx = canvas.getContext("2d");
 var posX = 0;
 var posY = 0;
 
+var zoom = 10000;
+
 var seed = "default";
 var seedInt = parseInt(SHA256(seed));
 
+let keysPressed ={};
+
 document.addEventListener('keydown', function(e) {
-    if(e.key === 'w') {
+    keysPressed[e.key] = true;
+    if(keysPressed['w']) {
         posY-=10;
     }
-    if(e.key === 'a') {
+    if(keysPressed['a']) {
         posX-=10;
     }
-    if(e.key === 's') {
+    if(keysPressed['s']) {
         posY+=10;
     }
-    if(e.key === 'd') {
+    if(keysPressed['d']) {
         posX+=10;
     }
     ctx.clearRect(0,0,canvas.width,canvas.height);
     draw();
 });
+
+document.addEventListener('keyup', function(e) {
+    keysPressed[e.key] = false;
+})
+
+document.addEventListener('wheel', function(e) {
+    if(e.deltaY > 0 && zoom > 100) {
+        zoom-=100;
+    } else if (e.deltaY < 0 && zoom < 10000) {
+        zoom+=100;
+    }
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    draw();
+})
 
 function terrainColor(c) {
     // sea
@@ -95,7 +114,7 @@ function terrainColor(c) {
 function draw() {
     for (var x = 0; x < width; x += 10) {
         for (var y = 0; y < height; y += 10) {
-            var c = (perlin2((x+posX)/200,(y+posY)/200)+1)/2;
+            var c = (perlin2((x+posX)/zoom,(y+posY)/zoom)+1)/2;
             ctx.fillStyle = terrainColor(c);
             ctx.fillRect(x, y, 10, 10);
         }
