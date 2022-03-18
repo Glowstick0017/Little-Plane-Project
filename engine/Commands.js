@@ -21,7 +21,7 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
             seed(HashToNumber(SHA256(newSeed)));
             posX = 0;
             posY = 0;
-            document.getElementById('result').value = "seed set to " + newSeed;
+            document.getElementById('result').value = "seed set to `" + newSeed + "`";
             draw();
         }
         // adjust speed of movement
@@ -32,8 +32,21 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
             } else if (Number(speedArr[1]) > 10 || Number(speedArr[1]) < 1) {
                 document.getElementById('result').value = "Invalid input. Range 1-10";
             } else {
-                speed = speedArr[1];
+                speed = Number(speedArr[1]);
                 document.getElementById('result').value = "New speed set to " + speedArr[1];
+            }
+        }
+        // adjust quality of the world
+        else if (command.startsWith("quality")) {
+            const qualArr = command.split(" ");
+            if (qualArr.length !== 2 || isNaN(Number(qualArr[1])) || !Number.isInteger(Number(qualArr[1]))) {
+                document.getElementById('result').value = "Invalid syntax `quality <quality>`";
+            } else if (Number(qualArr[1]) > 20 || Number(qualArr[1]) < 5) {
+                document.getElementById('result').value = "Invalid input. Range 5-20";
+            } else {
+                quality = Number(qualArr[1]);
+                draw();
+                document.getElementById('result').value = "Quality set to " + qualArr[1];
             }
         }
         // invalid command // command not found

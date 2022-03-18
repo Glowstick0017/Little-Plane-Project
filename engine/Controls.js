@@ -33,13 +33,13 @@ document.addEventListener('keydown', function(e) {
         planeRotate(Math.PI / 2);
     }
 
-    if(keysPressed['w'] && keysPressed['a']) {
+    if((keysPressed['w'] && keysPressed['a']) || (keysPressed['ArrowUp'] && keysPressed['ArrowLeft'])) {
         planeRotate((7 * Math.PI) / 4);
-    } else if (keysPressed['w'] && keysPressed['d']) {
+    } else if ((keysPressed['w'] && keysPressed['d']) || (keysPressed['ArrowUp'] && keysPressed['ArrowRight'])) {
         planeRotate(Math.PI / 4);
-    } else if (keysPressed['d'] && keysPressed['s']) {
+    } else if ((keysPressed['d'] && keysPressed['s']) || (keysPressed['ArrowRight'] && keysPressed['ArrowDown'])) {
         planeRotate((3 * Math.PI) / 4);
-    } else if (keysPressed['a'] && keysPressed['s']) {
+    } else if ((keysPressed['a'] && keysPressed['s']) || (keysPressed['ArrowLeft'] && keysPressed['ArrowDown'])) {
         planeRotate((5 * Math.PI) / 4);
     }
 
