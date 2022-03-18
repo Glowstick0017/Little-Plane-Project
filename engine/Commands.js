@@ -49,6 +49,19 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
                 document.getElementById('result').value = "Quality set to " + qualArr[1];
             }
         }
+        // teleport to coordinates in the current world
+        else if (command.startsWith("teleport") || command.startsWith("tp")) {  // alias 'tp' and 'teleport'
+            const telArr= command.split(" ");
+            if (telArr.length !== 3 || isNaN(Number(telArr[1])) || !Number.isInteger(Number(telArr[1]))
+                || isNaN(Number(telArr[2])) || !Number.isInteger(Number(telArr[2]))) {
+                document.getElementById('result').value = "Invalid syntax `teleport <x> <y>`";
+            } else {
+                posX = Number(telArr[1])*10;
+                posY = Number(telArr[2])*10;
+                draw();
+                document.getElementById('result').value = "Teleported to " + telArr[1] + " " + telArr[2];
+            }
+        }
         // invalid command // command not found
         else {
             document.getElementById('result').value = "Invalid command.";
