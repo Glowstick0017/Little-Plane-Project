@@ -120,3 +120,12 @@ function SHA256(s){
     s = Utf8Encode(s);
     return binb2hex(core_sha256(str2binb(s), s.length * chrsz));
 }
+
+function HashToNumber(str) {
+    var number = 0.0;
+    for(let i=0;i<str.length;i++) {
+        number += parseInt(str.charAt(i), 16) / 16;
+    }
+    number /= str.length;
+    return number;
+}

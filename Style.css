@@ -1,2 +1,45 @@
 body {margin: 0px;padding:0px;overflow:hidden;}
 canvas {width: 100%; height: 100%;}
+
+#result {
+    position:absolute;
+    left:25px;
+    top:50px;
+    width:250px;
+    height:25px;
+    background: rgba(0,0,0,.6);
+    border: transparent;
+    opacity: 0;
+    color: white;
+    font-family: boxyFont;
+    letter-spacing: 1px;
+    font-size: 16px;
+}
+
+#commandbox {
+    position:absolute;
+    left:25px;
+    top:25px;
+    width:250px;
+    height:25px;
+    background: rgba(0,0,0,.6);
+    border: transparent;
+    color: transparent;
+    opacity: 0;
+}
+
+#commandbox:focus, #result:focus {
+    outline: none;
+    background: rgba(0,0,0,.6);
+    box-shadow: 0 0 10px rgba(0,0,0,.9);
+    color: white;
+    font-family: boxyFont;
+    letter-spacing: 1px;
+    font-size: 16px;
+    opacity: 1;
+}
+
+@font-face {
+    font-family: boxyFont;
+    src: url("boxyFont.otf") format("opentype");
+}
