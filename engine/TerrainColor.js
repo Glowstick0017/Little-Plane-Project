@@ -1,53 +1,4 @@
-var canvas= document.getElementById("canvas");
-var rect = canvas.getBoundingClientRect();
-var width = canvas.width = rect.width;
-var height = canvas.height = rect.height;
-var ctx = canvas.getContext("2d");
-
-var posX = 0;
-var posY = 0;
-
-var zoom = 300;
-
-var quality = 10;
-
-let keysPressed = {};
-
-draw();
-
-document.addEventListener('keydown', function(e) {
-    keysPressed[e.key] = true;
-    if(keysPressed['w']) {
-        posY-=10;
-    }
-    if(keysPressed['a']) {
-        posX-=10;
-    }
-    if(keysPressed['s']) {
-        posY+=10;
-    }
-    if(keysPressed['d']) {
-        posX+=10;
-    }
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    draw();
-});
-
-document.addEventListener('keyup', function(e) {
-    keysPressed[e.key] = false;
-})
-
-/**
-document.addEventListener('wheel', function(e) {
-    if(e.deltaY > 0 && zoom > 100) {
-        zoom-=100;
-    } else if (e.deltaY < 0 && zoom < 10000) {
-        zoom+=100;
-    }
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    draw();
-})
- */
+// soon to be modular and user defined. Users will be able to adjust values and create their own worlds.
 
 function terrainColor(c) {
     // sea
@@ -113,14 +64,3 @@ function terrainColor(c) {
         }
     }
 }
-
-function draw() {
-    for (var x = 0; x < width; x += quality) {
-        for (var y = 0; y < height; y += quality) {
-            var c = (perlin2((x+posX)/zoom,(y+posY)/zoom)+1)/2;
-            ctx.fillStyle = terrainColor(c);
-            ctx.fillRect(x, y, quality, quality);
-        }
-    }
-}
-

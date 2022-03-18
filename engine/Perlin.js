@@ -1,15 +1,18 @@
-function Grad(x, y, z) {
+// room to grow for 3d
+function Gradient(x, y, z) {
     this.x = x; this.y = y; this.z = z;
 }
 
-Grad.prototype.dot2 = function dot2(x, y) {
+Gradient.prototype.dot = function dot(x, y) {
     return this.x*x + this.y*y;
 };
 
-var grad3 = [new Grad(1,1,0),new Grad(-1,1,0),new Grad(1,-1,0),new Grad(-1,-1,0),
-    new Grad(1,0,1),new Grad(-1,0,1),new Grad(1,0,-1),new Grad(-1,0,-1),
-    new Grad(0,1,1),new Grad(0,-1,1),new Grad(0,1,-1),new Grad(0,-1,-1)];
+// room to grow for 3d
+var gradient3 = [new Gradient(1,1,0),new Gradient(-1,1,0),new Gradient(1,-1,0),new Gradient(-1,-1,0),
+    new Gradient(1,0,1),new Gradient(-1,0,1),new Gradient(1,0,-1),new Gradient(-1,0,-1),
+    new Gradient(0,1,1),new Gradient(0,-1,1),new Gradient(0,1,-1),new Gradient(0,-1,-1)];
 
+// permutation table, originally created by Ken Perlin
 var permutations = [151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140, 36,
     103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23, 190, 6, 148, 247, 120, 234, 75, 0,
     26, 197, 62, 94, 252, 219, 203, 117, 35, 11, 32, 57, 177, 33, 88, 237, 149, 56,
@@ -27,8 +30,9 @@ var permutations = [151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 23
     93, 222, 114, 67, 29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180, 151];
 
 var perm = new Array(512);
-var gradP = new Array(512);
+var gradientP = new Array(512);
 
+// seed definition function
 function seed(seed) {
     if(seed > 0 && seed < 1) {
         // Scale the seed out
@@ -49,23 +53,26 @@ function seed(seed) {
         }
 
         perm[i] = perm[i + 256] = v;
-        gradP[i] = gradP[i + 256] = grad3[v % 12];
+        gradientP[i] = gradientP[i + 256] = gradient3[v % 12];
     }
 }
 
+// default seed
 seed(0);
 
+// fade curve
 function fade(t) {
     return t*t*t*(t*(t*6-15)+10);
 }
 
-function lerp(a, b, t) {
+//
+function interpolate(a, b, t) {
     return (1-t)*a + t*b;
 }
 
 // 2D Perlin Noise
 function perlin2(x, y) {
-    // Find unit grid cell containing point
+    // Get coordinates
     var X = Math.floor(x), Y = Math.floor(y);
     // Get relative xy coordinates of point within that cell
     x = x - X; y = y - Y;
@@ -73,17 +80,17 @@ function perlin2(x, y) {
     X = X & 255; Y = Y & 255;
 
     // Calculate noise contributions from each of the four corners
-    var n00 = gradP[X+permutations[Y]].dot2(x, y);
-    var n01 = gradP[X+permutations[Y+1]].dot2(x, y-1);
-    var n10 = gradP[X+1+permutations[Y]].dot2(x-1, y);
-    var n11 = gradP[X+1+permutations[Y+1]].dot2(x-1, y-1);
+    var n00 = gradientP[X+permutations[Y]].dot(x, y);
+    var n01 = gradientP[X+permutations[Y+1]].dot(x, y-1);
+    var n10 = gradientP[X+1+permutations[Y]].dot(x-1, y);
+    var n11 = gradientP[X+1+permutations[Y+1]].dot(x-1, y-1);
 
     // Compute the fade curve value for x
     var u = fade(x);
 
     // Interpolate the four results
-    return lerp(
-        lerp(n00, n10, u),
-        lerp(n01, n11, u),
+    return interpolate(
+        interpolate(n00, n10, u),
+        interpolate(n01, n11, u),
         fade(y));
 }
