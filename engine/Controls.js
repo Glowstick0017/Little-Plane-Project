@@ -6,12 +6,19 @@ let sprinting = false;
 // controls
 document.addEventListener('keydown', function(e) {
     // makes sure commands arent being typed
-    if (isfocused == true) {
+    if (isfocused === true) {
         return;
     }
-
     // register keypress
     keysPressed[e.key] = true;
+});
+
+// remove keypress
+document.addEventListener('keyup', function(e) {
+    keysPressed[e.key] = false;
+})
+
+function gameLoop() {
     // move up
     if(keysPressed['w'] || keysPressed['ArrowUp']) {
         posY-=speed*10;
@@ -33,6 +40,7 @@ document.addEventListener('keydown', function(e) {
         planeRotate(Math.PI / 2);
     }
 
+    // angles
     if((keysPressed['w'] && keysPressed['a']) || (keysPressed['ArrowUp'] && keysPressed['ArrowLeft'])) {
         planeRotate((7 * Math.PI) / 4);
     } else if ((keysPressed['w'] && keysPressed['d']) || (keysPressed['ArrowUp'] && keysPressed['ArrowRight'])) {
@@ -43,12 +51,11 @@ document.addEventListener('keydown', function(e) {
         planeRotate((5 * Math.PI) / 4);
     }
 
+
+
     // clear and redraw screen, can be optimized at some point to only draw new pixels bringing speed up and can increase quality
     ctx.clearRect(0,0,canvas.width,canvas.height);
     draw();
-});
-
-// remove keypress
-document.addEventListener('keyup', function(e) {
-    keysPressed[e.key] = false;
-})
+    setTimeout(gameLoop, 10);
+}
+gameLoop();

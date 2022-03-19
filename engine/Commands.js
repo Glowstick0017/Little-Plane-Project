@@ -79,6 +79,10 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
     }
 });
 
+document.getElementById('commandbox').addEventListener('blur', function() {
+    isfocused = false;
+})
+
 // fade out for result of command
 function fadeOutEffect() {
     var fadeTarget = document.getElementById('result');
