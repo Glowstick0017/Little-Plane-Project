@@ -10,7 +10,7 @@
 - [License](#license)
 
 # Getting started
-Hi! Thank you for checking out `The little plane project`. Thus far there isnt much to do in the plane project but fly around and discover generated chunks that nobody has ever seen before. To get started visit the [play site](). You can move with either the `WASD` keys like any other game or you can use the arrow keys if you're oldschool. 
+Hi! Thank you for checking out `The little plane project`. Thus far there isnt much to do in the plane project but fly around and discover generated chunks that nobody has ever seen before. To get started visit the [play site](https://glowstick.me/tlpp/). You can move with either the `WASD` keys like any other game or you can use the arrow keys if you're oldschool. 
 
 ![image](https://user-images.githubusercontent.com/90464994/159105547-7c25a446-00e2-4da7-a5d9-fc8c283421b5.png?size=10)
 
