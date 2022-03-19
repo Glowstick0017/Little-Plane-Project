@@ -40,6 +40,16 @@ body {margin: 0px;padding:0px;overflow:hidden;}
     opacity: 1;
 }
 
+#coords {
+    position:absolute;
+    right:25px;
+    top:25px;
+    color: black;
+    font-family: boxyFont;
+    letter-spacing: 1px;
+    font-size: 16px;
+}
+
 @font-face {
     font-family: boxyFont;
     src: url("boxyFont.otf") format("opentype");

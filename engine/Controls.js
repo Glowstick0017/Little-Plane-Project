@@ -3,6 +3,8 @@ let keysPressed = {};
 
 let sprinting = false;
 
+let coords = document.getElementById('coords');
+
 // controls
 document.addEventListener('keydown', function(e) {
     // makes sure commands arent being typed
@@ -51,7 +53,7 @@ function gameLoop() {
         planeRotate((5 * Math.PI) / 4);
     }
 
-
+    coords.innerHTML = "X = " + (posX/10) + " Y = " + (posY/10);
 
     // clear and redraw screen, can be optimized at some point to only draw new pixels bringing speed up and can increase quality
     ctx.clearRect(0,0,canvas.width,canvas.height);
