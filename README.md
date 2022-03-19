@@ -9,7 +9,7 @@
 # Commands
 | Command  | Description | Default value |
 | ------------- | ------------- | ------------- |
-| seed <value>  | Generate a new world with the given seed  | 0 |
+| seed \<value>  | Generate a new world with the given seed  | 0 |
 | speed <value>  | Set flight speed. Range 1-10  | 1 |
 | quality <value>  | Set rendering quality, the lower the more detailed. Anything below 10 will lag. Range 5-20  | 10 |
 | teleport <x> <y>  | Teleport to specified coordinates  |  |
