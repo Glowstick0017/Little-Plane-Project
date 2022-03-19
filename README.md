@@ -1,6 +1,6 @@
 # The Little Plane Project
 ![alt text](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/tlpp-icon.png?raw=true)
-![image](https://user-images.githubusercontent.com/90464994/159108836-a0d89465-cd83-4cbe-bf93-b18d83bf1976.png)
+[![image](/.github/ISSUE_TEMPLATE/playbutton.png)](https://glowstick.me/tlpp/)
 
 
 
