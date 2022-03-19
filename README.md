@@ -1,6 +1,7 @@
 # The Little Plane Project
 ![alt text](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/tlpp-icon.png?raw=true)
-![image](https://user-images.githubusercontent.com/90464994/159108723-004caa45-a51c-471a-a8e3-bbd374bb9fb9.png)
+![image](https://user-images.githubusercontent.com/90464994/159108836-a0d89465-cd83-4cbe-bf93-b18d83bf1976.png)
+
 
 
 `The little plane project` is a small passion project that I started based on my interest and curiosity on perlin noise and procedural generation. Rather than making a project in a prebuilt game engine like unity, I wanted to create my own engine from the ground up using only javascript and no external libraries (only using a prebuilt algorithm for SHA256 made by [Angel Marin](https://anmar.eu.org/) and [Paul Johnston](http://pajhome.org.uk/)). I made this project in javascript so that a majority of people can read and understand what's happening in the code (may not be too understandable since I have poor documentation, standards, and this is my first decently sized javascript project), as well as an extreme ease of access to a demo of the project to anyone that can use a browser. Credit also goes out to [Javidx9 or OneLoneCoder](https://github.com/OneLoneCoder) for their explanation on Perlin noise in the first 10 minutes of [this video](https://youtu.be/6-0UaeJBumA) which tremendously helped wrap my head around what Perlin noise is and how to go about my implementation. 
