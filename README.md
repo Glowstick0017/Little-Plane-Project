@@ -19,5 +19,5 @@
 | quality \<value>  | Set rendering quality, the lower the more detailed. Anything below 10 will lag. Range 5-20  | 10 |
 | teleport \<x> \<y>  | Teleport to specified coordinates  |  |
 
-#License
+# License
 Distributed under the MIT License. See [LICENSE](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/LICENSE) for more information.
