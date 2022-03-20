@@ -38,6 +38,8 @@ Upcoming features to be implemented
 - [ ] menu screen or esc menu
 - [ ] command to change plane or color of plane
 - [ ] user adjusted color values
+- [ ] toggleable stats
+- [ ] color command that shows underlying perlin plane in black/white
 - [ ] user feature suggestions
 
 # License
