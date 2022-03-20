@@ -17,6 +17,8 @@ var quality = 10;
 // speed at which the camera moves
 var speed = 1;
 
+var color = 1;
+
 // initial draw
 draw();
 
@@ -36,8 +38,13 @@ function draw() {
     for (var x = 0; x < width; x += quality) {
         for (var y = 0; y < height; y += quality) {
             // current perlin curve simulates sea level
-            var c = (perlin2((x+posX)/zoom,(y+posY)/zoom)+1)/2;
-            ctx.fillStyle = terrainColor(c);
+            if (color == 0) {
+                var c = `rgba(0, 0, 0, ` + (perlin2((x+posX)/zoom,(y+posY)/zoom)+1)/2 + `)`
+                ctx.fillStyle = c;
+            } else {
+                var c = (perlin2((x+posX)/zoom,(y+posY)/zoom)+1)/2;
+                ctx.fillStyle = terrainColor(c);
+            }
             ctx.fillRect(x, y, quality, quality);
         }
     }

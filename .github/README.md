@@ -3,7 +3,7 @@
 [![image](/.github/ISSUE_TEMPLATE/playbutton.png)](https://glowstick.me/tlpp/)
 
 [![image](https://img.shields.io/badge/Live_build-22w11a-darkgreen)](https://glowstick.me/tlpp/)
-[![image](https://img.shields.io/badge/Snapshot-22w11a-darkgreen)](https://glowstick0017.github.io/Little-Plane-Project/index)
+[![image](https://img.shields.io/badge/Snapshot-22w11b-darkgreen)](https://glowstick0017.github.io/Little-Plane-Project/index)
 
 `The little plane project` is a small passion project that I started based on my interest and curiosity on perlin noise and procedural generation. Rather than making a project in a prebuilt game engine like unity, I wanted to create my own engine from the ground up using only javascript and no external libraries (only using a prebuilt algorithm for SHA256 made by [Angel Marin](https://anmar.eu.org/) and [Paul Johnston](http://pajhome.org.uk/)). I made this project in javascript so that a majority of people can read and understand what's happening in the code (may not be too understandable since I have poor documentation, standards, and this is my first decently sized javascript project), as well as an extreme ease of access to a demo of the project to anyone that can use a browser. Credit also goes out to [Javidx9 or OneLoneCoder](https://github.com/OneLoneCoder) for their explanation on Perlin noise in the first 10 minutes of [this video](https://youtu.be/6-0UaeJBumA) which tremendously helped wrap my head around what Perlin noise is and how to go about my implementation. 
 
@@ -26,12 +26,13 @@ To open the command box, hit your `Enter` key and you can use any of these comma
 Enjoy your time and please send any suggestions you have to Glowstick#0017 on discord or leave your suggestions [here](https://github.com/Glowstick0017/Little-Plane-Project/issues/new?assignees=&labels=new+feature&template=feature_request.md&title=Feature%20Request).
 
 # Commands
-| Command | Description | Default value |
-| :--------------: | ------------- | :-------------: |
-| seed \<value>  | Generate a new world with the given seed. <br />Any length of characters, words, or numbers can be entered for a unique world  | 0 |
-| speed \<value>  | Set flight speed. Range 1-10  | 1 |
-| quality \<value>  | Set rendering quality, the lower the more detailed.  <br />Anything below 10 will lag. Range 5-20  | 10 |
-| teleport \<x> \<y>  | Teleport to specified coordinates  |  |
+|      Command       | Description                                                                                                                   | Default value |
+|:------------------:|-------------------------------------------------------------------------------------------------------------------------------|:-------------:|
+|       color        | Toggle between full world color and gray scale to view underlying perlin plane                                                |               |
+|  quality \<value>  | Set rendering quality, the lower the more detailed.  <br />Anything below 10 will lag. Range 5-20                             |      10       |
+|   seed \<value>    | Generate a new world with the given seed. <br />Any length of characters, words, or numbers can be entered for a unique world |       0       |
+|   speed \<value>   | Set flight speed. Range 1-10                                                                                                  |       1       |
+| teleport \<x> \<y> | Teleport to specified coordinates                                                                                             |               |
 
 # Readmap
 Upcoming features to be implemented
@@ -40,7 +41,7 @@ Upcoming features to be implemented
 - [ ] command to change plane or color of plane
 - [ ] user adjusted color values
 - [ ] toggleable stats
-- [ ] color command that shows underlying perlin plane in black/white
+- [X] color command that shows underlying perlin plane in black/white
 - [ ] different worlds
 - [ ] randomly spawned airports to refuel
 - [ ] deliver packages from airports to others directed by arrow on screen

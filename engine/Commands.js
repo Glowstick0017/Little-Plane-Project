@@ -16,7 +16,7 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
         let command = document.getElementById('commandbox').value;
 
         // modify seed command, spawns you into the starting position of a new world
-        if (command.startsWith("seed ")) {
+        if (command.toUpperCase().startsWith("SEED ")) {
             let newSeed = command.substring(5);
             seed(HashToNumber(SHA256(newSeed)));
             posX = 0;
@@ -25,7 +25,7 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
             draw();
         }
         // adjust speed of movement
-        else if (command.startsWith("speed")) {
+        else if (command.toUpperCase().startsWith("SPEED")) {
             const speedArr = command.split(" ");
             if (speedArr.length !== 2 || isNaN(Number(speedArr[1])) || !Number.isInteger(Number(speedArr[1]))) {
                 document.getElementById('result').value = "Invalid syntax `speed <speed>`";
@@ -37,7 +37,7 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
             }
         }
         // adjust quality of the world
-        else if (command.startsWith("quality")) {
+        else if (command.toUpperCase().startsWith("QUALITY")) {
             const qualArr = command.split(" ");
             if (qualArr.length !== 2 || isNaN(Number(qualArr[1])) || !Number.isInteger(Number(qualArr[1]))) {
                 document.getElementById('result').value = "Invalid syntax `quality <quality>`";
@@ -50,7 +50,7 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
             }
         }
         // teleport to coordinates in the current world
-        else if (command.startsWith("teleport") || command.startsWith("tp")) {  // alias 'tp' and 'teleport'
+        else if (command.toUpperCase().startsWith("TELEPORT") || command.toUpperCase().startsWith("TP")) {  // alias 'tp' and 'teleport'
             const telArr= command.split(" ");
             if (telArr.length !== 3 || isNaN(Number(telArr[1])) || !Number.isInteger(Number(telArr[1]))
                 || isNaN(Number(telArr[2])) || !Number.isInteger(Number(telArr[2]))) {
@@ -60,6 +60,16 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
                 posY = Number(telArr[2])*10;
                 draw();
                 document.getElementById('result').value = "Teleported to " + telArr[1] + " " + telArr[2];
+            }
+        }
+        // teleport to coordinates in the current world
+        else if (command.toUpperCase() === "COLOR") {
+            if (color === 0) {
+                color = 1;
+                document.getElementById('result').value = "Color on.";
+            } else {
+                color = 0;
+                document.getElementById('result').value = "Color off.";
             }
         }
         // invalid command // command not found
