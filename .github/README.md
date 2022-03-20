@@ -25,11 +25,11 @@ To open the command box, hit your `Enter` key and you can use any of these comma
 Enjoy your time and please send any suggestions you have to Glowstick#0017 on discord or leave your suggestions [here](https://github.com/Glowstick0017/Little-Plane-Project/issues/new?assignees=&labels=new+feature&template=feature_request.md&title=Feature%20Request).
 
 # Commands
-| Command  | Description | Default value |
-| -------------- | ------------- | ------------- |
-| seed \<value>  | Generate a new world with the given seed. Any length of characters, words, or numbers can be entered for a unique world  | 0 |
+| Command | Description | Default value |
+| :--------------: | ------------- | :-------------: |
+| seed \<value>  | Generate a new world with the given seed. <br />Any length of characters, words, or numbers can be entered for a unique world  | 0 |
 | speed \<value>  | Set flight speed. Range 1-10  | 1 |
-| quality \<value>  | Set rendering quality, the lower the more detailed. Anything below 10 will lag. Range 5-20  | 10 |
+| quality \<value>  | Set rendering quality, the lower the more detailed.  <br />Anything below 10 will lag. Range 5-20  | 10 |
 | teleport \<x> \<y>  | Teleport to specified coordinates  |  |
 
 # Readmap
