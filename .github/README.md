@@ -40,6 +40,9 @@ Upcoming features to be implemented
 - [ ] user adjusted color values
 - [ ] toggleable stats
 - [ ] color command that shows underlying perlin plane in black/white
+- [ ] different worlds
+- [ ] randomly spawned airports to refuel
+- [ ] deliver packages from airports to others directed by arrow on screen
 - [ ] user feature suggestions
 
 # License
