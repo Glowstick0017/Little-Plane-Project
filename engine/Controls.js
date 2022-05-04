@@ -20,6 +20,30 @@ document.addEventListener('keyup', function(e) {
     keysPressed[e.key] = false;
 })
 
+// mobile controls
+document.addEventListener('wheel', function(e) {
+    if(e.deltaY > 0) {
+        keysPressed['w'] = true;
+    }
+    if (e.deltaY < 0) {
+        keysPressed['s'] = true;
+    }
+    if(e.deltaX > 0) {
+        keysPressed['a'] = true;
+    }
+    if (e.deltaX < 0) {
+        keysPressed['d'] = true;
+    }
+    if (e.deltaY === 0 && e.deltaX === 0) {
+        keysPressed['w'] = false;
+        keysPressed['a'] = false;
+        keysPressed['s'] = false;
+        keysPressed['d'] = false;
+    }
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    draw();
+})
+
 function gameLoop() {
     // move up
     if(keysPressed['w'] || keysPressed['ArrowUp']) {

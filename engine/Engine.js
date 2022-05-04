@@ -8,9 +8,6 @@ var ctx = canvas.getContext("2d");
 var posX = 0;
 var posY = 0;
 
-// how zoomed in you are to the position, lower is further, higher is closer
-var zoom = 300;
-
 // block size by pixel, i wouldn't recommend going under 5 load times will be longer
 var quality = 10;
 
@@ -39,11 +36,13 @@ function draw() {
         for (var y = 0; y < height; y += quality) {
             // current perlin curve simulates sea level
             if (color == 0) {
-                var c = `rgba(0, 0, 0, ` + (perlin2((x+posX)/zoom,(y+posY)/zoom)+1)/2 + `)`
+                var c = `rgba(0, 0, 0, ` + (perlin2((x+posX)/300,(y+posY)/300)+1)/2 + `)`
                 ctx.fillStyle = c;
             } else {
-                var c = (perlin2((x+posX)/zoom,(y+posY)/zoom)+1)/2;
-                ctx.fillStyle = terrainColor(c);
+                var seaLevel = (perlin2((x+posX)/300,(y+posY)/300)+1)/2;
+                //var temperature = (perlin2((x+posX)/300,(y+posY)/300)+1)/.5;
+                //var humidity = (perlin2((x+posX)/300,(y+posY)/300)+1)/.5;
+                ctx.fillStyle = terrainColor(seaLevel);
             }
             ctx.fillRect(x, y, quality, quality);
         }
