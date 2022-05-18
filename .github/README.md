@@ -41,7 +41,7 @@ Enjoy your time and please send any suggestions you have to Glowstick#0017 on di
 |   speed \<value>   | Set flight speed. Range 1-10                                                                                                  |       1       |
 | teleport \<x> \<y> | Teleport to specified coordinates                                                                                             |               |
 
-# Readmap
+# Roadmap
 Upcoming features to be implemented
 - [ ] biomes by using multile perlin planes to simulate different conditions including sea level, temperature, humidity...
 - [ ] menu screen or esc menu
