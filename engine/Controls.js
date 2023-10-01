@@ -5,6 +5,10 @@ let sprinting = false;
 
 let coords = document.getElementById('coords');
 
+// Coordinates to be displayed
+const coordX = document.getElementById('coord-x');
+const coordY = document.getElementById('coord-y');
+
 // controls
 document.addEventListener('keydown', function (e) {
     // makes sure commands arent being typed
@@ -61,8 +65,10 @@ function gameLoop() {
         planeRotate((5 * Math.PI) / 4);
     }
 
-    coords.innerHTML = "X = " + (posX / 10) + " Y = " + (posY / 10);
-
+    // Update coordinates at screen
+    coordX.innerHTML = "X = " + (posX / 10);
+    coordY.innerHTML = "Y = " + (posY / 10);
+    
     // clear and redraw screen, can be optimized at some point to only draw new pixels bringing speed up and can increase quality
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     draw();
