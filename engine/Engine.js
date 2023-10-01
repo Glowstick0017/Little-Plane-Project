@@ -1,20 +1,20 @@
-var canvas= document.getElementById("canvas");
-var rect = canvas.getBoundingClientRect();
-var width = canvas.width = rect.width;
-var height = canvas.height = rect.height;
-var ctx = canvas.getContext("2d");
+let canvas= document.getElementById("canvas");
+let rect = canvas.getBoundingClientRect();
+let width = canvas.width = rect.width;
+let height = canvas.height = rect.height;
+let ctx = canvas.getContext("2d");
 
 // position of current screen
-var posX = 0;
-var posY = 0;
+let posX = 0;
+let posY = 0;
 
 // block size by pixel, i wouldn't recommend going under 5 load times will be longer
-var quality = 10;
+let quality = 10;
 
 // speed at which the camera moves
-var speed = 1;
+let speed = 1;
 
-var color = 1;
+let color = 1;
 
 // initial draw
 draw();
@@ -32,16 +32,16 @@ document.addEventListener('wheel', function(e) {
  */
 
 function draw() {
-    for (var x = 0; x < width; x += quality) {
-        for (var y = 0; y < height; y += quality) {
+    for (let x = 0; x < width; x += quality) {
+        for (let y = 0; y < height; y += quality) {
             // current perlin curve simulates sea level
             if (color == 0) {
-                var c = `rgba(0, 0, 0, ` + (perlin2((x+posX)/300,(y+posY)/300)+1)/2 + `)`
+                let c = `rgba(0, 0, 0, ` + (perlin2((x+posX)/300,(y+posY)/300)+1)/2 + `)`
                 ctx.fillStyle = c;
             } else {
-                var seaLevel = (perlin2((x+posX)/300,(y+posY)/300)+1)/2;
-                //var temperature = (perlin2((x+posX)/300,(y+posY)/300)+1)/.5;
-                //var humidity = (perlin2((x+posX)/300,(y+posY)/300)+1)/.5;
+                let seaLevel = (perlin2((x+posX)/300,(y+posY)/300)+1)/2;
+                //let temperature = (perlin2((x+posX)/300,(y+posY)/300)+1)/.5;
+                //let humidity = (perlin2((x+posX)/300,(y+posY)/300)+1)/.5;
                 ctx.fillStyle = terrainColor(seaLevel);
             }
             ctx.fillRect(x, y, quality, quality);

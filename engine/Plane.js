@@ -1,9 +1,9 @@
 // pixel plane sprite
-var planeCanvas = document.getElementById("planeCanvas");
-var planerect = canvas.getBoundingClientRect();
-var planewidth = planeCanvas.width = planerect.width;
-var planeheight = planeCanvas.height = planerect.height;
-var planectx = planeCanvas.getContext("2d");
+let planeCanvas = document.getElementById("planeCanvas");
+let planerect = canvas.getBoundingClientRect();
+let planewidth = planeCanvas.width = planerect.width;
+let planeheight = planeCanvas.height = planerect.height;
+let planectx = planeCanvas.getContext("2d");
 
 drawPlane();
 
