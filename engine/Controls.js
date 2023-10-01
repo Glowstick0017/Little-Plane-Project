@@ -1,18 +1,13 @@
 // Dictionary to track the current state of key presses
 let keysPressed = {};
-
 // Flag to check if the sprint mode is active
 let sprinting = false;
-
-// HTML element to display current coordinates
-let coords = document.getElementById('coords');
-
-// Coordinates to be displayed
-const coordX = document.getElementById('coord-x');
-const coordY = document.getElementById('coord-y');
-
 // Flag to determine if the canvas needs a redraw
 let needsRedraw = false;
+
+// HTML elements to display current coordinates
+const coordX = document.getElementById('coord-x');
+const coordY = document.getElementById('coord-y');
 
 // Defining constants for keys to improve readability
 const KEYS = {
@@ -56,7 +51,6 @@ function moveAndRotate(dx, dy, angle) {
     needsRedraw = true;
 }
 
-
 const movementMapping = {
     [KEYS.W]: () => moveAndRotate(0, -1, 0),
     [KEYS.ARROW_UP]: () => moveAndRotate(0, -1, 0),
@@ -88,8 +82,8 @@ function gameLoop() {
     }
 
     // Update displayed coordinates
-    coordX.innerHTML = "X = " + (posX / 10);
-    coordY.innerHTML = "Y = " + (posY / 10);
+    coordX.innerHTML = `X = ${(posX / 10)}`;
+    coordY.innerHTML = `Y = ${(posY / 10)}`;
 
     // Redraw the canvas if needed
     if (needsRedraw) {
