@@ -8,12 +8,12 @@ Gradient.prototype.dot = function dot(x, y) {
 };
 
 // room to grow for 3d
-var gradient3 = [new Gradient(1,1,0),new Gradient(-1,1,0),new Gradient(1,-1,0),new Gradient(-1,-1,0),
+let gradient3 = [new Gradient(1,1,0),new Gradient(-1,1,0),new Gradient(1,-1,0),new Gradient(-1,-1,0),
     new Gradient(1,0,1),new Gradient(-1,0,1),new Gradient(1,0,-1),new Gradient(-1,0,-1),
     new Gradient(0,1,1),new Gradient(0,-1,1),new Gradient(0,1,-1),new Gradient(0,-1,-1)];
 
 // permutation table, originally created by Ken Perlin
-var permutations = [151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140, 36,
+let permutations = [151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140, 36,
     103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23, 190, 6, 148, 247, 120, 234, 75, 0,
     26, 197, 62, 94, 252, 219, 203, 117, 35, 11, 32, 57, 177, 33, 88, 237, 149, 56,
     87, 174, 20, 125, 136, 171, 168, 68, 175, 74, 165, 71, 134, 139, 48, 27, 166,
@@ -29,8 +29,8 @@ var permutations = [151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 23
     157, 184, 84, 204, 176, 115, 121, 50, 45, 127, 4, 150, 254, 138, 236, 205,
     93, 222, 114, 67, 29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180, 151];
 
-var perm = new Array(512);
-var gradientP = new Array(512);
+let perm = new Array(512);
+let gradientP = new Array(512);
 
 // seed definition function
 function seed(seed) {
@@ -44,8 +44,8 @@ function seed(seed) {
         seed |= seed << 8;
     }
 
-    for(var i = 0; i < 256; i++) {
-        var v;
+    for(let i = 0; i < 256; i++) {
+        let v;
         if (i & 1) {
             v = permutations[i] ^ (seed & 255);
         } else {
@@ -73,20 +73,20 @@ function interpolate(a, b, t) {
 // 2D Perlin Noise
 function perlin2(x, y) {
     // Get coordinates
-    var X = Math.floor(x), Y = Math.floor(y);
+    let X = Math.floor(x), Y = Math.floor(y);
     // Get relative xy coordinates of point within that cell
     x = x - X; y = y - Y;
     // Wrap the integer cells at 255 (smaller integer period can be introduced here)
     X = X & 255; Y = Y & 255;
 
     // Calculate noise contributions from each of the four corners
-    var n00 = gradientP[X+permutations[Y]].dot(x, y);
-    var n01 = gradientP[X+permutations[Y+1]].dot(x, y-1);
-    var n10 = gradientP[X+1+permutations[Y]].dot(x-1, y);
-    var n11 = gradientP[X+1+permutations[Y+1]].dot(x-1, y-1);
+    let n00 = gradientP[X+permutations[Y]].dot(x, y);
+    let n01 = gradientP[X+permutations[Y+1]].dot(x, y-1);
+    let n10 = gradientP[X+1+permutations[Y]].dot(x-1, y);
+    let n11 = gradientP[X+1+permutations[Y+1]].dot(x-1, y-1);
 
     // Compute the fade curve value for x
-    var u = fade(x);
+    let u = fade(x);
 
     // Interpolate the four results
     return interpolate(

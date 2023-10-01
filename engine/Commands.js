@@ -1,5 +1,5 @@
 // variable for if the command box is focused
-var isfocused = false;
+let isfocused = false;
 
 // enter the command box
 document.addEventListener('keydown', function(e) {
@@ -95,9 +95,9 @@ document.getElementById('commandbox').addEventListener('blur', function() {
 
 // fade out for result of command
 function fadeOutEffect() {
-    var fadeTarget = document.getElementById('result');
+    let fadeTarget = document.getElementById('result');
     fadeTarget.style.opacity = 1;
-    var fadeEffect = setInterval(function () {
+    let fadeEffect = setInterval(function () {
         if (!fadeTarget.style.opacity) {
             fadeTarget.style.opacity = 1;
         }
