@@ -52,7 +52,6 @@ function moveAndRotate(dx, dy, angle) {
     needsRedraw = true;
 }
 
-const DIAGONAL_SPEED_MULTIPLIER = Math.sqrt(0.5);
 
 const movementMapping = {
     [KEYS.W]: () => moveAndRotate(0, -1, 0),
@@ -64,14 +63,14 @@ const movementMapping = {
     [KEYS.D]: () => moveAndRotate(1, 0, Math.PI / 2),
     [KEYS.ARROW_RIGHT]: () => moveAndRotate(1, 0, Math.PI / 2),
     // Diagonal movements
-    [`${KEYS.W}-${KEYS.A}`]: () => moveAndRotate(-1 * DIAGONAL_SPEED_MULTIPLIER, -1 * DIAGONAL_SPEED_MULTIPLIER, (7 * Math.PI) / 4),
-    [`${KEYS.ARROW_UP}-${KEYS.ARROW_LEFT}`]: () => moveAndRotate(-1 * DIAGONAL_SPEED_MULTIPLIER, -1 * DIAGONAL_SPEED_MULTIPLIER, (7 * Math.PI) / 4),
-    [`${KEYS.W}-${KEYS.D}`]: () => moveAndRotate(1 * DIAGONAL_SPEED_MULTIPLIER, -1 * DIAGONAL_SPEED_MULTIPLIER, Math.PI / 4),
-    [`${KEYS.ARROW_UP}-${KEYS.ARROW_RIGHT}`]: () => moveAndRotate(1 * DIAGONAL_SPEED_MULTIPLIER, -1 * DIAGONAL_SPEED_MULTIPLIER, Math.PI / 4),
-    [`${KEYS.D}-${KEYS.S}`]: () => moveAndRotate(1 * DIAGONAL_SPEED_MULTIPLIER, 1 * DIAGONAL_SPEED_MULTIPLIER, (3 * Math.PI) / 4),
-    [`${KEYS.ARROW_RIGHT}-${KEYS.ARROW_DOWN}`]: () => moveAndRotate(1 * DIAGONAL_SPEED_MULTIPLIER, 1 * DIAGONAL_SPEED_MULTIPLIER, (3 * Math.PI) / 4),
-    [`${KEYS.A}-${KEYS.S}`]: () => moveAndRotate(-1 * DIAGONAL_SPEED_MULTIPLIER, 1 * DIAGONAL_SPEED_MULTIPLIER, (5 * Math.PI) / 4),
-    [`${KEYS.ARROW_LEFT}-${KEYS.ARROW_DOWN}`]: () => moveAndRotate(-1 * DIAGONAL_SPEED_MULTIPLIER, 1 * DIAGONAL_SPEED_MULTIPLIER, (5 * Math.PI) / 4)
+    [`${KEYS.W}-${KEYS.A}`]: () => moveAndRotate(0, 0, (7 * Math.PI) / 4),
+    [`${KEYS.ARROW_UP}-${KEYS.ARROW_LEFT}`]: () => moveAndRotate(0, 0, (7 * Math.PI) / 4),
+    [`${KEYS.W}-${KEYS.D}`]: () => moveAndRotate(0, 0, Math.PI / 4),
+    [`${KEYS.ARROW_UP}-${KEYS.ARROW_RIGHT}`]: () => moveAndRotate(0, 0, Math.PI / 4),
+    [`${KEYS.D}-${KEYS.S}`]: () => moveAndRotate(0, 0, (3 * Math.PI) / 4),
+    [`${KEYS.ARROW_RIGHT}-${KEYS.ARROW_DOWN}`]: () => moveAndRotate(0, 0, (3 * Math.PI) / 4),
+    [`${KEYS.A}-${KEYS.S}`]: () => moveAndRotate(0, 0, (5 * Math.PI) / 4),
+    [`${KEYS.ARROW_LEFT}-${KEYS.ARROW_DOWN}`]: () => moveAndRotate(0, 0, (5 * Math.PI) / 4)
 };
 
 // Game loop to handle movement and rendering
