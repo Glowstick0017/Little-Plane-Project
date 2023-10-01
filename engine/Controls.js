@@ -12,12 +12,20 @@ document.addEventListener('keydown', function (e) {
         return;
     }
     // register keypress
-    keysPressed[e.key.toLowerCase()] = true;
+    if (e.key.length === 1) {
+        keysPressed[e.key.toLowerCase()] = true;
+    } else {
+        keysPressed[e.key] = true;
+    }
 });
 
 // remove keypress
 document.addEventListener('keyup', function (e) {
-    keysPressed[e.key.toLowerCase()] = false;
+    if (e.key.length === 1) {
+        keysPressed[e.key.toLowerCase()] = false;
+    } else {
+        keysPressed[e.key] = false;
+    }
 })
 
 // mobile controls
