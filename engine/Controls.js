@@ -6,29 +6,29 @@ let sprinting = false;
 let coords = document.getElementById('coords');
 
 // controls
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     // makes sure commands arent being typed
     if (isfocused === true) {
         return;
     }
     // register keypress
-    keysPressed[e.key] = true;
+    keysPressed[e.key.toLowerCase()] = true;
 });
 
 // remove keypress
-document.addEventListener('keyup', function(e) {
-    keysPressed[e.key] = false;
+document.addEventListener('keyup', function (e) {
+    keysPressed[e.key.toLowerCase()] = false;
 })
 
 // mobile controls
-document.addEventListener('wheel', function(e) {
-    if(e.deltaY > 0) {
+document.addEventListener('wheel', function (e) {
+    if (e.deltaY > 0) {
         keysPressed['w'] = true;
     }
     if (e.deltaY < 0) {
         keysPressed['s'] = true;
     }
-    if(e.deltaX > 0) {
+    if (e.deltaX > 0) {
         keysPressed['a'] = true;
     }
     if (e.deltaX < 0) {
@@ -40,34 +40,34 @@ document.addEventListener('wheel', function(e) {
         keysPressed['s'] = false;
         keysPressed['d'] = false;
     }
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     draw();
 })
 
 function gameLoop() {
     // move up
-    if(keysPressed['w'] || keysPressed['ArrowUp']) {
-        posY-=speed*10;
+    if (keysPressed['w'] || keysPressed['ArrowUp']) {
+        posY -= speed * 10;
         planeRotate(0);
     }
     // move left
-    if(keysPressed['a'] || keysPressed['ArrowLeft']) {
-        posX-=speed*10;
-        planeRotate((3*Math.PI) / 2);
+    if (keysPressed['a'] || keysPressed['ArrowLeft']) {
+        posX -= speed * 10;
+        planeRotate((3 * Math.PI) / 2);
     }
     // move down
-    if(keysPressed['s'] || keysPressed['ArrowDown']) {
-        posY+=speed*10;
+    if (keysPressed['s'] || keysPressed['ArrowDown']) {
+        posY += speed * 10;
         planeRotate(Math.PI);
     }
     // move right
-    if(keysPressed['d'] || keysPressed['ArrowRight']) {
-        posX+=speed*10;
+    if (keysPressed['d'] || keysPressed['ArrowRight']) {
+        posX += speed * 10;
         planeRotate(Math.PI / 2);
     }
 
     // angles
-    if((keysPressed['w'] && keysPressed['a']) || (keysPressed['ArrowUp'] && keysPressed['ArrowLeft'])) {
+    if ((keysPressed['w'] && keysPressed['a']) || (keysPressed['ArrowUp'] && keysPressed['ArrowLeft'])) {
         planeRotate((7 * Math.PI) / 4);
     } else if ((keysPressed['w'] && keysPressed['d']) || (keysPressed['ArrowUp'] && keysPressed['ArrowRight'])) {
         planeRotate(Math.PI / 4);
@@ -77,10 +77,10 @@ function gameLoop() {
         planeRotate((5 * Math.PI) / 4);
     }
 
-    coords.innerHTML = "X = " + (posX/10) + " Y = " + (posY/10);
+    coords.innerHTML = "X = " + (posX / 10) + " Y = " + (posY / 10);
 
     // clear and redraw screen, can be optimized at some point to only draw new pixels bringing speed up and can increase quality
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     draw();
     setTimeout(gameLoop, 10);
 }

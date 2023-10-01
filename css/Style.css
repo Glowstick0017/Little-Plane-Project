@@ -1,56 +1,79 @@
-body {margin: 0px;padding:0px;overflow:hidden;}
-#canvas {width: 100%; height: 100%;position:absolute;z-index:0;}
-#planeCanvas{width: 100%; height: 100%;position:absolute;z-index:1;background-color: transparent;}
+body {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+#canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+}
+#planeCanvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  background-color: transparent;
+}
 
 #result {
-    position:absolute;
-    left:25px;
-    top:50px;
-    width:300px;
-    height:25px;
-    background: rgba(0,0,0,.6);
-    border: transparent;
-    opacity: 0;
-    color: white;
-    font-family: boxyFont;
-    letter-spacing: 1px;
-    font-size: 16px;
+  position: absolute;
+  left: 25px;
+  top: 50px;
+  width: 300px;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.6);
+  border: transparent;
+  opacity: 0;
+  color: white;
+  font-family: boxyFont;
+  letter-spacing: 1px;
+  font-size: 16px;
 }
 
 #commandbox {
-    position:absolute;
-    left:25px;
-    top:25px;
-    width:300px;
-    height:25px;
-    background: rgba(0,0,0,.6);
-    border: transparent;
-    color: transparent;
-    opacity: 0;
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  width: 300px;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.6);
+  border: transparent;
+  color: transparent;
+  opacity: 0;
 }
 
-#commandbox:focus, #result:focus {
-    outline: none;
-    background: rgba(0,0,0,.6);
-    box-shadow: 0 0 10px rgba(0,0,0,.9);
-    color: white;
-    font-family: boxyFont;
-    letter-spacing: 1px;
-    font-size: 16px;
-    opacity: 1;
+#commandbox:focus,
+#result:focus {
+  outline: none;
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  color: white;
+  font-family: boxyFont;
+  letter-spacing: 1px;
+  font-size: 16px;
+  opacity: 1;
 }
 
 #coords {
-    position:absolute;
-    right:25px;
-    top:25px;
-    color: black;
-    font-family: boxyFont;
-    letter-spacing: 1px;
-    font-size: 16px;
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  color: black;
+  font-family: boxyFont;
+  letter-spacing: 1px;
+  font-size: 16px;
+}
+
+#navigateControls {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  z-index: 100;
 }
 
 @font-face {
-    font-family: boxyFont;
-    src: url("boxyFont.otf") format("opentype");
+  font-family: boxyFont;
+  src: url("boxyFont.otf") format("opentype");
 }
