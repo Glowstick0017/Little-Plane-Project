@@ -35,9 +35,8 @@ function draw() {
     for (let x = 0; x < width; x += quality) {
         for (let y = 0; y < height; y += quality) {
             // current perlin curve simulates sea level
-            if (color == 0) {
-                let c = `rgba(0, 0, 0, ` + (perlin2((x+posX)/300,(y+posY)/300)+1)/2 + `)`
-                ctx.fillStyle = c;
+            if (color === 0) {
+                ctx.fillStyle = `rgba(0, 0, 0, ` + (perlin2((x + posX) / 300, (y + posY) / 300) + 1) / 2 + `)`;
             } else {
                 let seaLevel = (perlin2((x+posX)/300,(y+posY)/300)+1)/2;
                 //let temperature = (perlin2((x+posX)/300,(y+posY)/300)+1)/.5;

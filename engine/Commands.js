@@ -71,6 +71,8 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
                 color = 0;
                 document.getElementById('result').value = "Color off.";
             }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            draw();
         }
         // invalid command // command not found
         else {
