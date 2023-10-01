@@ -62,3 +62,11 @@ If you made any changes you think would be helpful to add to the original reposi
 
 # License
 Distributed under the MIT License. See [LICENSE](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/LICENSE) for more information.
+
+## Contributing
+
+Meet the talented individuals who have contributed to The Little Plane Project:
+
+<a href="https://github.com/Glowstick0017/Little-Plane-Project/graphs/contributors">
+ <img src="https://contrib.rocks/image?repo=Glowstick0017/Little-Plane-Project" />
+</a>
