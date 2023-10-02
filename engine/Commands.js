@@ -22,6 +22,7 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
             posX = 0;
             posY = 0;
             document.getElementById('result').value = "seed set to `" + newSeed + "`";
+            document.getElementById("seed").innerHTML = "Seed: " + newSeed;
             draw();
         }
         // adjust speed of movement
@@ -34,6 +35,7 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
             } else {
                 speed = Number(speedArr[1]);
                 document.getElementById('result').value = "New speed set to " + speedArr[1];
+                document.getElementById("speed").innerHTML = "Speed: " + speed;
             }
         }
         // adjust quality of the world
@@ -47,6 +49,7 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
                 quality = Number(qualArr[1]);
                 draw();
                 document.getElementById('result').value = "Quality set to " + qualArr[1];
+                document.getElementById("quality").innerHTML = "Quality: " + quality + "px";
             }
         }
         // teleport to coordinates in the current world
@@ -57,9 +60,10 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
                 document.getElementById('result').value = "Invalid syntax `teleport <x> <y>`";
             } else {
                 posX = Number(telArr[1])*10;
-                posY = Number(telArr[2])*10;
+                posY = (-1)*Number(telArr[2])*10;
                 draw();
                 document.getElementById('result').value = "Teleported to " + telArr[1] + " " + telArr[2];
+                document.getElementById("coordinates").innerHTML = "Coordinates: X=" + posX/10 + ", Y=" + (posY/10)*-1;
             }
         }
         // teleport to coordinates in the current world
@@ -67,9 +71,11 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
             if (color === 0) {
                 color = 1;
                 document.getElementById('result').value = "Color on.";
+                document.getElementById("color").innerHTML = "Color: " + color;
             } else {
                 color = 0;
                 document.getElementById('result').value = "Color off.";
+                document.getElementById("color").innerHTML = "Color: " + color;
             }
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             draw();

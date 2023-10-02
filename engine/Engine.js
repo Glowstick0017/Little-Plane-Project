@@ -7,17 +7,23 @@ let ctx = canvas.getContext("2d");
 // position of current screen
 let posX = 0;
 let posY = 0;
+document.getElementById("coordinates").innerHTML = "Coordinates: X=" + posX + ", Y=" + posY;
 
 // block size by pixel, i wouldn't recommend going under 5 load times will be longer
 let quality = 10;
+document.getElementById("quality").innerHTML = "Quality: " + quality + "px";
 
 // speed at which the camera moves
 let speed = 1;
+document.getElementById("speed").innerHTML = "Speed: " + speed;
 
 let color = 1;
+document.getElementById("color").innerHTML = "Color: " + color;
 
 // start every game with random seed
-seed(Math.random()*100000)
+let seedVal = Math.floor(Math.random()*1000000);
+seed(HashToNumber(SHA256(seedVal + "")));
+document.getElementById("seed").innerHTML = "Seed: " + seedVal;
 
 // initial draw
 draw();

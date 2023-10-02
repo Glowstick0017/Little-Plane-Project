@@ -131,6 +131,10 @@ body {
   display: none;
   text-shadow: 1px 1px white;
 }
+#settingsMenu {
+  display: none;
+  text-shadow: 1px 1px white;
+}
 .planeColors {
   display: flex;
   flex-direction: column;

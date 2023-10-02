@@ -1,8 +1,10 @@
 const hamburger = document.getElementById("hamburger");
 const nav = document.getElementById("nav");
 const customise = document.getElementById("customise");
+const settings = document.getElementById("settings");
 const ui = document.getElementById("ui");
 const customiseMenu = document.getElementById("customiseMenu");
+const settingsMenu = document.getElementById("settingsMenu");
 
 // Event for listening to hamburger menu clicks
 hamburger.addEventListener("click", () => {
@@ -21,18 +23,32 @@ hamburger.addEventListener("click", () => {
 
 
 customise.addEventListener("click", () => {
-  if (customiseMenu.style.display === "block") {
+  if (customiseMenu.style.display === "block" || settingsMenu.display === "block") {
     ui.style.display = "none";
     customiseMenu.style.display = "none";
+    settingsMenu.style.display = "none";
   } else {
     ui.style.display = "block";
     customiseMenu.style.display = "block";
+    settingsMenu.style.display = "none";
 
     // Was going to render a new image of the plane.
     // But it renders too large. Left this out for now.
     // const planeAvatarImg = document.createElement("img");
     // planeAvatarImg.src = planeCanvas.toDataURL();
     // customiseMenu.appendChild(planeAvatarImg);
+  }
+});
+
+settings.addEventListener("click", () => {
+  if (settingsMenu.style.display === "block" || customiseMenu.display === "block") {
+    ui.style.display = "none";
+    settingsMenu.style.display = "none";
+    customiseMenu.style.display = "none";
+  } else {
+    ui.style.display = "block";
+    settingsMenu.style.display = "block";
+    customiseMenu.style.display = "none";
   }
 });
 

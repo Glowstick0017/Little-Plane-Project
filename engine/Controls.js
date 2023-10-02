@@ -45,6 +45,7 @@ function formatKey(key) {
 function moveAndRotate(dx, dy, angle) {
     posX += dx * speed * 10;
     posY += dy * speed * 10;
+    document.getElementById("coordinates").innerHTML = "Coordinates: X=" + posX/10 + ", Y=" + (posY/10)*-1;
 
     planeRotate(angle);
 
