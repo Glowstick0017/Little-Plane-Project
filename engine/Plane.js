@@ -7,7 +7,6 @@ let planectx = planeCanvas.getContext("2d");
 let planeColor = 'red'; // Default plane color
 
 let planeColors = {
-    red: {
         outer: 'rgb(119, 6, 24)',
         innerMain: 'rgb(172, 50, 46)',
         innerHighlight: 'rgb(216, 86, 101)',
@@ -16,16 +15,6 @@ let planeColors = {
         windshield: 'rgb(11, 160, 210)',
         propeller: 'rgb(51, 51, 51)',
         propellerBlades: 'rgb(179, 179, 179)'
-    },
-    green: {
-        // Define the color values for the green plane
-    },
-    blue: {
-        // Define the color values for the blue plane
-    },
-    gray: {
-        // Define the color values for the gray plane
-    }
 };
 
 drawPlane();
@@ -33,7 +22,7 @@ drawPlane();
 planectx.save();
 
 function drawPlane() {
-    const colors = planeColors[planeColor];
+    const colors = planeColors;
     let scale = 2;
     let startx = planewidth/2 - 120/scale;
     let starty = planeheight/2 - 100/scale;

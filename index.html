@@ -19,6 +19,56 @@
     <canvas id="planeCanvas"></canvas>
     <canvas id="canvas"></canvas>
 </div>
+<div id="menu">
+    <div id="hamburger">
+    </div>
+    <div id="nav">
+        <ul>
+            <li id="customise">✈️ Customise</li>
+        </ul>
+    </div>
+</div>
+
+<div id="ui">
+    <div id="customiseMenu">
+        <h3>Customise your plane</h3>
+        <div class="planeColors">           
+            <div>
+                <input type="color" id="outer" name="outer" value="#770619" />
+                <label for="outer">Outer</label>
+            </div>
+            <div>
+                <input type="color" id="innerMain" name="innerMain" value="#ac322e" />
+                <label for="innerMain">Main</label>
+            </div>
+            <div>
+                <input type="color" id="innerHighlight" name="innerHighlight" value="#d85665" />
+                <label for="innerHighlight">Highlight</label>
+            </div>
+            <div>
+                <input type="color" id="innerDarkHighlight" name="innerDarkHighlight" value="#8c0308" />
+                <label for="innerDarkHighlight">Dark Highlight</label>
+            </div>
+            <div>
+                <input type="color" id="aroundWindshield" name="aroundWindshield" value="#570101" />
+                <label for="aroundWindshield">Around Windshield</label>
+            </div>
+            <div>
+                <input type="color" id="windshield" name="windshield" value="#0ba0d2" />
+                <label for="windshield">Windshield</label>
+            </div>
+            <div>
+                <input type="color" id="propeller" name="propeller" value="#333333" />
+                <label for="propeller">Propeller</label>
+            </div>
+            <div>
+                <input type="color" id="propellerBlades" name="propellerBlades" value="#b3b3b3" />
+                <label for="propellerBlades">Propeller Blades</label>
+            </div>
+        </div>
+    </div>
+</div>
+
 <input type="text" id="commandbox" autocomplete="off">
 <input type="text" id="result" disabled>
 <label id="coords">X = 0 Y = 0</label>
@@ -32,5 +82,6 @@
     <script src="engine/Commands.js"></script>
     <script src="engine/Plane.js"></script>
     <script src="engine/Controls.js"></script>
+    <script src="engine/Ui.js"></script>
 </footer>
 </html>
