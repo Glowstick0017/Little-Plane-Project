@@ -16,6 +16,9 @@ let speed = 1;
 
 let color = 1;
 
+// start every game with random seed
+seed(Math.random()*100000)
+
 // initial draw
 draw();
 
