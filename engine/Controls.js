@@ -84,7 +84,7 @@ function gameLoop() {
     }
 
     // Update displayed coordinates
-    coords.innerHTML = `X = ${posX / 10} Y = ${posY / 10}`;
+    coords.innerHTML = `X = ${posX / 10} Y = ${(-1) * posY / 10}`;
 
     // Redraw the canvas if needed
     if (needsRedraw) {
