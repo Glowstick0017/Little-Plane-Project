@@ -2,7 +2,7 @@
 ![alt text](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/tlpp-icon.png?raw=true)
 [![image](/.github/ISSUE_TEMPLATE/playbutton.png)](https://glowstick.me/tlpp/)
 
-[![image](https://img.shields.io/badge/Live_build-23w39a-darkgreen)](https://glowstick.me/tlpp/)
+[![image](https://img.shields.io/badge/Live_build-23w40a-darkgreen)](https://glowstick.me/tlpp/)
 [![image](https://img.shields.io/badge/Snapshot-23w40a-darkgreen)](https://glowstick0017.github.io/Little-Plane-Project/index)
 
 ![image](https://img.shields.io/static/v1?label=Chrome&message=%E2%9C%94&color=success?style=social&logo=google-chrome&logoColor=white)
@@ -45,9 +45,9 @@ Enjoy your time and please send any suggestions you have to Glowstick#0017 on di
 # Roadmap
 Upcoming features to be implemented
 - [ ] biomes by using multile perlin planes to simulate different conditions including sea level, temperature, humidity...
-- [ ] menu screen or esc menu
-- [ ] command to change plane or color of plane
-- [ ] user adjusted color values
+- [X] menu screen or esc menu
+- [X] command to change plane or color of plane
+- [X] user adjusted color values
 - [ ] toggleable stats
 - [X] color command that shows underlying perlin plane in black/white
 - [ ] different worlds
