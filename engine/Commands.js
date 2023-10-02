@@ -74,6 +74,23 @@ document.getElementById('commandbox').addEventListener('keyup', function (e) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             draw();
         }
+        // adjust plane color
+        else if (command.toUpperCase().startsWith("PLANE_COLOR")) {
+            const colorArr = command.split(" ");
+            if (colorArr.length !== 2) {
+                document.getElementById('result').value = "Invalid syntax `plane_color <color>`";
+            } else {
+                const color = colorArr[1].toLowerCase();
+                if (color === "red" || color === "green" || color === "blue" || color === "gray") {
+                    // Update the plane color based on the input
+                    planeColor = color;
+                    document.getElementById('result').value = "Plane color set to " + color;
+                    drawPlane();
+                } else {
+                    document.getElementById('result').value = "Invalid plane color. Choose from red, green, blue, or gray.";
+                }
+            }
+        }
         // invalid command // command not found
         else {
             document.getElementById('result').value = "Invalid command.";
