@@ -64,6 +64,7 @@ body {
   font-family: boxyFont;
   letter-spacing: 1px;
   font-size: 16px;
+  text-shadow: 2px 2px #fff;
 }
 
 #navigateControls {
