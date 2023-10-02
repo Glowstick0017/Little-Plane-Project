@@ -20,7 +20,7 @@ body {
 #result {
   position: absolute;
   left: 25px;
-  top: 50px;
+  bottom: 50px;
   width: 300px;
   height: 25px;
   background: rgba(0, 0, 0, 0.6);
@@ -35,7 +35,7 @@ body {
 #commandbox {
   position: absolute;
   left: 25px;
-  top: 25px;
+  bottom: 25px;
   width: 300px;
   height: 25px;
   background: rgba(0, 0, 0, 0.6);
@@ -64,6 +64,7 @@ body {
   font-family: boxyFont;
   letter-spacing: 1px;
   font-size: 16px;
+  text-shadow: 2px 2px #fff;
 }
 
 #navigateControls {
@@ -72,6 +73,70 @@ body {
   right: 25px;
   z-index: 100;
 }
+
+/* Menu UI */
+#menu {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  z-index: 100;
+}
+#hamburger {
+  width: 50px; 
+  height: 50px;
+  background: url('hamburger.png') 0 0; /* Set the sprite image */
+  background-size: 50px 50px; 
+  cursor: pointer;
+}
+#nav {
+  background: rgba(255, 255, 255, 0.8);
+  border: solid #323c39 4px;
+  border-radius: 5%;
+  display: none;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0.8rem;
+  font-family: boxyFont;
+  letter-spacing: 1px;
+  font-size: 16px;
+  user-select: none;
+}
+#nav ul {
+  list-style: none;
+  padding: 0;
+}
+#nav li {
+  cursor: pointer;
+}
+#nav li:hover {
+  color: rgb(6, 173, 224);
+}
+
+/* Customisation UI */
+#ui {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: auto;
+  background: rgba(255, 255, 255, 0.7);
+  border: solid #323c39 4px;
+  padding: 1rem;
+  font-family: boxyFont;
+  letter-spacing: 1px;
+  z-index: 150;
+  display: none;
+}
+#customiseMenu {
+  display: none;
+  text-shadow: 1px 1px white;
+}
+.planeColors {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 
 @font-face {
   font-family: boxyFont;
