@@ -21,7 +21,6 @@ hamburger.addEventListener("click", () => {
 
 
 customise.addEventListener("click", () => {
-  console.log("click");
   if (customiseMenu.style.display === "block") {
     ui.style.display = "none";
     customiseMenu.style.display = "none";

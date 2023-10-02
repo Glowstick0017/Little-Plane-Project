@@ -20,7 +20,7 @@ body {
 #result {
   position: absolute;
   left: 25px;
-  top: 50px;
+  bottom: 50px;
   width: 300px;
   height: 25px;
   background: rgba(0, 0, 0, 0.6);
@@ -35,7 +35,7 @@ body {
 #commandbox {
   position: absolute;
   left: 25px;
-  top: 25px;
+  bottom: 25px;
   width: 300px;
   height: 25px;
   background: rgba(0, 0, 0, 0.6);
