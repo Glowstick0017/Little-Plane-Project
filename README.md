@@ -46,7 +46,8 @@ Enjoy your time and please send any suggestions you have to Glowstick#0017 on di
 Upcoming features to be implemented
 - [ ] biomes by using multile perlin planes to simulate different conditions including sea level, temperature, humidity...
 - [ ] Instructions in context menu
-- [ ] mobile controls 
+- [ ] mobile controls (either joystick or click on displayed WASD)
+- [ ] context menu friendly on mobile  
 - [X] menu screen or esc menu
 - [X] command to change plane or color of plane
 - [X] user adjusted color values
