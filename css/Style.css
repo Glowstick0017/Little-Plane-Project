@@ -12,7 +12,7 @@ body {
 }
 #canvas {
   width: max(1600px, 100%);
-  height: max(80px, 100%);
+  height: max(800px, 100%);
   position: absolute;
   z-index: 0;
 }
