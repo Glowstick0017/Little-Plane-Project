@@ -149,7 +149,6 @@ class Plane {
     // Function to change the color of a plane part
     setColor(partName, newColor) {
         if (this.parts[partName]) {
-            console.log({ partName, newColor });
             this.parts[partName].color = newColor;
             this.draw();
         }
