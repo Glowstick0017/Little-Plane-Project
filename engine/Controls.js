@@ -47,7 +47,7 @@ function moveAndRotate(dx, dy, angle) {
     posY += dy * speed * 10;
     document.getElementById("coordinates").innerHTML = "Coordinates: X=" + posX/10 + ", Y=" + (posY/10)*-1;
 
-    planeRotate(angle);
+    plane.rotate(angle);
 
     // Set the flag to redraw the canvas
     needsRedraw = true;

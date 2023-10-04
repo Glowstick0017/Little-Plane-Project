@@ -60,8 +60,7 @@ const colorInputs = document.querySelectorAll(
 // Add a change event listener to each color input
 colorInputs.forEach((input) => {
   input.addEventListener("change", (e) => {
-    const target = e.target;
-    planeColors[target.id] = target.value;
-    drawPlane();
+    const {id: partName, value: newColor} = e.target;
+    plane.setColor(partName, newColor);
   });
 });
