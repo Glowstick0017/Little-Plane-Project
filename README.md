@@ -63,5 +63,15 @@ This project was made to learn the concepts and technologies used as simple as p
 The only thing you need to do to make and see your own changes in action is simply clone the repository, make your experimental changes to the code, and open index.html on your browser to view your changes.
 If you made any changes you think would be helpful to add to the original repository, feel free to open a pull request. All proposed changes will be reviewed and whether or not they're added, there will be meaningful comments left to help support everyones learning journey.
 
+# Contributing
+
+We welcome contributions of all shapes and sizes! Follow these steps to successfully contribute!
+
+1. Fork the repository
+2. Add or revise a pull
+3. Make a PR (Pull Request)
+4. Wait for the Pull Request to be accepted
+5. Get Hacktoberfest points (or just feel good!)
+
 # License
 Distributed under the MIT License. See [LICENSE](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/LICENSE) for more information.
