@@ -1,30 +1,51 @@
 let canvas = document.getElementById("canvas");
-let rect = canvas.getBoundingClientRect();
-let width = (canvas.width = rect.width);
-let height = (canvas.height = rect.height);
-let ctx = canvas.getContext("2d");
+
+// create all the variables with references to the html elements
+const $canvas = document.getElementById("canvas");
+const $color = document.getElementById("color");
+const $commandBox = document.getElementById("commandBox");
+const $coordinates = document.getElementById("coordinates");
+const $coords = document.getElementById("coords");
+const $customize = document.getElementById("customize");
+const $customizeMenu = document.getElementById("customizeMenu");
+const $hamburger = document.getElementById("hamburger");
+const $nav = document.getElementById("nav");
+const $quality = document.getElementById("quality");
+const $result = document.getElementById("result");
+const $seed = document.getElementById("seed");
+const $settings = document.getElementById("settings");
+const $settingsMenu = document.getElementById("settingsMenu");
+const $speed = document.getElementById("speed");
+const $ui = document.getElementById("ui");
+const $planeColors = document.querySelectorAll(
+  '.planeColors input[type="color"]',
+);
+
+let rect = $canvas.getBoundingClientRect();
+let width = ($canvas.width = rect.width);
+let height = ($canvas.height = rect.height);
+let ctx = $canvas.getContext("2d");
 
 // position of current screen
 let posX = 0;
 let posY = 0;
-document.getElementById("coordinates").innerHTML =
-  "Coordinates: X=" + posX + ", Y=" + posY;
+$coordinates.innerHTML = "Coordinates: X=" + posX + ", Y=" + posY;
 
 // block size by pixel, i wouldn't recommend going under 5 load times will be longer
 let quality = 10;
-document.getElementById("quality").innerHTML = "Quality: " + quality + "px";
+$quality.innerHTML = "Quality: " + quality + "px";
 
 // speed at which the camera moves
 let speed = 1;
-document.getElementById("speed").innerHTML = "Speed: " + speed;
+$speed.innerHTML = "Speed: " + speed;
 
 let color = 1;
-document.getElementById("color").innerHTML = "Color: " + color;
+$color.innerHTML = "Color: " + color;
 
 // start every game with random seed
 let seedVal = Math.floor(Math.random() * 1000000);
 seed(HashToNumber(SHA256(seedVal + "")));
-document.getElementById("seed").innerHTML = "Seed: " + seedVal;
+$seed.innerHTML = "Seed: " + seedVal;
 
 // initial draw
 draw();
@@ -36,9 +57,9 @@ document.addEventListener('wheel', function(e) {
     } else if (e.deltaY < 0 && zoom < 10000) {
         zoom+=100;
     }
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    draw();w
-})ww
+    ctx.clearRect(0,0,$canvas.width,$canvas.height);
+    draw();
+})
  */
 
 // Initial draw function
