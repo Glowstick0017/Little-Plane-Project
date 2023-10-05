@@ -53,7 +53,7 @@ function moveAndRotate(dx, dy, angle) {
   needsRedraw = true;
 }
 
-// Elevate the plane
+// Elevate the sea level
 function elevateHeight(dz) {
   heightFromGround += dz;
 
