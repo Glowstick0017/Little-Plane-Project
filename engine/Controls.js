@@ -43,13 +43,18 @@ function moveAndRotate(dx, dy, angle) {
   posX += dx * speed * 10;
   posY += dy * speed * 10;
   $coordinates.innerHTML =
-    "Coordinates: X=" + posX / 10 + ", Y=" + (posY / 10) * -1;
+  `Coordinates: X= ${Math.round(posX/10)} , Y= ${(-1)*Math.round(posY/10)}`;
 
   plane.rotate(angle);
 
   // Set the flag to redraw the canvas
   needsRedraw = true;
 }
+
+//Using Pythagorean Triangle rule, if the speed needs to be the same, it should cover 1 unit distance when both keys are pressed. Hence, Each side would be 1/sqrt(2) units long. To compensate the already established distances to be travelled, we subtract the diagonal distance to maintain a compensatory value.
+
+const diagonalDist = (1-1/(Math.sqrt(2)));
+
 
 const movementMapping = {
   [KEYS.W]: () => moveAndRotate(0, -1, 0),
@@ -61,18 +66,14 @@ const movementMapping = {
   [KEYS.D]: () => moveAndRotate(1, 0, Math.PI / 2),
   [KEYS.ARROW_RIGHT]: () => moveAndRotate(1, 0, Math.PI / 2),
   // Diagonal movements
-  [`${KEYS.W}-${KEYS.A}`]: () => moveAndRotate(0, 0, (7 * Math.PI) / 4),
-  [`${KEYS.ARROW_UP}-${KEYS.ARROW_LEFT}`]: () =>
-    moveAndRotate(0, 0, (7 * Math.PI) / 4),
-  [`${KEYS.W}-${KEYS.D}`]: () => moveAndRotate(0, 0, Math.PI / 4),
-  [`${KEYS.ARROW_UP}-${KEYS.ARROW_RIGHT}`]: () =>
-    moveAndRotate(0, 0, Math.PI / 4),
-  [`${KEYS.D}-${KEYS.S}`]: () => moveAndRotate(0, 0, (3 * Math.PI) / 4),
-  [`${KEYS.ARROW_RIGHT}-${KEYS.ARROW_DOWN}`]: () =>
-    moveAndRotate(0, 0, (3 * Math.PI) / 4),
-  [`${KEYS.A}-${KEYS.S}`]: () => moveAndRotate(0, 0, (5 * Math.PI) / 4),
-  [`${KEYS.ARROW_LEFT}-${KEYS.ARROW_DOWN}`]: () =>
-    moveAndRotate(0, 0, (5 * Math.PI) / 4),
+  [`${KEYS.W}-${KEYS.A}`]: () => moveAndRotate(diagonalDist, diagonalDist, (7 * Math.PI) / 4),
+    [`${KEYS.ARROW_UP}-${KEYS.ARROW_LEFT}`]: () => moveAndRotate(diagonalDist, diagonalDist, (7 * Math.PI) / 4),
+    [`${KEYS.W}-${KEYS.D}`]: () => moveAndRotate((-1)*(diagonalDist), diagonalDist, Math.PI / 4),
+    [`${KEYS.ARROW_UP}-${KEYS.ARROW_RIGHT}`]: () => moveAndRotate((-1)*(diagonalDist), diagonalDist, Math.PI / 4),
+    [`${KEYS.D}-${KEYS.S}`]: () => moveAndRotate((-1)*(diagonalDist), (-1)*(diagonalDist), (3 * Math.PI) / 4),
+    [`${KEYS.ARROW_RIGHT}-${KEYS.ARROW_DOWN}`]: () => moveAndRotate((-1)*(diagonalDist), (-1)*(diagonalDist), (3 * Math.PI) / 4),
+    [`${KEYS.A}-${KEYS.S}`]: () => moveAndRotate(diagonalDist, (-1)*(diagonalDist), (5 * Math.PI) / 4),
+    [`${KEYS.ARROW_LEFT}-${KEYS.ARROW_DOWN}`]: () => moveAndRotate(diagonalDist, (-1)*(diagonalDist), (5 * Math.PI) / 4),
 };
 
 // Game loop to handle movement and rendering
@@ -86,7 +87,7 @@ function gameLoop() {
   }
 
   // Update displayed coordinates
-  $coords.innerHTML = `X = ${posX / 10} Y = ${(-1 * posY) / 10}`;
+  $coords.innerHTML = `X = ${Math.round(posX / 10)} Y = ${Math.round((-1) * posY / 10)}`;
 
   // Redraw the canvas if needed
   if (needsRedraw) {
