@@ -37,6 +37,10 @@ body {
   font-family: boxyFont;
   letter-spacing: 1px;
   font-size: 16px;
+  resize: none;
+  overflow: hidden;
+  white-space: pre-wrap; /* This allows text to break and wrap */
+  line-height: 1.5; /* center the text inside of the result (well, approximately) */
 }
 
 #commandbox {
