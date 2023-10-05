@@ -29,7 +29,9 @@ body {
   left: 25px;
   bottom: 50px;
   width: 300px;
-  height: 25px;
+  min-height: 25px; /* Changed from height to min-height */
+  overflow-y: hidden; /* Prevent scroll bar */
+  resize: none; /* Prevent manual resize by user */
   background: rgba(0, 0, 0, 0.6);
   border: transparent;
   opacity: 0;
@@ -37,9 +39,10 @@ body {
   font-family: boxyFont;
   letter-spacing: 1px;
   font-size: 16px;
+  padding: 4px; /* Add padding for better text alignment */
 }
 
-#commandbox {
+#commandBox {
   position: absolute;
   left: 25px;
   bottom: 25px;
@@ -51,7 +54,7 @@ body {
   opacity: 0;
 }
 
-#commandbox:focus,
+#commandBox:focus,
 #result:focus {
   outline: none;
   background: rgba(0, 0, 0, 0.6);
@@ -89,10 +92,10 @@ body {
   z-index: 100;
 }
 #hamburger {
-  width: 50px; 
+  width: 50px;
   height: 50px;
-  background: url('hamburger.png') 0 0; /* Set the sprite image */
-  background-size: 50px 50px; 
+  background: url("hamburger.png") 0 0; /* Set the sprite image */
+  background-size: 50px 50px;
   cursor: pointer;
 }
 #nav {
@@ -134,7 +137,7 @@ body {
   z-index: 150;
   display: none;
 }
-#customiseMenu {
+#customizeMenu {
   display: none;
   text-shadow: 1px 1px white;
 }
@@ -147,7 +150,6 @@ body {
   flex-direction: column;
   gap: 0.5rem;
 }
-
 
 @font-face {
   font-family: boxyFont;
