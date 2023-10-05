@@ -61,8 +61,6 @@ const teleportCommand = new Command(
 
 // Color command - toggles the color setting.
 const colorCommand = new Command("COLOR", "COLOR", 0, (args) => {
-  const $color = $color;
-
   if (color === 0) {
     color = 1;
     $color.innerHTML = "Color: " + color;
@@ -78,13 +76,18 @@ const colorCommand = new Command("COLOR", "COLOR", 0, (args) => {
   }
 });
 
-const helpCommand = new Command("HELP", "HELP", 0, (args, context) => {
-  let helpMessages = [];
-  context.commands.forEach((cmd) => {
-    helpMessages.push(`${cmd.name}: ${cmd.description}`);
-  });
-  return helpMessages.join("\n");
-});
+const helpCommand = new Command(
+  "HELP",
+  "list all commands and their usage",
+  0,
+  (args, context) => {
+    let helpMessages = [];
+    context.commands.forEach((cmd) => {
+      helpMessages.push(`${cmd.aliases.join(", ")}: ${cmd.description}`);
+    });
+    return helpMessages.join("\n");
+  },
+);
 
 // Instantiate a new CommandHandler and register the commands.
 const handler = new CommandHandler();

@@ -4,7 +4,7 @@
 class Command {
   /**
    * Creates a new Command instance.
-   * @param {string | string[]} } - Name of the command (case insensitive).
+   * @param {string | string[]} name - Name of the command (case insensitive).
    * @param {string} description - Description or syntax of the command.
    * @param {number} expectedInputs - Expected number of arguments for the command.
    * @param {Function} executeFunction - Function to execute the command.
@@ -66,7 +66,6 @@ class CommandHandler {
    * @param {string} commandString - Input string containing command name and arguments.
    * @return {string} Feedback or result message after attempting to execute the command.
    */
-
   execute(commandString) {
     const [name, ...args] = commandString.split(" ");
     const command = this.commands.get(name.toUpperCase());
