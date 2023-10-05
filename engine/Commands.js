@@ -40,7 +40,7 @@ const qualityCommand = new Command("QUALITY", "QUALITY <value>", 1, (args) => {
 
 // Teleport command - teleports the player to specific coordinates in the current world.
 const teleportCommand = new Command(
-  "TELEPORT",
+  ["TELEPORT", "TP"],
   "TELEPORT <x> <y> or TP <x> <y>",
   2,
   (args) => {

@@ -4,13 +4,17 @@
 class Command {
   /**
    * Creates a new Command instance.
-   * @param {string} name - Name of the command (case insensitive).
+   * @param {string | string[]} } - Name of the command (case insensitive).
    * @param {string} description - Description or syntax of the command.
    * @param {number} expectedInputs - Expected number of arguments for the command.
    * @param {Function} executeFunction - Function to execute the command.
    */
   constructor(name, description, expectedInputs, executeFunction) {
-    this.name = name.toUpperCase();
+    if (Array.isArray(name)) {
+      this.aliases = name.map((n) => n.toUpperCase());
+    } else {
+      this.aliases = [name.toUpperCase()];
+    }
     this.description = description;
     this.expectedInputs = expectedInputs;
     this.execute = executeFunction;
@@ -49,7 +53,9 @@ class CommandHandler {
    */
   register(command) {
     if (command instanceof Command) {
-      this.commands.set(command.name, command);
+      command.aliases.forEach((alias) => {
+        this.commands.set(alias, command);
+      });
     } else {
       alert(`Invalid command type ${command}. Expected Command instance.`);
     }
