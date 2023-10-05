@@ -17,6 +17,8 @@ const KEYS = {
   ARROW_DOWN: "ArrowDown",
   ARROW_LEFT: "ArrowLeft",
   ARROW_RIGHT: "ArrowRight",
+  U: "u",
+  J: "j",
 };
 
 // Registering keypress and release events
@@ -51,7 +53,18 @@ function moveAndRotate(dx, dy, angle) {
   needsRedraw = true;
 }
 
+// Elevate the plane
+function elevateHeight(dz) {
+  heightFromGround += dz;
+
+  // Set the flag to redraw the canvas
+  needsRedraw = true;
+}
+
 const movementMapping = {
+  [KEYS.U]: () => elevateHeight(-1),
+  [KEYS.J]: () => elevateHeight(1),
+
   [KEYS.W]: () => moveAndRotate(0, -1, 0),
   [KEYS.ARROW_UP]: () => moveAndRotate(0, -1, 0),
   [KEYS.A]: () => moveAndRotate(-1, 0, (3 * Math.PI) / 2),

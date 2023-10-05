@@ -18,7 +18,7 @@ const $settingsMenu = document.getElementById("settingsMenu");
 const $speed = document.getElementById("speed");
 const $ui = document.getElementById("ui");
 const $planeColors = document.querySelectorAll(
-  '.planeColors input[type="color"]',
+  '.planeColors input[type="color"]'
 );
 
 let rect = $canvas.getBoundingClientRect();
@@ -29,6 +29,7 @@ let ctx = $canvas.getContext("2d");
 // position of current screen
 let posX = 0;
 let posY = 0;
+let heightFromGround = 300; // nice visual range: 250 - 500
 $coordinates.innerHTML = "Coordinates: X=" + posX + ", Y=" + posY;
 
 // block size by pixel, i wouldn't recommend going under 5 load times will be longer
@@ -76,7 +77,6 @@ function draw() {
 // Baseline sea level
 function calculateSeaLevel(x, y) {
   // set values to variables so they can be adjusted (by slider?)
-  let heightFromGround = 300; // nice visual range: 250 - 500
   let mountainHeight = 1.0; // nice visual range: 0 - 1.3
 
   return (
