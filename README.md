@@ -36,11 +36,11 @@ Enjoy your time and please send any suggestions you have to Glowstick#0017 on di
 # Commands
 |      Command       | Description                                                                                                                   | Default value |
 |:------------------:|-------------------------------------------------------------------------------------------------------------------------------|:-------------:|
-|       color        | Toggle between full world color and gray scale to view underlying perlin plane                                                |               |
+|       color        | Toggle between full world color and gray scale to view underlying perlin plane                                                |       1       |
 |  quality \<value>  | Set rendering quality, the lower the more detailed.  <br />Anything below 10 will lag. Range 5-20                             |      10       |
-|   seed \<value>    | Generate a new world with the given seed. <br />Any length of characters, words, or numbers can be entered for a unique world |       0       |
+|   seed \<value>    | Generate a new world with the given seed. <br />Any length of characters, words, or numbers can be entered for a unique world |    random     |
 |   speed \<value>   | Set flight speed. Range 1-10                                                                                                  |       1       |
-| teleport \<x> \<y> <br/> tp \<x> \<y> | Teleport to specified coordinates                                                                          |               |
+| teleport \<x> \<y> <br/> tp \<x> \<y> | Teleport to specified coordinates                                                                          |      0 0      |
 
 # Roadmap
 Upcoming features to be implemented
