@@ -85,6 +85,9 @@ const helpCommand = new Command(
     context.commands.forEach((cmd) => {
       helpMessages.push(`${cmd.aliases.join(", ")}: ${cmd.description}`);
     });
+    // remove duplicates
+    helpMessages = [...new Set(helpMessages)];
+
     return helpMessages.join("\n");
   },
 );
