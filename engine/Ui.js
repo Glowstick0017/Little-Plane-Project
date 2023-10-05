@@ -51,12 +51,14 @@ class UiController {
   }
 
   handleHamburgerClick() {
-    UiController.setDisplay("toggle", $nav, $ui, $customizeMenu);
+    UiController.setDisplay("toggle", $nav);
 
-    $hamburger.style.backgroundImage =
-      $nav.style.display === "block"
-        ? "url('css/close.png')"
-        : "url('css/hamburger.png')";
+    if ($nav.style.display === "block")
+      $hamburger.style.backgroundImage = "url('css/close.png')";
+    else {
+      $hamburger.style.backgroundImage = "url('css/hamburger.png')";
+      UiController.setDisplay("none", $ui, $customizeMenu, $settingsMenu);
+    }
   }
 
   updatePlaneColor(e) {
