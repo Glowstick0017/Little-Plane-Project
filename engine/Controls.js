@@ -4,9 +4,6 @@ let keysPressed = {};
 // Flag to check if the sprint mode is active
 let sprinting = false;
 
-// HTML element to display current coordinates
-let coords = document.getElementById('coords');
-
 // Flag to determine if the canvas needs a redraw
 let needsRedraw = false;
 
@@ -18,6 +15,7 @@ let dashing = false;
 let dx = 0;
 let dy = 0;
 let t = 0;
+let cooldown = 0;
 
 // Defining constants for keys to improve readability
 const KEYS = {
@@ -33,79 +31,54 @@ const KEYS = {
 };
 
 // Registering keypress and release events
-document.addEventListener('keydown', registerKeyPress);
-document.addEventListener('keyup', deregisterKeyPress);
+document.addEventListener("keydown", registerKeyPress);
+document.addEventListener("keyup", deregisterKeyPress);
 
 // Handler for key press events
 function registerKeyPress(e) {
-    if (isfocused) return; // Makes sure commands aren't being typed
-    keysPressed[formatKey(e.key)] = true;
+  if (handler.isFocused) return; // Makes sure commands aren't being typed
+  keysPressed[formatKey(e.key)] = true;
 }
 
 // Handler for key release events
 function deregisterKeyPress(e) {
-    keysPressed[formatKey(e.key)] = false;
+  keysPressed[formatKey(e.key)] = false;
 }
 
 function formatKey(key) {
-    return key.startsWith('Arrow') ? key : key.toLowerCase();
+  return key.startsWith("Arrow") ? key : key.toLowerCase();
 }
 
-// Movement and rotation function
-function moveAndRotate(dx, dy, angle) {
+// Elevate the sea level
+function elevateHeight(dz) {
+  heightFromGround += dz;
 
-    if(dashing == true){
-        posX += dx * speed * 10 + 0.5 * dx * acceleration * 10 * t;
-        posY += dy * speed * 10 + 0.5 * dy * acceleration * 10 * t;
-        t -= 0.2;
-    }
-    else{
-        posX += dx * speed * 10;
-        posY += dy * speed * 10;
-    }
-    
-    document.getElementById("coordinates").innerHTML = "Coordinates: X=" + posX/10 + ", Y=" + (posY/10)*-1;
-
-    planeRotate(angle);
-
-    // Set the flag to redraw the canvas
-    needsRedraw = true;
+  // Set the flag to redraw the canvas
+  needsRedraw = true;
 }
 
+// Movement Rotation and Dash Function
 function moveRotateAndDash(dx, dy, dashing) {
-    posX += dx * speed * 10 + 20 * dx * t;
-    posY += dy * speed * 10 + 20 * dy * t;
-    if(dashing) t -= 0.2;
-    console.log(t);
-    document.getElementById("coordinates").innerHTML = "Coordinates: X=" + posX/10 + ", Y=" + (posY/10)*-1;
 
-    // if(dx == 0) planeRotate(dy*Math.PI/2 + Math.PI/2);
-    // else if(dy == 0) planeRotate(dx*Math.PI/2);
+    // Update the position of plane based on the direction of movement and dash status
+    posX += dx * speed * 10 + 30 * dx * t;
+    posY += dy * speed * 10 + 30 * dy * t;
+    if(dashing) t -= 0.2;
+    else if(cooldown) cooldown -= 0.2;
+    // console.log(t);
+
+    // Rotate the plane based on the direction of movement
+    if(dx == 0 && dy == 0) /*Blank case*/;
+    else if(dx == 0) plane.rotate(dy*Math.PI/2+Math.PI/2);
+    else if(dy == 0) plane.rotate(dx*Math.PI/2);
+    else plane.rotate(Math.atan(-dy/dx) + Math.PI/2 + dy*Math.PI/2);
+    // console.log(Math.atan(-dy/dx)*180/Math.PI);
 
     // Set the flag to redraw the canvas
     needsRedraw = true;
 }
 
-const movementMapping = {
-    [KEYS.W]: () => moveAndRotate(0, -1, 0, 0),
-    [KEYS.ARROW_UP]: () => moveAndRotate(0, -1, 0, 0),
-    [KEYS.A]: () => moveAndRotate(-1, 0, (3 * Math.PI) / 2, 0),
-    [KEYS.ARROW_LEFT]: () => moveAndRotate(-1, 0, (3 * Math.PI) / 2, 0),
-    [KEYS.S]: () => moveAndRotate(0, 1, Math.PI, 0),
-    [KEYS.ARROW_DOWN]: () => moveAndRotate(0, 1, Math.PI, 0),
-    [KEYS.D]: () => moveAndRotate(1, 0, Math.PI / 2, 0),
-    [KEYS.ARROW_RIGHT]: () => moveAndRotate(1, 0, Math.PI / 2, 0),
-    // Diagonal movements
-    [`${KEYS.W}-${KEYS.A}`]: () => moveAndRotate(0, 0, (7 * Math.PI) / 4, 0),
-    [`${KEYS.ARROW_UP}-${KEYS.ARROW_LEFT}`]: () => moveAndRotate(0, 0, (7 * Math.PI) / 4, 0),
-    [`${KEYS.W}-${KEYS.D}`]: () => moveAndRotate(0, 0, Math.PI / 4, 0),
-    [`${KEYS.ARROW_UP}-${KEYS.ARROW_RIGHT}`]: () => moveAndRotate(0, 0, Math.PI / 4, 0),
-    [`${KEYS.D}-${KEYS.S}`]: () => moveAndRotate(0, 0, (3 * Math.PI) / 4, 0),
-    [`${KEYS.ARROW_RIGHT}-${KEYS.ARROW_DOWN}`]: () => moveAndRotate(0, 0, (3 * Math.PI) / 4, 0),
-    [`${KEYS.A}-${KEYS.S}`]: () => moveAndRotate(0, 0, (5 * Math.PI) / 4, 0),
-    [`${KEYS.ARROW_LEFT}-${KEYS.ARROW_DOWN}`]: () => moveAndRotate(0, 0, (5 * Math.PI) / 4, 0),
-};
-
+// Dictionary to map input keys to horizontal movement
 const horizontalMapping = {
     [KEYS.A]: () => {dx = -1},
     [KEYS.ARROW_LEFT]: () => {dx = -1},
@@ -113,6 +86,7 @@ const horizontalMapping = {
     [KEYS.ARROW_RIGHT]: () => {dx = 1},
 };
 
+// Dictionary to map input keys to vertical movement
 const verticalMapping = {
     [KEYS.W]: () => {dy = -1},
     [KEYS.ARROW_UP]: () => {dy = -1},
@@ -122,49 +96,56 @@ const verticalMapping = {
 
 // Game loop to handle movement and rendering
 function gameLoop() {
-    // Handle all movements: standard and diagonal
-    // for (let keyCombination in movementMapping) {
-    //     const keys = keyCombination.split('-');
-    //     if (keys.every(key => keysPressed[key])) {
-    //         movementMapping[keyCombination]();
-    //     }
-    // }
+    //Reset to 0 incase of no inputs
     dx = 0;
     dy = 0;
+
+    // Check if any of the keys are pressed and update dx
     for(let key in horizontalMapping){
         if (keysPressed[key]) {
             horizontalMapping[key]();
         }
     }
 
+    // Check if any of the keys are pressed and update dy
     for(let key in verticalMapping){
         if (keysPressed[key]) {
             verticalMapping[key]();
         }
     }
-    console.log(dx, dy);
-    if(keysPressed[KEYS.DASH] && !dashing){
+
+    // Check if the dash key is pressed if dash flag is false
+    if(keysPressed[KEYS.DASH] && !dashing && cooldown <= 0){
         dashing = true
+        // Duration of the dash
         t = 2;
     }
-    // else if(!keysPressed[KEYS.DASH] && !dashing){
-    //     dashing = false;
-    // }
+
     else if( t < 0){  
         dashing = false;
+        cooldown = 1.6;
+        t = 0;
     }
+
+    if(keysPressed[KEYS.U]){
+        elevateHeight(-1);
+    }
+    else if(keysPressed[KEYS.J]){
+        elevateHeight(1);
+    }
+
     moveRotateAndDash(dx, dy, dashing)
     // Update displayed coordinates
-    coords.innerHTML = `X = ${posX / 10} Y = ${(-1) * posY / 10}`;
+    coords.innerHTML = `X = ${Math.round(posX / 10)} Y = ${Math.round((-1) * posY / 10)}`;
 
-    // Redraw the canvas if needed
-    if (needsRedraw) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        draw();
-        needsRedraw = false; // Reset the flag after drawing
-    }
+  // Redraw the canvas if needed
+  if (needsRedraw) {
+    ctx.clearRect(0, 0, $canvas.width, $canvas.height);
+    draw();
+    needsRedraw = false; // Reset the flag after drawing
+  }
 
-    requestAnimationFrame(gameLoop); // Queue the next iteration
+  requestAnimationFrame(gameLoop); // Queue the next iteration
 }
 
 gameLoop(); // Initiate the game loop
