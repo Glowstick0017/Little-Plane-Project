@@ -26,6 +26,12 @@ let width = ($canvas.width = rect.width);
 let height = ($canvas.height = rect.height);
 let ctx = $canvas.getContext("2d");
 
+let buffer_canvas = document.createElement('canvas');
+buffer_canvas.width = canvas.width;
+buffer_canvas.height = canvas.height;
+let buffer_ctx = buffer_canvas.getContext("2d");
+
+
 // position of current screen
 let posX = 0;
 let posY = 0;
@@ -58,7 +64,7 @@ document.addEventListener('wheel', function(e) {
     } else if (e.deltaY < 0 && zoom < 10000) {
         zoom+=100;
     }
-    ctx.clearRect(0,0,$canvas.width,$canvas.height);
+    buffer_ctx.clearRect(0,0,$canvas.width,$canvas.height);
     draw();
 })
  */
@@ -68,10 +74,12 @@ function draw() {
   for (let x = 0; x < width; x += quality) {
     for (let y = 0; y < height; y += quality) {
       const seaLevel = calculateSeaLevel(x, y);
-      ctx.fillStyle = getColor(seaLevel);
-      ctx.fillRect(x, y, quality, quality);
+      buffer_ctx.fillStyle = getColor(seaLevel);
+      buffer_ctx.fillRect(x, y, quality, quality);
     }
   }
+
+  ctx.drawImage(buffer_canvas, 0, 0);
 }
 
 // Baseline sea level
