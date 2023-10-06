@@ -32,7 +32,7 @@ let posY = 0;
 let heightFromGround = 300; // nice visual range: 250 - 500
 $coordinates.innerHTML = "Coordinates: X=" + posX + ", Y=" + posY;
 
-// block size by pixel, i wouldn't recommend going under 5 load times will be longer
+// block size by pixel, i wouldn't recommend going under 5, load times will be longer
 let quality = 10;
 $quality.innerHTML = "Quality: " + quality + "px";
 
