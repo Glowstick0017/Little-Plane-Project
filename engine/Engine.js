@@ -9,7 +9,7 @@ let posX = 0;
 let posY = 0;
 document.getElementById("coordinates").innerHTML = "Coordinates: X=" + posX + ", Y=" + posY;
 
-// block size by pixel, i wouldn't recommend going under 5 load times will be longer
+// block size by pixel, i wouldn't recommend going under 5, load times will be longer
 let quality = 10;
 document.getElementById("quality").innerHTML = "Quality: " + quality + "px";
 
