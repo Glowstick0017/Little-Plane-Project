@@ -27,7 +27,9 @@ const KEYS = {
     ARROW_UP: 'ArrowUp',
     ARROW_DOWN: 'ArrowDown',
     ARROW_LEFT: 'ArrowLeft',
-    ARROW_RIGHT: 'ArrowRight'
+    ARROW_RIGHT: 'ArrowRight',
+    U: "u",
+    J: "j",
 };
 
 // Registering keypress and release events
@@ -72,6 +74,7 @@ function moveRotateAndDash(dx, dy, dashing) {
     else if(dx == 0) plane.rotate(dy*Math.PI/2+Math.PI/2);
     else if(dy == 0) plane.rotate(dx*Math.PI/2);
     else plane.rotate(Math.atan(-dy/dx) + Math.PI/2 + dy*Math.PI/2);
+
     // console.log(Math.atan(-dy/dx)*180/Math.PI);
 
     // Set the flag to redraw the canvas
