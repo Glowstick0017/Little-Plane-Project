@@ -7,9 +7,6 @@ let sprinting = false;
 // Flag to determine if the canvas needs a redraw
 let needsRedraw = false;
 
-// Flag to determine if the plane is at rest or motion
-let rest = true;
-
 // Variable to track the time since the plane started moving
 let dashing = false;
 let dx = 0;
@@ -69,12 +66,10 @@ function moveRotateAndDash(dx, dy, dashing) {
     else if(cooldown) cooldown -= 0.2;
     // console.log(t);
 
-    // Rotate the plane based on the direction of movement
+    // // Rotate the plane based on the direction of movement
     if(dx == 0 && dy == 0) /*Blank case*/;
-    else if(dx == 0) plane.rotate(dy*Math.PI/2+Math.PI/2);
-    else if(dy == 0) plane.rotate(dx*Math.PI/2);
-    else plane.rotate(Math.atan(-dy/dx) + Math.PI/2 + dy*Math.PI/2);
-
+    else if(dx >= 0) plane.rotate(Math.atan(dy/dx) + Math.PI/2);
+    else plane.rotate(Math.atan(dy/dx) - Math.PI/2);
     // console.log(Math.atan(-dy/dx)*180/Math.PI);
 
     // Set the flag to redraw the canvas
