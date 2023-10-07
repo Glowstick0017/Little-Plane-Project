@@ -26,6 +26,12 @@ let width = ($canvas.width = rect.width);
 let height = ($canvas.height = rect.height);
 let ctx = $canvas.getContext("2d");
 
+let buffer_canvas = document.createElement('canvas');
+buffer_canvas.width = canvas.width;
+buffer_canvas.height = canvas.height;
+let buffer_ctx = buffer_canvas.getContext("2d");
+
+
 // position of current screen
 let posX = 0;
 let posY = 0;
@@ -58,20 +64,51 @@ document.addEventListener('wheel', function(e) {
     } else if (e.deltaY < 0 && zoom < 10000) {
         zoom+=100;
     }
-    ctx.clearRect(0,0,$canvas.width,$canvas.height);
+    buffer_ctx.clearRect(0,0,$canvas.width,$canvas.height);
     draw();
 })
  */
 
 // Initial draw function
 function draw() {
-  for (let x = 0; x < width; x += quality) {
-    for (let y = 0; y < height; y += quality) {
+  const drawing_batch = new Map()
+  const fixed_quality = quality
+  
+  for (let x = 0; x < width; x += fixed_quality) {
+    let last_color = "";
+    for (let y = 0; y < height; y += fixed_quality) {
       const seaLevel = calculateSeaLevel(x, y);
-      ctx.fillStyle = getColor(seaLevel);
-      ctx.fillRect(x, y, quality, quality);
+      const color = getColor(seaLevel);
+
+      if (!drawing_batch.get(color)) {
+        drawing_batch.set(color, [])
+      }
+
+      if (last_color == color) {
+        const to_increase = drawing_batch.get(color).pop()
+        drawing_batch.get(color).push({
+          ...to_increase,
+          delta_y: to_increase.delta_y + fixed_quality
+        })
+      }
+      else {
+        drawing_batch.get(color).push({
+          x, y, delta_x: fixed_quality, delta_y: fixed_quality
+        })
+      }
+
+      last_color = color
     }
   }
+
+  for (let [color, squares] of drawing_batch) {
+    buffer_ctx.fillStyle = color;
+    for (let square of squares) {
+      buffer_ctx.fillRect(square.x, square.y, square.delta_x, square.delta_y);
+    }
+  }
+
+  ctx.drawImage(buffer_canvas, 0, 0);
 }
 
 // Baseline sea level
