@@ -75,21 +75,33 @@ function draw() {
   const fixed_quality = quality
   
   for (let x = 0; x < width; x += fixed_quality) {
+    let last_color = "";
     for (let y = 0; y < height; y += fixed_quality) {
       const seaLevel = calculateSeaLevel(x, y);
       const color = getColor(seaLevel);
 
-      if (!drawing_batch.get(color)){
+      if (!drawing_batch.get(color)) {
         drawing_batch.set(color, [])
       }
 
-      drawing_batch.get(color).push({
-        x, y, delta_x: fixed_quality, delta_y: fixed_quality
-      })
+      if (last_color == color) {
+        const to_increase = drawing_batch.get(color).pop()
+        drawing_batch.get(color).push({
+          ...to_increase,
+          delta_y: to_increase.delta_y + fixed_quality
+        })
+      }
+      else {
+        drawing_batch.get(color).push({
+          x, y, delta_x: fixed_quality, delta_y: fixed_quality
+        })
+      }
+
+      last_color = color
     }
   }
 
-  for (let [color, squares] of drawing_batch){
+  for (let [color, squares] of drawing_batch) {
     buffer_ctx.fillStyle = color;
     for (let square of squares) {
       buffer_ctx.fillRect(square.x, square.y, square.delta_x, square.delta_y);
