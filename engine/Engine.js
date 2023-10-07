@@ -71,11 +71,28 @@ document.addEventListener('wheel', function(e) {
 
 // Initial draw function
 function draw() {
-  for (let x = 0; x < width; x += quality) {
-    for (let y = 0; y < height; y += quality) {
+  const drawing_batch = new Map()
+  const fixed_quality = quality
+  
+  for (let x = 0; x < width; x += fixed_quality) {
+    for (let y = 0; y < height; y += fixed_quality) {
       const seaLevel = calculateSeaLevel(x, y);
-      buffer_ctx.fillStyle = getColor(seaLevel);
-      buffer_ctx.fillRect(x, y, quality, quality);
+      const color = getColor(seaLevel);
+
+      if (!drawing_batch.get(color)){
+        drawing_batch.set(color, [])
+      }
+
+      drawing_batch.get(color).push({
+        x, y, delta_x: fixed_quality, delta_y: fixed_quality
+      })
+    }
+  }
+
+  for (let [color, squares] of drawing_batch){
+    buffer_ctx.fillStyle = color;
+    for (let square of squares) {
+      buffer_ctx.fillRect(square.x, square.y, square.delta_x, square.delta_y);
     }
   }
 
