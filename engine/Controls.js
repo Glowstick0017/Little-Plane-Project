@@ -95,7 +95,7 @@ function moveRotateAndDash(dx, dy, dashing , keyPressedFlag) {
 // Dictionary to map input keys to change the playerAngle
 const horizontalMapping = {
     [KEYS.A]: () => { playerAngle -= yawStrength , updateDirection()},
-    [KEYS.ARROW_LEFT]: () => { playerAngle += yawStrength , updateDirection()},
+    [KEYS.ARROW_LEFT]: () => { playerAngle -= yawStrength , updateDirection()},
     [KEYS.D]: () => { playerAngle += yawStrength , updateDirection()},
     [KEYS.ARROW_RIGHT]: () => { playerAngle += yawStrength , updateDirection()},
 };
