@@ -64,13 +64,11 @@ const colorCommand = new Command("COLOR", "COLOR", 0, (args) => {
   if (color === 0) {
     color = 1;
     $color.innerHTML = "Color: " + color;
-    ctx.clearRect(0, 0, $canvas.width, $canvas.height);
     draw();
     return "Color on.";
   } else {
     color = 0;
     $color.innerHTML = "Color: " + color;
-    ctx.clearRect(0, 0, $canvas.width, $canvas.height);
     draw();
     return "Color off.";
   }

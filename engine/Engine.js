@@ -73,7 +73,7 @@ document.addEventListener('wheel', function(e) {
 function draw() {
   const drawing_batch = new Map()
   const fixed_quality = quality
-  
+
   for (let x = 0; x < width; x += fixed_quality) {
     let last_color = "";
     for (let y = 0; y < height; y += fixed_quality) {
@@ -126,7 +126,8 @@ function calculateSeaLevel(x, y) {
 // Define terrain
 function getColor(seaLevel) {
   if (color === 0) {
-    return `rgba(0, 0, 0, ${seaLevel})`;
+    const gray_scale_range = (seaLevel * 255).toFixed();
+    return `rgb(${gray_scale_range}, ${gray_scale_range}, ${gray_scale_range})`;
   } else {
     return terrainColor(seaLevel);
   }
