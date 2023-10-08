@@ -16,7 +16,10 @@ let dy = -1;
 
 //player Angle for plane's yaw 
 let playerAngle = -3.14 / 2;
-let yawStrength = 0.02; //the strength of rotation 
+let yawStrength = 0.02; //the strength of rotation
+
+//constant flight toggle
+let constantFlight = false;
     
 let t = 0;
 let cooldown = 0;
@@ -41,6 +44,7 @@ const KEYS = {
     ARROW_RIGHT: 'ArrowRight',
     U: "u",
     J: "j",
+    ToggleForward: 'e',
 };
 
 // Registering keypress and release events
@@ -83,7 +87,7 @@ function moveRotateAndDash(dx, dy, dashing , keyPressedFlag) {
     }
     // // Rotate the plane based on the direction of movement
 
-    if(dx == 0 && dy == 0) /*Blank case*/;
+    if(dx === 0 && dy === 0) /*Blank case*/;
     else if(dx >= 0) plane.rotate(Math.atan(dy/dx) + Math.PI/2);
     else plane.rotate(Math.atan(dy/dx) - Math.PI/2);
     // console.log(Math.atan(-dy/dx)*180/Math.PI);
@@ -108,7 +112,13 @@ const verticalMapping = {
 
 // Game loop to handle movement and rendering
 function gameLoop() {
-    let keyPressedFlag = false;
+    let keyPressedFlag;
+
+    if (keysPressed[KEYS.ToggleForward]){
+        constantFlight=!constantFlight;
+        keysPressed[KEYS.ToggleForward]=false;
+    }
+    constantFlight ? keyPressedFlag=true : keyPressedFlag=false;
 
     // Check if any of the keys are pressed and update dx
     for(let key in horizontalMapping){

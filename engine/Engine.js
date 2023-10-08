@@ -84,7 +84,7 @@ function draw() {
         drawing_batch.set(color, [])
       }
 
-      if (last_color == color) {
+      if (last_color === color) {
         const to_increase = drawing_batch.get(color).pop()
         drawing_batch.get(color).push({
           ...to_increase,
