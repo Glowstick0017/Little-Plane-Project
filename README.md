@@ -19,6 +19,7 @@
 - [Commands](#commands)
 - [Roadmap](#roadmap)
 - [Run a local/dev copy](#how-to-run-a-development-copy-of-the-project)
+- [Contributors](#contributors)
 - [License](#license)
 
 # Getting started & controls
@@ -62,6 +63,12 @@ Upcoming features to be implemented
 This project was made to learn the concepts and technologies used as simple as possible, from how perlin noise works to simple javascript fundamentals.
 The only thing you need to do to make and see your own changes in action is simply clone the repository, make your experimental changes to the code, and open index.html on your browser to view your changes.
 If you made any changes you think would be helpful to add to the original repository, feel free to open a pull request. All proposed changes will be reviewed and whether or not they're added, there will be meaningful comments left to help support everyones learning journey.
+
+# Contributors
+Meet the talented individuals who have contributed to The Little Plane Project:
+<a href="https://github.com/Glowstick0017/Little-Plane-Project/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Glowstick0017/Little-Plane-Project" />
+</a>
 
 # License
 Distributed under the MIT License. See [LICENSE](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/LICENSE) for more information.
