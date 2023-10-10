@@ -63,6 +63,13 @@ class UiController {
 
   updatePlaneColor(e) {
     const { id: partName, value: newColor } = e.target;
+    console.log(partName, newColor);
+    // save colors set in local storage
+    const littlePlaneColorsAlready = localStorage.getItem("littlePlaneColors");
+    localStorage.setItem(
+      "littlePlaneColors",
+      littlePlaneColorsAlready + "," + partName + ":" + newColor
+    );
     plane.setColor(partName, newColor);
   }
 
