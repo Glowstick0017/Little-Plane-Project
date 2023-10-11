@@ -165,5 +165,7 @@ for (let color of colors) {
     // later colors overwrites the previous ones
     let values = color.split(":");
     plane.setColor(values[0], values[1]);
+    // overwrites the default values of color UI`
+    document.getElementById(values[0]).value = values[1];
 }
 plane.draw();
