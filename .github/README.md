@@ -65,7 +65,8 @@ The only thing you need to do to make and see your own changes in action is simp
 If you made any changes you think would be helpful to add to the original repository, feel free to open a pull request. All proposed changes will be reviewed and whether or not they're added, there will be meaningful comments left to help support everyones learning journey.
 
 # Contributors
-Meet the talented individuals who have contributed to The Little Plane Project:
+Meet the talented individuals who have contributed to The Little Plane Project and learn how you can join them in [contributing to the project](CONTRIBUTING.md):
+
 <a href="https://github.com/Glowstick0017/Little-Plane-Project/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Glowstick0017/Little-Plane-Project" />
 </a>
