@@ -16,7 +16,9 @@ const $seed = document.getElementById("seed");
 const $settings = document.getElementById("settings");
 const $settingsMenu = document.getElementById("settingsMenu");
 const $speed = document.getElementById("speed");
+const $start = document.getElementById("start");
 const $ui = document.getElementById("ui");
+const $welcome = document.getElementById("welcome");
 const $planeColors = document.querySelectorAll(
   '.planeColors input[type="color"]'
 );

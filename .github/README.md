@@ -3,7 +3,7 @@
 [![image](/.github/ISSUE_TEMPLATE/playbutton.png)](https://glowstick.me/tlpp/)
 
 [![image](https://img.shields.io/badge/Live_build-23w40d-darkgreen)](https://glowstick.me/tlpp/)
-[![image](https://img.shields.io/badge/Snapshot-23w41a-darkgreen)](https://glowstick0017.github.io/Little-Plane-Project/index)
+[![image](https://img.shields.io/badge/Snapshot-23w41b-darkgreen)](https://glowstick0017.github.io/Little-Plane-Project/index)
 
 ![image](https://img.shields.io/static/v1?label=Chrome&message=%E2%9C%94&color=success?style=social&logo=google-chrome&logoColor=white)
 ![image](https://img.shields.io/static/v1?label=Firefox&message=%E2%9C%94&color=success?style=social&logo=Firefox&logoColor=white)
@@ -26,7 +26,7 @@
 Hi! Thank you for checking out `The little plane project`. Thus far there isnt much to do in the plane project but fly around and discover generated chunks that nobody has ever seen before. To get started visit the [play site](https://glowstick.me/tlpp/). You can move with either the `WASD` keys like any other game or you can use the arrow keys if you're oldschool. 
 
 ![image](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/WASD.png?raw=true)
-![image](https://user-images.githubusercontent.com/90464994/159105547-7c25a446-00e2-4da7-a5d9-fc8c283421b5.png?size=10)
+![image](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/arrowKeys.png?raw=true)
 
 To open the command box, hit your `Enter` key and you can use any of these commands to change your experience. I recommend using the seed command to generate a new world since the play site always starts on the same seed. 
 
@@ -46,7 +46,7 @@ Enjoy your time and please send any suggestions you have to Glowstick#0017 on di
 # Roadmap
 Upcoming features to be implemented
 - [ ] biomes by using multile perlin planes to simulate different conditions including sea level, temperature, humidity...
-- [ ] Instructions in context menu
+- [X] Instructions in context menu
 - [ ] mobile controls (either joystick or click on displayed WASD)
 - [ ] context menu friendly on mobile  
 - [X] menu screen or esc menu

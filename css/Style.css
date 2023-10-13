@@ -135,11 +135,16 @@ body {
   font-family: boxyFont;
   letter-spacing: 1px;
   z-index: 150;
-  display: none;
+  display: block;
 }
 #customizeMenu {
   display: none;
   text-shadow: 1px 1px white;
+}
+#welcome {
+  display: block;
+  text-shadow: 1px 1px white;
+  text-align: center;
 }
 #settingsMenu {
   display: none;

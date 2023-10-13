@@ -51,6 +51,7 @@ class UiController {
   }
 
   handleHamburgerClick() {
+    UiController.setDisplay("none", $welcome);
     UiController.setDisplay("toggle", $nav);
 
     if ($nav.style.display === "block")
@@ -76,6 +77,10 @@ class UiController {
     $hamburger.addEventListener("click", this.handleHamburgerClick);
     $customize.addEventListener("click", this.handleCustomizeClick);
     $settings.addEventListener("click", this.handleSettingsClick);
+    $start.addEventListener("click", () => {
+        UiController.setDisplay("none", $welcome, $ui);
+        constantFlight = true;
+    });
     $planeColors.forEach((input) => {
       input.addEventListener("change", this.updatePlaneColor);
     });
