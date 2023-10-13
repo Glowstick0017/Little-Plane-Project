@@ -101,10 +101,13 @@ function draw() {
     }
   }
 
+  const drawOffsetX = (posX + fixed_quality / 2) % fixed_quality;
+  const drawOffsetY = (posY + fixed_quality / 2) % fixed_quality;
+
   for (let [color, squares] of drawing_batch) {
     buffer_ctx.fillStyle = color;
     for (let square of squares) {
-      buffer_ctx.fillRect(square.x, square.y, square.delta_x, square.delta_y);
+      buffer_ctx.fillRect(square.x - drawOffsetX, square.y - drawOffsetY, square.delta_x, square.delta_y);
     }
   }
 
@@ -117,7 +120,7 @@ function calculateSeaLevel(x, y) {
   let mountainHeight = 1.0; // nice visual range: 0 - 1.3
 
   return (
-    (perlin2((x + posX) / heightFromGround, (y + posY) / heightFromGround) +
+    (perlin2((x + (Math.round(posX/quality)*quality)) / heightFromGround, (y + (Math.round(posY/quality)*quality)) / heightFromGround) +
       mountainHeight) /
     2
   );
