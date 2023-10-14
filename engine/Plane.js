@@ -153,6 +153,18 @@ class Plane {
             this.draw();
         }
     }
+
+    resetDefaults() {
+        document.getElementById("outer").value = this.parts["outer"].color = '#770619';
+        document.getElementById("innerMain").value = this.parts["innerMain"].color = '#ac322e';
+        document.getElementById("innerHighlight").value = this.parts["innerHighlight"].color = '#d85665';
+        document.getElementById("innerDarkHighlight").value = this.parts["innerDarkHighlight"].color = '#8c0308';
+        document.getElementById("aroundWindshield").value = this.parts["aroundWindshield"].color = '#570101';
+        document.getElementById("windshield").value = this.parts["windshield"].color = '#0ba0d2';
+        document.getElementById("propeller").value = this.parts["propeller"].color = '#333333';
+        document.getElementById("propellerBlades").value = this.parts["propellerBlades"].color = '#b3b3b3';
+        this.draw();
+    }
 }
 
 // Instantiating the plane and drawing it for the first time

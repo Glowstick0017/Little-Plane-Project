@@ -11,6 +11,7 @@ const $customizeMenu = document.getElementById("customizeMenu");
 const $hamburger = document.getElementById("hamburger");
 const $nav = document.getElementById("nav");
 const $quality = document.getElementById("quality");
+const $resetDefault = document.getElementById("resetDefault");
 const $result = document.getElementById("result");
 const $seed = document.getElementById("seed");
 const $settings = document.getElementById("settings");
