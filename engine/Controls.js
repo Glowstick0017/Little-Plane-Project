@@ -158,7 +158,7 @@ function gameLoop() {
 
     moveRotateAndDash(dx, dy, dashing , keyPressedFlag)
     // Update displayed coordinates
-    coords.innerHTML = `X = ${Math.round(posX / 10)} Y = ${Math.round((-1) * posY / 10)}`;
+    $coords.innerHTML = `X = ${Math.round(posX / 10)} Y = ${Math.round((-1) * posY / 10)}`;
     $coordinates.innerHTML =
         `Coordinates: X= ${Math.round(posX / 10)} Y= ${Math.round((-1) * posY / 10)}`;
 

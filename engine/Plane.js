@@ -170,14 +170,16 @@ class Plane {
 // Instantiating the plane and drawing it for the first time
 const plane = new Plane("planeCanvas");
 // loading colors from local storage
-let colors = localStorage.getItem("littlePlaneColors");
-colors = colors.split(",");
-colors = colors.slice(1); // remove null at start of array
-for (let color of colors) {
-    // later colors overwrites the previous ones
-    let values = color.split(":");
-    plane.setColor(values[0], values[1]);
-    // overwrites the default values of color UI`
-    document.getElementById(values[0]).value = values[1];
+if (localStorage.getItem("littlePlaneColors")) {
+    let colors = localStorage.getItem("littlePlaneColors");
+    colors = colors.split(",");
+    colors = colors.slice(1); // remove null at start of array
+    for (let color of colors) {
+        // later colors overwrites the previous ones
+        let values = color.split(":");
+        plane.setColor(values[0], values[1]);
+        // overwrites the default values of color UI`
+        document.getElementById(values[0]).value = values[1];
+    }
 }
 plane.draw();

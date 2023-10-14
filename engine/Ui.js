@@ -88,6 +88,14 @@ class UiController {
       localStorage.removeItem("littlePlaneColors");
       plane.resetDefaults();
     });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if ($welcome.style.display === "block") {
+          constantFlight = true;
+        }
+        UiController.setDisplay("none", $ui, $customizeMenu, $settingsMenu, $welcome);
+      }
+    });
   }
 }
 
