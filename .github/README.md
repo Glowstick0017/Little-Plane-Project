@@ -2,8 +2,8 @@
 ![alt text](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/tlpp-icon.png?raw=true)
 [![image](/.github/ISSUE_TEMPLATE/playbutton.png)](https://glowstick.me/tlpp/)
 
-[![image](https://img.shields.io/badge/Live_build-23w40d-darkgreen)](https://glowstick.me/tlpp/)
-[![image](https://img.shields.io/badge/Snapshot-23w41b-darkgreen)](https://glowstick0017.github.io/Little-Plane-Project/index)
+[![image](https://img.shields.io/badge/Live_build-darkgreen)](https://glowstick.me/tlpp/)
+[![image](https://img.shields.io/badge/Snapshot-23w41b-yellow)](https://glowstick0017.github.io/Little-Plane-Project/index)
 
 ![image](https://img.shields.io/static/v1?label=Chrome&message=%E2%9C%94&color=success?style=social&logo=google-chrome&logoColor=white)
 ![image](https://img.shields.io/static/v1?label=Firefox&message=%E2%9C%94&color=success?style=social&logo=Firefox&logoColor=white)

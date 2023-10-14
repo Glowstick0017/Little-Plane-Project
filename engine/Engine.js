@@ -60,18 +60,6 @@ $seed.innerHTML = "Seed: " + seedVal;
 // initial draw
 draw();
 
-/** zoom feature that doesn't work well yet
-document.addEventListener('wheel', function(e) {
-    if(e.deltaY > 0 && zoom > 100) {
-        zoom-=100;
-    } else if (e.deltaY < 0 && zoom < 10000) {
-        zoom+=100;
-    }
-    buffer_ctx.clearRect(0,0,$canvas.width,$canvas.height);
-    draw();
-})
- */
-
 // Initial draw function
 function draw() {
   const drawing_batch = new Map()
