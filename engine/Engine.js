@@ -65,9 +65,9 @@ function draw() {
   const drawing_batch = new Map()
   const fixed_quality = quality
 
-  for (let x = 0; x < width; x += fixed_quality) {
+  for (let x = -fixed_quality; x < width + fixed_quality; x += fixed_quality) {
     let last_color = "";
-    for (let y = 0; y < height; y += fixed_quality) {
+    for (let y = -fixed_quality; y < height + fixed_quality; y += fixed_quality) {
       const seaLevel = calculateSeaLevel(x, y);
       const color = getColor(seaLevel);
 
