@@ -84,6 +84,10 @@ class UiController {
     $planeColors.forEach((input) => {
       input.addEventListener("change", this.updatePlaneColor);
     });
+    $resetDefault.addEventListener("click", () => {
+      localStorage.removeItem("littlePlaneColors");
+      plane.resetDefaults();
+    });
   }
 }
 
