@@ -1,11 +1,12 @@
 class UiController {
   constructor() {
     // Binding methods to the instance for correct `this` context when called from event listeners
+    let audio="sound.mp3";
     this.handleHamburgerClick = this.handleHamburgerClick.bind(this);
     this.handleCustomizeClick = this.handleCustomizeClick.bind(this);
     this.handleSettingsClick = this.handleSettingsClick.bind(this);
     this.updatePlaneColor = this.updatePlaneColor.bind(this);
-
+     
     this.setupEventListeners();
   }
 
@@ -41,6 +42,7 @@ class UiController {
       UiController.setDisplay("none", menuToHide);
     }
   }
+    
 
   handleCustomizeClick() {
     this.handleMenuToggle($customizeMenu, $settingsMenu);
@@ -81,8 +83,11 @@ class UiController {
     $customize.addEventListener("click", this.handleCustomizeClick);
     $settings.addEventListener("click", this.handleSettingsClick);
     $start.addEventListener("click", () => {
+     
         UiController.setDisplay("none", $welcome, $ui);
+        
         constantFlight = true;
+        
     });
     $planeColors.forEach((input) => {
       input.addEventListener("change", this.updatePlaneColor);
