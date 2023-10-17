@@ -51,7 +51,10 @@ class UiController {
   }
 
   handleHamburgerClick() {
-    UiController.setDisplay("none", $welcome);
+    if ($welcome.style.display === "block") {
+        constantFlight = true;
+        UiController.setDisplay("none", $welcome, $ui);
+    }
     UiController.setDisplay("toggle", $nav);
 
     if ($nav.style.display === "block")

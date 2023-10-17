@@ -150,6 +150,9 @@ body {
   display: none;
   text-shadow: 1px 1px white;
 }
+#start {
+  cursor: pointer;
+}
 .planeColors {
   display: flex;
   flex-direction: column;
