@@ -111,9 +111,9 @@ function calculateSeaLevel(x, y) {
   let mountainHeight = 1.0; // nice visual range: 0 - 1.3
 
   return (
-    (perlin2((x + (Math.round(posX/quality)*quality)) / heightFromGround, (y + (Math.round(posY/quality)*quality)) / heightFromGround) +
-      mountainHeight) /
-    2
+    (perlin2(((x-width/2)/heightFromGround + (Math.round(posX/quality)*quality)/300), ((y-height/2)/heightFromGround + (Math.round(posY/quality)*quality)/300)) +
+    mountainHeight) /
+  2
   );
 }
 
