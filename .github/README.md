@@ -12,6 +12,7 @@
 ![image](https://img.shields.io/static/v1?label=Safari&message=%E2%9C%94&color=success?style=social&logo=Safari&logoColor=white)
 ![image](https://img.shields.io/static/v1?label=Mobile&message=In%20progress&color=critical)
 
+## Introduction
 `The little plane project` is a small passion project that I started based on my interest and curiosity on perlin noise and procedural generation. Rather than making a project in a prebuilt game engine like ~~Unity~~Godot(we don't like Unity around here anymore), I wanted to create my own engine from the ground up using only javascript and no external libraries (only using a prebuilt algorithm for SHA256 made by [Angel Marin](https://anmar.eu.org/) and [Paul Johnston](http://pajhome.org.uk/)). I made this project in javascript so that a majority of people can read and understand what's happening in the code (may not be too understandable since I have poor documentation, standards, and this is my first decently sized javascript project), as well as an extreme ease of access to a demo of the project to anyone that can use a browser. Credit also goes out to [Javidx9 or OneLoneCoder](https://github.com/OneLoneCoder) for their explanation on Perlin noise in the first 10 minutes of [this video](https://youtu.be/6-0UaeJBumA) which tremendously helped wrap my head around what Perlin noise is and how to go about my implementation. 
 
 # Table of contents
@@ -42,6 +43,10 @@ Enjoy your time and please send any suggestions you have to Glowstick#0017 on di
 |   seed \<value>    | Generate a new world with the given seed. <br />Any length of characters, words, or numbers can be entered for a unique world |    random     |
 |   speed \<value>   | Set flight speed. Range 1-10                                                                                                  |       1       |
 | teleport \<x> \<y> <br/> tp \<x> \<y> | Teleport to specified coordinates                                                                          |      0 0      |
+
+
+## Instructions within the Application
+With the addition of the context menu thanks to jackwebdev, detailed instructions are available within the application itself, providing information on controls and command execution. These instructions enhance the user experience and understanding.
 
 # Roadmap
 Upcoming features to be implemented
