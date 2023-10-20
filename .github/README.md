@@ -69,10 +69,6 @@ This project was made to learn the concepts and technologies used as simple as p
 The only thing you need to do to make and see your own changes in action is simply clone the repository, make your experimental changes to the code, and open index.html on your browser to view your changes.
 If you made any changes you think would be helpful to add to the original repository, feel free to open a pull request. All proposed changes will be reviewed and whether or not they're added, there will be meaningful comments left to help support everyones learning journey.
 
-## Contributing
-We welcome contributions to "The Little Plane Project." Whether it's bug fixes, new features, or improvements, your input is valuable. Before contributing, please review our [Contribution Guidelines](CONTRIBUTING.md).
-
-
 # Contributors
 Meet the talented individuals who have contributed to The Little Plane Project and learn how you can join them in [contributing to the project](CONTRIBUTING.md):
 
@@ -80,15 +76,5 @@ Meet the talented individuals who have contributed to The Little Plane Project a
   <img src="https://contrib.rocks/image?repo=Glowstick0017/Little-Plane-Project" />
 </a>
 
-## Code Documentation
-To facilitate understanding for beginners, the code includes detailed comments and documentation for methods and functions. If you have any questions or need further clarification, please reach out.
-
-## Troubleshooting
-If you encounter issues while using the project, check our troubleshooting guide in [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for solutions to common problems.
-
 # License
 Distributed under the MIT License. See [LICENSE](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/LICENSE) for more information.
-
-
-## Acknowledgments
-Special thanks to [Javidx9 or OneLoneCoder](https://github.com/OneLoneCoder) for their insights on Perlin noise. We also appreciate the contributions of [Angel Marin](https://anmar.eu.org/) and [Paul Johnston](http://pajhome.org.uk/) for their SHA256 algorithm. Additionally, we thank our contributors for their valuable input.
