@@ -20,6 +20,9 @@ let yawStrength = 0.02; //the strength of rotation
 
 //constant flight toggle
 let constantFlight = false;
+
+//pause
+let pause = true;
     
 let t = 0;
 let cooldown = 0;
@@ -112,6 +115,10 @@ const verticalMapping = {
 
 // Game loop to handle movement and rendering
 function gameLoop() {
+    if (pause) {
+        keysPressed = {};
+    }
+
     let keyPressedFlag;
 
     if (keysPressed[KEYS.ToggleForward]){

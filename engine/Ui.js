@@ -83,6 +83,7 @@ class UiController {
     $start.addEventListener("click", () => {
         UiController.setDisplay("none", $welcome, $ui);
         constantFlight = true;
+        pause = false;
     });
     $planeColors.forEach((input) => {
       input.addEventListener("change", this.updatePlaneColor);
@@ -94,6 +95,7 @@ class UiController {
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         if ($welcome.style.display === "block") {
+          pause = false;
           constantFlight = true;
         }
         UiController.setDisplay("none", $ui, $customizeMenu, $settingsMenu, $welcome);
