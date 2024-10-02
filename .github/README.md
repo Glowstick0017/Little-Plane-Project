@@ -73,6 +73,7 @@ If you made any changes you think would be helpful to add to the original reposi
 Default docker compose is set to expose on port 9090
 
 Run Docker Compose
+
 docker compose up -d
 
 Open your web browser and go to localhost:9090
