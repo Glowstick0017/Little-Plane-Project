@@ -1,6 +1,7 @@
 class Plane {
     constructor(canvasId) {
         // Setting up canvas and its dimensions
+        /** @type {HTMLCanvasElement} */
         this.canvas = document.getElementById(canvasId);
         this.rect = this.canvas.getBoundingClientRect();
         this.width = this.canvas.width = this.rect.width;
@@ -11,6 +12,9 @@ class Plane {
         this.scale = 2;
         this.startx = this.width / 2 - 120 / this.scale;
         this.starty = this.height / 2 - 100 / this.scale;
+
+        // State
+        this.angle = 0.0;
 
         // Defining plane parts with their colors and coordinates for rendering
         this.parts = {
@@ -122,11 +126,16 @@ class Plane {
         this.ctx.fillRect(this.startx + x / this.scale, this.starty + y / this.scale, width / this.scale, height / this.scale);
     }
 
-    // Main draw function to render the plane
-    draw() {
-        // Clearing the canvas before drawing
-        this.ctx.clearRect(0, 0, this.width, this.height);
+    drawShadow() {
+        for (const partName in this.parts) {
+            const part = this.parts[partName];
+            for (const coord of part.coords) {
+                this.drawRect(...coord, 'rgba(0, 0, 0, 0.5)');
+            }
+        }
+    }
 
+    drawPlane() {
         // Iterating over each plane part to draw it
         for (const partName in this.parts) {
             const part = this.parts[partName];
@@ -136,13 +145,33 @@ class Plane {
         }
     }
 
+    // Main draw function to render the plane
+    draw() {
+        // Clearing the canvas before drawing
+        this.ctx.clearRect(0, 0, this.width, this.height);
+
+        this.ctx.translate(this.width / 2 - 32*this.scale, this.height / 2 + 32*this.scale);
+        this.ctx.rotate(this.angle);
+        this.ctx.translate(-this.width / 2, -this.height / 2);
+        this.drawShadow();
+        this.ctx.resetTransform();
+
+        this.ctx.translate(this.width / 2, this.height / 2);
+        this.ctx.rotate(this.angle);
+        this.ctx.translate(-this.width / 2, -this.height / 2);
+        this.drawPlane();
+        this.ctx.resetTransform();
+    }
+
     // Function to rotate the plane
     rotate(angle) {
-        this.ctx.restore();
-        this.ctx.save();
-        this.ctx.translate(this.width / 2, this.height / 2);
-        this.ctx.rotate(angle);
-        this.ctx.translate(-this.width / 2, -this.height / 2);
+        // this.ctx.restore();
+        // this.ctx.save();
+        // this.ctx.translate(this.width / 2, this.height / 2);
+        // this.ctx.rotate(angle);
+        // this.ctx.translate(-this.width / 2, -this.height / 2);
+        // this.draw();
+        this.angle = angle;
         this.draw();
     }
 
