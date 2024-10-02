@@ -1,0 +1,5 @@
+services:
+  little-plane:
+    build: .
+    ports: 
+      - "9090:80"
