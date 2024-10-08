@@ -21,7 +21,9 @@ let constantFlight = false;
 //pause
 let pause = true;
     
-let t = 0;
+let baseSpeed = 1;
+let speedMultiplier = 3;
+let currentSpeed = baseSpeed;
 
 //update dx and dy based on player angle
 const updateDirection = () => {
@@ -78,10 +80,8 @@ function moveRotateAndSprint(dx, dy, sprinting , keyPressedFlag) {
 
     // Update the position of plane based on the direction of movement and sprint status , only if any of the keys is pressed
     if (keyPressedFlag) {
-        posX += dx * speed * 10 + 30 * dx * t;
-        posY += dy * speed * 10 + 30 * dy * t;
-        if (sprinting) t -= 0.2;
-        // console.log(t);
+        posX += dx * speed * 10 + 30 * dx;
+        posY += dy * speed * 10 + 30 * dy;
     }
     // // Rotate the plane based on the direction of movement
 
@@ -138,16 +138,13 @@ function gameLoop() {
         }
     }
 
-    // Check if the sprint key is pressed if sprint flag is false
-    if(keysPressed[KEYS.SPRINT] && !sprinting){
-        sprinting = true
-        // Duration of the sprint (speed)
-        t = 1;
-    }
-
-    else if( t < 0){  
+    // Check if the sprint key is pressed
+    if (keysPressed[KEYS.SPRINT]) {
+        sprinting = true;
+        speed = currentSpeed * speedMultiplier; // Update speed for sprinting
+    } else {
         sprinting = false;
-        t = 0;
+        speed = currentSpeed;
     }
 
     if(keysPressed[KEYS.U]){

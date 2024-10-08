@@ -17,7 +17,8 @@ const speedCommand = new Command("SPEED", "SPEED <value>", 1, (args) => {
   } else if (speedVal > 10 || speedVal < 1) {
     return "Invalid input. Range 1-10";
   } else {
-    speed = speedVal;
+    currentSpeed = speedVal;
+    speed = currentSpeed;
     $speed.innerHTML = "Speed: " + speed;
     return "New speed set to " + speedVal;
   }
