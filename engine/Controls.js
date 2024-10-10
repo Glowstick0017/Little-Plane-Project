@@ -21,6 +21,7 @@ let constantFlight = false;
 //pause
 let pause = true;
     
+let t = 0;
 let baseSpeed = 1;
 let speedMultiplier = 3;
 let currentSpeed = baseSpeed;
@@ -80,8 +81,8 @@ function moveRotateAndSprint(dx, dy, sprinting , keyPressedFlag) {
 
     // Update the position of plane based on the direction of movement and sprint status , only if any of the keys is pressed
     if (keyPressedFlag) {
-        posX += dx * speed * 10 + 30 * dx;
-        posY += dy * speed * 10 + 30 * dy;
+        posX += dx * speed * 10 + 30 * dx * t;
+        posY += dy * speed * 10 + 30 * dy * t;
     }
     // // Rotate the plane based on the direction of movement
 
