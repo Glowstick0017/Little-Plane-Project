@@ -1,80 +1,122 @@
 # The Little Plane Project
-![alt text](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/tlpp-icon.png?raw=true)
-[![image](/.github/ISSUE_TEMPLATE/playbutton.png)](https://glowstick.me/tlpp/)
+![The Little Plane Project Icon](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/tlpp-icon.png?raw=true)
 
-[![image](https://img.shields.io/badge/Live_build-darkgreen)](https://glowstick.me/tlpp/)
-[![image](https://img.shields.io/badge/Snapshot-24w40a-yellow)](https://glowstick0017.github.io/Little-Plane-Project/index)
+[![Play Now](https://img.shields.io/badge/Play-Now-darkgreen)](https://glowstick.me/tlpp/) [![Snapshot](https://img.shields.io/badge/Snapshot-24w40a-yellow)](https://glowstick0017.github.io/Little-Plane-Project/index)
 
-![image](https://img.shields.io/static/v1?label=Chrome&message=%E2%9C%94&color=success?style=social&logo=google-chrome&logoColor=white)
-![image](https://img.shields.io/static/v1?label=Firefox&message=%E2%9C%94&color=success?style=social&logo=Firefox&logoColor=white)
-![image](https://img.shields.io/static/v1?label=Microsoft%20Edge&message=%E2%9C%94&color=success?style=social&logo=Microsoft-edge&logoColor=white)
-![image](https://img.shields.io/static/v1?label=Internet%20Explorer&message=%E2%9C%94&color=success?style=social&logo=Internet-Explorer&logoColor=white)
-![image](https://img.shields.io/static/v1?label=Safari&message=%E2%9C%94&color=success?style=social&logo=Safari&logoColor=white)
-![image](https://img.shields.io/static/v1?label=Mobile&message=In%20progress&color=critical)
+![Supported Browsers](https://img.shields.io/static/v1?label=Chrome&message=%E2%9C%94&color=success&style=social&logo=google-chrome)
+![Supported Browsers](https://img.shields.io/static/v1?label=Firefox&message=%E2%9C%94&color=success&style=social&logo=firefox)
+![Supported Browsers](https://img.shields.io/static/v1?label=Edge&message=%E2%9C%94&color=success&style=social&logo=microsoft-edge)
+![Supported Browsers](https://img.shields.io/static/v1?label=Safari&message=%E2%9C%94&color=success&style=social&logo=safari)
+![Mobile](https://img.shields.io/static/v1?label=Mobile&message=In%20Progress&color=red)
 
 ## Introduction
-`The little plane project` is a small passion project that I started based on my interest and curiosity on perlin noise and procedural generation. Rather than making a project in a prebuilt game engine like ~~Unity~~Godot(we don't like Unity around here anymore), I wanted to create my own engine from the ground up using only javascript and no external libraries (only using a prebuilt algorithm for SHA256 made by [Angel Marin](https://anmar.eu.org/) and [Paul Johnston](http://pajhome.org.uk/)). I made this project in javascript so that a majority of people can read and understand what's happening in the code (may not be too understandable since I have poor documentation, standards, and this is my first decently sized javascript project), as well as an extreme ease of access to a demo of the project to anyone that can use a browser. Credit also goes out to [Javidx9 or OneLoneCoder](https://github.com/OneLoneCoder) for their explanation on Perlin noise in the first 10 minutes of [this video](https://youtu.be/6-0UaeJBumA) which tremendously helped wrap my head around what Perlin noise is and how to go about my implementation. 
+**The Little Plane Project** is a 2D procedural generation flying game where you can control a small plane exploring an infinite world. Built purely with JavaScript, HTML, and CSS, it aims to be an educational resource for understanding procedural generation, Perlin noise, and basic game development. 
 
-# Table of contents
-- [Getting started](#getting-started--controls)
+The project started as a personal challenge to build a game engine from scratch instead of using existing engines like Unity or Godot, using only vanilla JavaScript for simplicity and transparency. Credit goes to [Javidx9](https://github.com/OneLoneCoder) for their explanation of Perlin noise, which inspired the terrain generation system.
+
+## Table of Contents
+- [Features](#features)
+- [Demo](#demo)
+- [Getting Started](#getting-started)
+- [Game Controls](#game-controls)
 - [Commands](#commands)
 - [Roadmap](#roadmap)
-- [Run a local/dev copy](#how-to-run-a-development-copy-of-the-project)
+- [Running a Development Copy](#running-a-development-copy)
+- [Code Structure](#code-structure)
 - [Contributors](#contributors)
 - [License](#license)
 
-# Getting started & controls
-Hi! Thank you for checking out `The little plane project`. Thus far there isnt much to do in the plane project but fly around and discover generated chunks that nobody has ever seen before. To get started visit the [play site](https://glowstick.me/tlpp/). You can move with either the `WASD` keys like any other game or you can use the arrow keys if you're oldschool. 
+## Features
+- **Infinite World Generation:** Explore procedurally generated terrains using Perlin noise.
+- **Customizable Settings:** Modify rendering quality, flight speed, plane color, and other settings.
+- **Dynamic Commands:** Use in-game commands to generate worlds, change settings, and teleport.
+- **Responsive UI:** Includes a context menu with detailed instructions and easy-to-use controls.
+- **Cross-Browser Support:** Compatible with all modern desktop browsers.
+- **Accessible Codebase:** Simple JavaScript structure allows anyone to learn or contribute.
 
-![image](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/WASD.png?raw=true)
-![image](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/arrowKeys.png?raw=true)
+## Demo
+Try out the game directly in your browser: [Play Now](https://glowstick.me/tlpp/).
 
-To open the command box, hit your `Enter` key and you can use any of these commands to change your experience. I recommend using the seed command to generate a new world since the play site always starts on the same seed. 
+## Getting Started
+You can start playing the game by visiting the [play site](https://glowstick.me/tlpp/). The controls are easy to grasp, using either `WASD` or arrow keys to navigate the plane.
 
-![image](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/enter.png?raw=true)
+![WASD Controls](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/WASD.png?raw=true)
+![Arrow Key Controls](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/arrowKeys.png?raw=true)
 
-Enjoy your time and please send any suggestions you have to Glowstick#0017 on discord or leave your suggestions [here](https://github.com/Glowstick0017/Little-Plane-Project/issues/new?assignees=&labels=new+feature&template=feature_request.md&title=Feature%20Request).
+To open the command box, press the `Enter` key and type any of the available commands to modify the game experience. The default seed always generates the same world; use the seed command to generate a new, unique world.
 
-# Commands
-|      Command       | Description                                                                                                                   | Default value |
-|:------------------:|-------------------------------------------------------------------------------------------------------------------------------|:-------------:|
-|       color        | Toggle between full world color and gray scale to view underlying perlin plane                                                |       1       |
-|  quality \<value>  | Set rendering quality, the lower the more detailed.  <br />Anything below 10 will lag. Range 5-20                             |      10       |
-|   seed \<value>    | Generate a new world with the given seed. <br />Any length of characters, words, or numbers can be entered for a unique world |    random     |
-|   speed \<value>   | Set flight speed. Range 1-10                                                                                                  |       1       |
-| teleport \<x> \<y> <br/> tp \<x> \<y> | Teleport to specified coordinates                                                                          |      0 0      |
+## Game Controls
+- **Move Forward:** `W` or `ArrowUp`
+- **Rotate Left:** `A` or `ArrowLeft`
+- **Rotate Right:** `D` or `ArrowRight`
+- **Increase Altitude:** `U`
+- **Decrease Altitude:** `J`
+- **Toggle Flight Mode:** `E` (Switch between manual and constant flight)
+- **Dash:** `Space` (Speed boost with cooldown)
+- **Pause/Resume:** `P`
 
+## Commands
+Commands can be accessed via the command box (`Enter` key). Here’s a list of commands to modify your gameplay experience:
 
-## Instructions within the Application
-With the addition of the context menu thanks to jackwebdev, detailed instructions are available within the application itself, providing information on controls and command execution. These instructions enhance the user experience and understanding.
+| Command                     | Description                                                                                                  | Default Value |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------|---------------|
+| `color`                     | Toggle between full-color mode and grayscale to view underlying Perlin noise.                                 | 1             |
+| `quality <value>`           | Set rendering quality. The lower the value, the higher the detail. Recommended range: 5-20.                  | 10            |
+| `seed <value>`              | Generate a new world with a custom seed. Any string input will generate a unique world.                      | Random        |
+| `speed <value>`             | Adjust the plane's flight speed. Range: 1-10.                                                                | 1             |
+| `teleport <x> <y>` or `tp`  | Instantly move to the specified coordinates.                                                                 | 0 0           |
 
-# Roadmap
-Upcoming features to be implemented
-- [ ] biomes by using multile perlin planes to simulate different conditions including sea level, temperature, humidity...
-- [X] Instructions in context menu
-- [ ] mobile controls (either joystick or click on displayed WASD)
-- [ ] context menu friendly on mobile  
-- [X] menu screen or esc menu
-- [X] command to change plane or color of plane
-- [X] user adjusted color values
-- [ ] toggleable stats
-- [X] color command that shows underlying perlin plane in black/white
-- [ ] different worlds
-- [ ] randomly spawned airports to refuel
-- [ ] deliver packages from airports to others directed by arrow on screen
-- [ ] user feature suggestions
+## Roadmap
+Future enhancements to be implemented:
+- [ ] Biomes: Simulate various terrains using multiple Perlin planes (e.g., sea level, temperature).
+- [ ] Mobile Controls: Add joystick or on-screen controls for touchscreen devices.
+- [ ] User Interface Enhancements: Improve context menu for better mobile compatibility.
+- [ ] In-Game Stats: Add a HUD to display flight stats and other information.
+- [ ] Procedural World Variations: Introduce different world types and randomly generated airports.
+- [ ] Mission System: Add delivery missions between airports.
+- [ ] Community Suggestions: Incorporate user-requested features and improvements.
 
-# How to run a development copy of the project
-This project was made to learn the concepts and technologies used as simple as possible, from how perlin noise works to simple javascript fundamentals.
-The only thing you need to do to make and see your own changes in action is simply clone the repository, make your experimental changes to the code, and open index.html on your browser to view your changes.
-If you made any changes you think would be helpful to add to the original repository, feel free to open a pull request. All proposed changes will be reviewed and whether or not they're added, there will be meaningful comments left to help support everyones learning journey.
+## Running a Development Copy
+To run a development version of the project locally:
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Glowstick0017/Little-Plane-Project.git
+   ```
+2. **Navigate to the Project Directory**
+   ```bash
+   cd Little-Plane-Project
+   ```
+3. **Open `index.html` in Your Browser**
+   - Simply open the file in a modern browser.
+   - Optionally, start a local server using Python for a more stable environment:
+     ```bash
+     python -m http.server 8000
+     ```
+   - Visit `http://localhost:8000` in your browser.
 
-# Contributors
-Meet the talented individuals who have contributed to The Little Plane Project and learn how you can join them in [contributing to the project](CONTRIBUTING.md):
+4. **Modify the Code**
+   - Make changes in `script.js` or other files, and refresh the browser to see the updates.
+
+## Code Structure
+The project is structured to be beginner-friendly:
+
+- **`index.html`**: Entry point that defines the game canvas.
+- **`style.css`**: Styling for the game interface.
+- **`script.js`**: Main game logic, including input handling, rendering, and procedural generation.
+- **Command Handling**: Commands are managed dynamically in `script.js` using the command box.
+
+### Key Components
+1. **Game Loop:** Uses `requestAnimationFrame` to handle rendering and state updates.
+2. **Perlin Noise Generation:** Manages terrain generation and world variation.
+3. **User Input Handling:** Listeners detect `keydown` and `keyup` events to control the plane.
+4. **Command Parsing:** The command box accepts various inputs for customizing the gameplay experience.
+
+## Contributors
+Meet the contributors who helped make this project possible! Interested in joining? Check out the [Contributing Guidelines](CONTRIBUTING.md).
 
 <a href="https://github.com/Glowstick0017/Little-Plane-Project/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Glowstick0017/Little-Plane-Project" />
 </a>
 
-# License
-Distributed under the MIT License. See [LICENSE](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/LICENSE) for more information.
+## License
+The Little Plane Project is distributed under the MIT License. See the [LICENSE](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/LICENSE) file for more information.
