@@ -27,6 +27,11 @@ let pause = true;
 let t = 0;
 let cooldown = 0;
 
+// speed of the plane
+let minSpeed = 0.5;
+let maxSpeed = 1.5;
+let dSpeed = 0.005;
+
 //update dx and dy based on player angle
 const updateDirection = () => {
     dx = Math.cos(playerAngle);
@@ -109,8 +114,10 @@ const horizontalMapping = {
 
 // Dictionary to map input keys to toggle throttle
 const verticalMapping = {
-    [KEYS.W]: () => {},
-    [KEYS.ARROW_UP]: () => {},
+    [KEYS.W]: () => { speed = Math.min(speed + dSpeed, maxSpeed) },
+    [KEYS.ARROW_UP]: () => { speed = Math.min(speed + dSpeed, maxSpeed) },
+    [KEYS.S]: () => { speed = Math.max(speed - dSpeed, minSpeed) },
+    [KEYS.ARROW_DOWN]: () => { speed = Math.max(speed - dSpeed, minSpeed) },
 };
 
 // Game loop to handle movement and rendering
