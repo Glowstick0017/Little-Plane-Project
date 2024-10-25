@@ -16,6 +16,28 @@ class Plane {
         // State
         this.angle = 0.0;
 
+        // Propeller rotation
+        this.propellerState = 0;
+        this.propellerSpeed = 1;
+        this.propellerFrames = [
+            [
+                [80, 0, 40, 10],
+                [130, 0, 40, 10]
+            ],
+            [
+                [90, 0, 40, 10],
+                [120, 0, 40, 10]
+            ],
+            [
+                [100, 0, 30, 10],
+                [120, 0, 30, 10]
+            ],
+            [
+                [120, 0, 40, 10],
+                [90, 0, 40, 10]
+            ]
+        ]
+
         // Defining plane parts with their colors and coordinates for rendering
         this.parts = {
             outer: {
@@ -175,6 +197,13 @@ class Plane {
         this.draw();
     }
 
+    // Function to rotate the propeller
+    rotatePropeller() {
+        this.propellerState = (this.propellerState + this.propellerSpeed) % this.propellerFrames.length;
+        this.parts.propellerBlades.coords = this.propellerFrames[Math.floor(this.propellerState)];
+        this.draw();
+    }
+
     // Function to change the color of a plane part
     setColor(partName, newColor) {
         if (this.parts[partName]) {
@@ -212,3 +241,8 @@ if (localStorage.getItem("littlePlaneColors")) {
     }
 }
 plane.draw();
+
+// always rotate the propeller
+setInterval(() => {
+    plane.rotatePropeller();
+}, 100);
