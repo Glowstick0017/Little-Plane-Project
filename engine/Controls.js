@@ -27,7 +27,7 @@ let cooldown = 0;
 // speed of the plane
 let minSpeed = 0.5;
 let maxSpeed = 1.5;
-let dSpeed = 0.005;
+let throttlePower = 0.5;
 
 //update dx and dy based on player angle
 const updateDirection = () => {
@@ -78,6 +78,31 @@ function elevateHeight(dz) {
   needsRedraw = true;
 }
 
+function clamp(value, min, max) {
+    if (value < min) {
+        return min;
+    }
+
+    if (value > max) {
+        return max;
+    }
+
+    return value;
+}
+
+function throttleChange(updateFn) {
+    let shouldClamp = true;
+
+    if (minSpeed > speed || speed > maxSpeed) {
+        shouldClamp = false;
+    }
+
+    speed = updateFn(speed, throttlePower / 100);
+    if (shouldClamp) {
+        speed = clamp(speed, minSpeed, maxSpeed);
+    }
+}
+
 // Movement Rotation
 function moveRotate(dx, dy , keyPressedFlag) {
 
@@ -108,10 +133,10 @@ const horizontalMapping = {
 
 // Dictionary to map input keys to toggle throttle
 const verticalMapping = {
-    [KEYS.W]: () => { speed = Math.min(speed + dSpeed, maxSpeed) },
-    [KEYS.ARROW_UP]: () => { speed = Math.min(speed + dSpeed, maxSpeed) },
-    [KEYS.S]: () => { speed = Math.max(speed - dSpeed, minSpeed) },
-    [KEYS.ARROW_DOWN]: () => { speed = Math.max(speed - dSpeed, minSpeed) },
+    [KEYS.W]: () => { throttleChange((s, tp) => s + tp) },
+    [KEYS.ARROW_UP]: () => { throttleChange((s, tp) => s + tp) },
+    [KEYS.S]: () => { throttleChange((s, tp) => s - tp) },
+    [KEYS.ARROW_DOWN]: () => { throttleChange((s, tp) => s - tp) },
 };
 
 // Game loop to handle movement and rendering
