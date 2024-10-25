@@ -7,9 +7,6 @@ let sprinting = false;
 // Flag to determine if the canvas needs a redraw
 let needsRedraw = false;
 
-// Variable to track the time since the plane started moving
-let dashing = false;
-
 //Unit Vector for direction
 let dx = 0;
 let dy = -1;
@@ -45,7 +42,6 @@ const KEYS = {
     A: 'a',
     S: 's',
     D: 'd',
-    DASH: ' ',
     ARROW_UP: 'ArrowUp',
     ARROW_DOWN: 'ArrowDown',
     ARROW_LEFT: 'ArrowLeft',
@@ -82,15 +78,13 @@ function elevateHeight(dz) {
   needsRedraw = true;
 }
 
-// Movement Rotation and Dash Function
-function moveRotateAndDash(dx, dy, dashing , keyPressedFlag) {
+// Movement Rotation
+function moveRotate(dx, dy , keyPressedFlag) {
 
-    // Update the position of plane based on the direction of movement and dash status , only if any of the keys is pressed
+    // Update the position of plane based on the direction of movement, only if any of the keys is pressed
     if (keyPressedFlag) {
         posX += dx * speed * 10 + 30 * dx * t;
         posY += dy * speed * 10 + 30 * dy * t;
-        if (dashing) t -= 0.2;
-        else if (cooldown) cooldown -= 0.2;
         // console.log(t);
     }
     // // Rotate the plane based on the direction of movement
@@ -150,19 +144,6 @@ function gameLoop() {
         }
     }
 
-    // Check if the dash key is pressed if dash flag is false
-    if(keysPressed[KEYS.DASH] && !dashing && cooldown <= 0){
-        dashing = true
-        // Duration of the dash
-        t = 2;
-    }
-
-    else if( t < 0){  
-        dashing = false;
-        cooldown = 1.6;
-        t = 0;
-    }
-
     if(keysPressed[KEYS.U]){
         elevateHeight(-1);
     }
@@ -170,7 +151,7 @@ function gameLoop() {
         elevateHeight(1);
     }
 
-    moveRotateAndDash(dx, dy, dashing , keyPressedFlag)
+    moveRotate(dx, dy , keyPressedFlag)
     // Update displayed coordinates
     $coords.innerHTML = `X = ${Math.round(posX / 10)} Y = ${Math.round((-1) * posY / 10)}`;
     $coordinates.innerHTML =

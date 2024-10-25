@@ -3,7 +3,7 @@
 [![image](/.github/ISSUE_TEMPLATE/playbutton.png)](https://glowstick.me/tlpp/)
 
 [![image](https://img.shields.io/badge/Live_build-darkgreen)](https://glowstick.me/tlpp/)
-[![image](https://img.shields.io/badge/Snapshot-24w40a-yellow)](https://glowstick0017.github.io/Little-Plane-Project/index)
+[![image](https://img.shields.io/badge/Snapshot-24w43a-yellow)](https://glowstick0017.github.io/Little-Plane-Project/index)
 
 ![image](https://img.shields.io/static/v1?label=Chrome&message=%E2%9C%94&color=success?style=social&logo=google-chrome&logoColor=white)
 ![image](https://img.shields.io/static/v1?label=Firefox&message=%E2%9C%94&color=success?style=social&logo=Firefox&logoColor=white)
@@ -24,7 +24,7 @@
 - [License](#license)
 
 # Getting started & controls
-Hi! Thank you for checking out `The little plane project`. Thus far there isnt much to do in the plane project but fly around and discover generated chunks that nobody has ever seen before. To get started visit the [play site](https://glowstick.me/tlpp/). You can move with either the `WASD` keys like any other game or you can use the arrow keys if you're oldschool. 
+Hi! Thank you for checking out `The little plane project`. Thus far there isnt much to do in the plane project but fly around and discover generated chunks that nobody has ever seen before. To get started visit the [play site](https://glowstick.me/tlpp/). You can move with either the `WASD` keys like any other game or you can use the arrow keys if you're oldschool. Up/Down changes your speed and Left/Right changes your direction.
 
 ![image](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/WASD.png?raw=true)
 ![image](https://github.com/Glowstick0017/Little-Plane-Project/blob/master/css/arrowKeys.png?raw=true)
