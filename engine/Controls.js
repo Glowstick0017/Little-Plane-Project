@@ -101,6 +101,8 @@ function throttleChange(updateFn) {
     if (shouldClamp) {
         speed = clamp(speed, minSpeed, maxSpeed);
     }
+
+    $speed.innerHTML = `Speed: ${speed}`;
 }
 
 // Movement Rotation
