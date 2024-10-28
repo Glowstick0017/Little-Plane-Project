@@ -18,7 +18,7 @@ const speedCommand = new Command("SPEED", "SPEED <value>", 1, (args) => {
     return "Invalid input. Range 0-20";
   } else {
     speed = speedVal;
-    $speed.innerHTML = "Speed: " + speed;
+    speedometerUpdate();
     return "New speed set to " + speedVal;
   }
 });
@@ -47,6 +47,7 @@ const maxSpeedCommand = new Command("MAXSPEED", "MAXSPEED <value>", 1, (args) =>
     return "Invalid input. Max speed cannot be less than min speed";
   } else {
     maxSpeed = maxSpeedVal;
+    speedometerUpdate();
     return "New max speed set to " + maxSpeedVal;
   }
 });
@@ -62,6 +63,7 @@ const minSpeedCommand = new Command("MINSPEED", "MINSPEED <value>", 1, (args) =>
     return "Invalid input. Min speed cannot be greater than max speed";
   } else {
     minSpeed = minSpeedVal;
+    speedometerUpdate();
     return "New min speed set to " + minSpeedVal;
   }
 });

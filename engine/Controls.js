@@ -90,6 +90,16 @@ function clamp(value, min, max) {
     return value;
 }
 
+function speedometerUpdate() {
+    $speed.innerHTML = `Speed: ${speed}`;
+
+    let speedometerNeedleAnglePercent = (speed - minSpeed);
+    speedometerNeedleAnglePercent /= (maxSpeed - minSpeed);
+    speedometerNeedleAnglePercent *= 100;
+
+    updateSpeedometerNeedle(speedometerNeedleAnglePercent);
+}
+
 function throttleChange(updateFn) {
     let shouldClamp = true;
 
@@ -102,7 +112,7 @@ function throttleChange(updateFn) {
         speed = clamp(speed, minSpeed, maxSpeed);
     }
 
-    $speed.innerHTML = `Speed: ${speed}`;
+    speedometerUpdate();
 }
 
 // Movement Rotation
@@ -140,6 +150,12 @@ const verticalMapping = {
     [KEYS.S]: () => { throttleChange((s, tp) => s - tp) },
     [KEYS.ARROW_DOWN]: () => { throttleChange((s, tp) => s - tp) },
 };
+
+// Function to initialize the game
+function gameInit() {
+    // update instruments
+    speedometerUpdate();
+}
 
 // Game loop to handle movement and rendering
 function gameLoop() {
@@ -194,4 +210,5 @@ function gameLoop() {
   requestAnimationFrame(gameLoop); // Queue the next iteration
 }
 
+gameInit(); // Initialize the game
 gameLoop(); // Initiate the game loop
