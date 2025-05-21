@@ -13,7 +13,7 @@ class Altimeter extends BaseInstrument {
                 ]
             },
             innerRing: {
-                color: '#111111',
+                color: '#666666',
                 coords: [
                     [-1 * -30, -1 * -70, -1 * 30, -1 * 70],
                     [-1 * -90, -1 * -50, -1 * 90, -1 * 30],
@@ -22,31 +22,31 @@ class Altimeter extends BaseInstrument {
                 ]
             },
             rangeIndicator1: {
-                color: '#964B00',
+                color: '#000000',
                 coords: [
                     [-70, -15, -50, 5]
                 ]
             },
             rangeIndicator2: {
-                color: '#00826a',
+                color: '#333333',
                 coords: [
                     [-25, -40, -45, -20]
                 ]
             },
             rangeIndicator3: {
-                color: '#64e3cc',
+                color: '#999999',
                 coords: [
                     [-10, -50, 10, -30]
                 ]
             },
             rangeIndicator4: {
-                color: '#d3d3d3',
+                color: '#dddddd',
                 coords: [
                     [25, -40, 45, -20]
                 ]
             },
             rangeIndicator5: {
-                color: '#f2f2f2',
+                color: '#ffffff',
                 coords: [
                     [50, -15, 70, 5]
                 ]
