@@ -30,8 +30,8 @@ let maxSpeed = 1.5;
 let throttlePower = 0.5;
 
 // altitude based
-let minHeight = 50;
-let maxHeight = 500;
+let minAltitude = 50;
+let maxAltitude = 500;
 let altSpeed = 1;
 
 //update dx and dy based on player angle
@@ -79,15 +79,15 @@ function smooth(value, quality) {
 }
 
 // Elevate the sea level
-function elevateHeight(dz) {
-    oldHeight = heightFromGround;
-    heightFromGround += dz;
+function elevateAltitude(dz) {
+    oldAltitude = altitudeFromGround;
+    altitudeFromGround += dz;
 
-    heightFromGround = clamp(heightFromGround, minHeight, maxHeight);
+    altitudeFromGround = clamp(altitudeFromGround, minAltitude, maxAltitude);
 
     // adjust the position of the plane based on the new height
-    posX = smooth((posX * heightFromGround) / oldHeight, quality);
-    posY = smooth((posY * heightFromGround) / oldHeight, quality);
+    posX = smooth((posX * altitudeFromGround) / oldAltitude, quality);
+    posY = smooth((posY * altitudeFromGround) / oldAltitude, quality);
 
     // Set the flag to redraw the canvas
     needsRedraw = true;
@@ -203,10 +203,10 @@ function gameLoop() {
     }
 
     if(keysPressed[KEYS.U]){
-        elevateHeight(-altSpeed);
+        elevateAltitude(-altSpeed);
     }
     else if(keysPressed[KEYS.J]){
-        elevateHeight(altSpeed);
+        elevateAltitude(altSpeed);
     }
 
     moveRotate(dx, dy , keyPressedFlag)
