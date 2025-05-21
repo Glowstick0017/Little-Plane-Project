@@ -95,6 +95,17 @@ body {
   text-shadow: 2px 2px #fff;
 }
 
+#altitude {
+  position: absolute;
+  right: 25px;
+  top: 46px;
+  color: black;
+  font-family: boxyFont;
+  letter-spacing: 1px;
+  font-size: 16px;
+  text-shadow: 2px 2px #fff;
+}
+
 #navigateControls {
   position: absolute;
   bottom: 25px;

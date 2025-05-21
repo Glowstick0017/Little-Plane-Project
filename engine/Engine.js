@@ -17,6 +17,8 @@ const $seed = document.getElementById("seed");
 const $settings = document.getElementById("settings");
 const $settingsMenu = document.getElementById("settingsMenu");
 const $speed = document.getElementById("speed");
+const $altitude = document.getElementById("altitude");
+const $settingsAltitude = document.getElementById("settings-altitude");
 const $start = document.getElementById("start");
 const $ui = document.getElementById("ui");
 const $welcome = document.getElementById("welcome");
@@ -37,8 +39,16 @@ let buffer_ctx = buffer_canvas.getContext("2d");
 // position of current screen
 let posX = 0;
 let posY = 0;
-let altitudeFromGround = 300; // nice visual range: 250 - 500
 $coordinates.innerHTML = "Coordinates: X=" + posX + ", Y=" + posY;
+
+// altitude of the plane
+let altitudeFromGround = 250;
+let altitudeFactor = 50000;
+
+// update altitude display
+let displayAltitude = Math.round((1 / altitudeFromGround) * altitudeFactor);
+$altitude.innerHTML = "Altitude = " + displayAltitude;
+$settingsAltitude.innerHTML = "Altitude: " + displayAltitude;
 
 // block size by pixel, i wouldn't recommend going under 5, load times will be longer
 let quality = 10;

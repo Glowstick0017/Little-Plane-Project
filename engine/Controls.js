@@ -74,10 +74,6 @@ function formatKey(key) {
     return key.startsWith("Arrow") ? key : key.toLowerCase();
 }
 
-function smooth(value, quality) {
-    return Math.round(value / quality) * quality;
-}
-
 // Elevate the sea level
 function elevateAltitude(dz) {
     oldAltitude = altitudeFromGround;
@@ -85,9 +81,14 @@ function elevateAltitude(dz) {
 
     altitudeFromGround = clamp(altitudeFromGround, minAltitude, maxAltitude);
 
+    // update the altitude display
+    let displayAltitude = Math.round((1 / altitudeFromGround) * altitudeFactor);
+    $altitude.innerHTML = "Altitude = " + displayAltitude;
+    $settingsAltitude.innerHTML = "Altitude: " + displayAltitude;
+
     // adjust the position of the plane based on the new altitude
-    posX = smooth((posX * altitudeFromGround) / oldAltitude, quality);
-    posY = smooth((posY * altitudeFromGround) / oldAltitude, quality);
+    posX = (posX * altitudeFromGround) / oldAltitude;
+    posY = (posY * altitudeFromGround) / oldAltitude;
 
     // Set the flag to redraw the canvas
     needsRedraw = true;
@@ -210,10 +211,15 @@ function gameLoop() {
     }
 
     moveRotate(dx, dy , keyPressedFlag)
+
     // Update displayed coordinates
-    $coords.innerHTML = `X = ${Math.round(posX / 10)} Y = ${Math.round((-1) * posY / 10)}`;
+    let coordFactor = altitudeFromGround / 5;
+    let coordX = Math.round(posX / coordFactor);
+    let coordY = Math.round(posY / -coordFactor);
+
+    $coords.innerHTML = `X = ${coordX} Y = ${coordY}`;
     $coordinates.innerHTML =
-        `Coordinates: X= ${Math.round(posX / 10)} Y= ${Math.round((-1) * posY / 10)}`;
+        `Coordinates: X= ${coordX} Y= ${coordY}`;
 
   // Redraw the canvas if needed
   if (needsRedraw) {
