@@ -50,8 +50,8 @@ const KEYS = {
     ARROW_DOWN: 'ArrowDown',
     ARROW_LEFT: 'ArrowLeft',
     ARROW_RIGHT: 'ArrowRight',
-    U: "[",
-    J: "]",
+    LT_SQ_BRACKET: "[",
+    RT_SQ_BRACKET: "]",
     ToggleForward: 'e',
 };
 
@@ -85,7 +85,7 @@ function elevateAltitude(dz) {
 
     altitudeFromGround = clamp(altitudeFromGround, minAltitude, maxAltitude);
 
-    // adjust the position of the plane based on the new height
+    // adjust the position of the plane based on the new altitude
     posX = smooth((posX * altitudeFromGround) / oldAltitude, quality);
     posY = smooth((posY * altitudeFromGround) / oldAltitude, quality);
 
@@ -202,10 +202,10 @@ function gameLoop() {
         }
     }
 
-    if(keysPressed[KEYS.U]){
+    if(keysPressed[KEYS.LT_SQ_BRACKET]){
         elevateAltitude(-altSpeed);
     }
-    else if(keysPressed[KEYS.J]){
+    else if(keysPressed[KEYS.RT_SQ_BRACKET]){
         elevateAltitude(altSpeed);
     }
 
