@@ -29,12 +29,16 @@ let minSpeed = 0.5;
 let maxSpeed = 1.5;
 let throttlePower = 0.5;
 
+// altitude based
+let minHeight = 50;
+let maxHeight = 500;
+let altSpeed = 1;
+
 //update dx and dy based on player angle
 const updateDirection = () => {
     dx = Math.cos(playerAngle);
     dy = Math.sin(playerAngle);
 }
-
 
 // Defining constants for keys to improve readability
 const KEYS = {
@@ -46,8 +50,8 @@ const KEYS = {
     ARROW_DOWN: 'ArrowDown',
     ARROW_LEFT: 'ArrowLeft',
     ARROW_RIGHT: 'ArrowRight',
-    U: "u",
-    J: "j",
+    U: "[",
+    J: "]",
     ToggleForward: 'e',
 };
 
@@ -57,25 +61,36 @@ document.addEventListener("keyup", deregisterKeyPress);
 
 // Handler for key press events
 function registerKeyPress(e) {
-  if (handler.isFocused) return; // Makes sure commands aren't being typed
-  keysPressed[formatKey(e.key)] = true;
+    if (handler.isFocused) return; // Makes sure commands aren't being typed
+    keysPressed[formatKey(e.key)] = true;
 }
 
 // Handler for key release events
 function deregisterKeyPress(e) {
-  keysPressed[formatKey(e.key)] = false;
+    keysPressed[formatKey(e.key)] = false;
 }
 
 function formatKey(key) {
-  return key.startsWith("Arrow") ? key : key.toLowerCase();
+    return key.startsWith("Arrow") ? key : key.toLowerCase();
+}
+
+function smooth(value, quality) {
+    return Math.round(value / quality) * quality;
 }
 
 // Elevate the sea level
 function elevateHeight(dz) {
-  heightFromGround += dz;
+    oldHeight = heightFromGround;
+    heightFromGround += dz;
 
-  // Set the flag to redraw the canvas
-  needsRedraw = true;
+    heightFromGround = clamp(heightFromGround, minHeight, maxHeight);
+
+    // adjust the position of the plane based on the new height
+    posX = smooth((posX * heightFromGround) / oldHeight, quality);
+    posY = smooth((posY * heightFromGround) / oldHeight, quality);
+
+    // Set the flag to redraw the canvas
+    needsRedraw = true;
 }
 
 function clamp(value, min, max) {
@@ -188,10 +203,10 @@ function gameLoop() {
     }
 
     if(keysPressed[KEYS.U]){
-        elevateHeight(-1);
+        elevateHeight(-altSpeed);
     }
     else if(keysPressed[KEYS.J]){
-        elevateHeight(1);
+        elevateHeight(altSpeed);
     }
 
     moveRotate(dx, dy , keyPressedFlag)

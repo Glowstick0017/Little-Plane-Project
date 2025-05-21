@@ -34,7 +34,6 @@ buffer_canvas.width = canvas.width;
 buffer_canvas.height = canvas.height;
 let buffer_ctx = buffer_canvas.getContext("2d");
 
-
 // position of current screen
 let posX = 0;
 let posY = 0;
@@ -98,7 +97,12 @@ function draw() {
   for (let [color, squares] of drawing_batch) {
     buffer_ctx.fillStyle = color;
     for (let square of squares) {
-      buffer_ctx.fillRect(square.x - drawOffsetX, square.y - drawOffsetY, square.delta_x, square.delta_y);
+      buffer_ctx.fillRect(
+        square.x - drawOffsetX,
+        square.y - drawOffsetY,
+        square.delta_x,
+        square.delta_y
+      );
     }
   }
 
@@ -109,11 +113,20 @@ function draw() {
 function calculateSeaLevel(x, y) {
   // set values to variables so they can be adjusted (by slider?)
   let mountainHeight = 1.0; // nice visual range: 0 - 1.3
+  
+  let roundedPosX = Math.round(posX / quality) * quality;
+  let roundedPosY = Math.round(posY / quality) * quality;
+
+  let adjustedX = roundedPosX - (width / 2);
+  let adjustedY = roundedPosY - (height / 2);
 
   return (
-    (perlin2((x + (Math.round(posX/quality)*quality)) / heightFromGround, (y + (Math.round(posY/quality)*quality)) / heightFromGround) +
-      mountainHeight) /
-    2
+    (
+      perlin2(
+        (x + adjustedX) / heightFromGround,
+        (y + adjustedY) / heightFromGround
+      ) + mountainHeight
+    ) / 2
   );
 }
 
