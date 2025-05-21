@@ -85,6 +85,7 @@ function elevateAltitude(dz) {
     let displayAltitude = Math.round((1 / altitudeFromGround) * altitudeFactor);
     $altitude.innerHTML = "Altitude = " + displayAltitude;
     $settingsAltitude.innerHTML = "Altitude: " + displayAltitude;
+    altimeterUpdate();
 
     // adjust the position of the plane based on the new altitude
     posX = (posX * altitudeFromGround) / oldAltitude;
@@ -114,6 +115,19 @@ function speedometerUpdate() {
     speedometerNeedleAnglePercent *= 100;
 
     updateSpeedometerNeedle(speedometerNeedleAnglePercent);
+}
+
+function altimeterUpdate() {
+    let adjustedMinAltitude = (1 / minAltitude) * altitudeFactor;
+    let adjustedMaxAltitude = (1 / maxAltitude) * altitudeFactor;
+    let adjustedAltitude = (1 / altitudeFromGround) * altitudeFactor;
+
+    let altimeterNeedleAnglePercent = (adjustedAltitude - adjustedMinAltitude);
+    altimeterNeedleAnglePercent /= (adjustedMaxAltitude - adjustedMinAltitude);
+    altimeterNeedleAnglePercent = 1 - altimeterNeedleAnglePercent;
+    altimeterNeedleAnglePercent *= 100;
+
+    updateAltimeterNeedle(altimeterNeedleAnglePercent);
 }
 
 function throttleChange(updateFn) {
@@ -171,6 +185,7 @@ const verticalMapping = {
 function gameInit() {
     // update instruments
     speedometerUpdate();
+    altimeterUpdate();
 }
 
 // Game loop to handle movement and rendering

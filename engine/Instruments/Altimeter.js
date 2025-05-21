@@ -1,4 +1,4 @@
-class Speedometer extends BaseInstrument {
+class Altimeter extends BaseInstrument {
     constructor(canvasId) {
         super(canvasId);
 
@@ -13,7 +13,7 @@ class Speedometer extends BaseInstrument {
                 ]
             },
             innerRing: {
-                color: '#666666',
+                color: '#111111',
                 coords: [
                     [-1 * -30, -1 * -70, -1 * 30, -1 * 70],
                     [-1 * -90, -1 * -50, -1 * 90, -1 * 30],
@@ -22,31 +22,31 @@ class Speedometer extends BaseInstrument {
                 ]
             },
             rangeIndicator1: {
-                color: '#00ff00',
+                color: '#964B00',
                 coords: [
                     [-70, -15, -50, 5]
                 ]
             },
             rangeIndicator2: {
-                color: '#AAff00',
+                color: '#00826a',
                 coords: [
                     [-25, -40, -45, -20]
                 ]
             },
             rangeIndicator3: {
-                color: '#ffff00',
+                color: '#64e3cc',
                 coords: [
                     [-10, -50, 10, -30]
                 ]
             },
             rangeIndicator4: {
-                color: '#ffaa00',
+                color: '#d3d3d3',
                 coords: [
                     [25, -40, 45, -20]
                 ]
             },
             rangeIndicator5: {
-                color: '#ff0000',
+                color: '#f2f2f2',
                 coords: [
                     [50, -15, 70, 5]
                 ]
@@ -101,7 +101,7 @@ class Speedometer extends BaseInstrument {
         }
 
         this.parts.needle.coords = this.needleCoords[this.needleState];
-        this.shiftX = -55;
+        this.shiftX = 55;
 
         this.draw();
     }
@@ -111,21 +111,21 @@ class Speedometer extends BaseInstrument {
     }
 }
 
-const speedometer = new Speedometer("instrumentCanvas");
-speedometer.draw();
+const altimeter = new Altimeter("instrumentCanvas");
+altimeter.draw();
 
-function updateSpeedometerNeedle(needleAnglePercent) {
+function updateAltimeterNeedle(needleAnglePercent) {
     needleAnglePercent = Math.min(needleAnglePercent, 100);
     needleAnglePercent = Math.max(needleAnglePercent, 0);
 
-    let stateCount = Object.keys(speedometer.needleCoords).length - 1;
+    let stateCount = Object.keys(altimeter.needleCoords).length - 1;
     let needleState = stateCount * (needleAnglePercent / 100);
     needleState = Math.floor(needleState) * (100 / stateCount);
 
-    speedometer.needleState = needleState;
-    let needleCoords = speedometer.needleCoords[needleState];
-    speedometer.parts.needle.coords = needleCoords;
+    altimeter.needleState = needleState;
+    let needleCoords = altimeter.needleCoords[needleState];
+    altimeter.parts.needle.coords = needleCoords;
 
-    speedometer.draw();
+    altimeter.draw();
 }
 
