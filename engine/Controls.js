@@ -232,7 +232,7 @@ function gameLoop() {
     moveRotate(dx, dy , keyPressedFlag)
 
     // Update displayed coordinates
-    let coordFactor = altitudeFromGround / 5;
+    let coordFactor = altitudeFactor / (altitudeFromGround * 10);
     let coordX = Math.round(posX / coordFactor);
     let coordY = Math.round(posY / -coordFactor);
 
