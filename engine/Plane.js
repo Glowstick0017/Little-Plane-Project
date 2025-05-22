@@ -140,21 +140,43 @@ class Plane {
                 ]
             }
         };
+
+        // Shadow height
+        this.shadowHeight = 0.5;
     }
 
     // Helper function to draw a rectangle with scaling
     drawRect(x, y, width, height, color) {
         this.ctx.fillStyle = color;
-        this.ctx.fillRect(this.startx + x / this.scale, this.starty + y / this.scale, width / this.scale, height / this.scale);
+        this.ctx.fillRect(
+            this.startx + x / this.scale,
+            this.starty + y / this.scale,
+            width / this.scale,
+            height / this.scale
+        );
     }
 
     drawShadow() {
+        let shadowHeightSq = this.shadowHeight * this.shadowHeight;
+        if (shadowHeightSq <= 0.4) { return; }
+
+        this.scale /= shadowHeightSq;
+        this.ctx.translate(
+            -32 * this.scale / this.shadowHeight + 48,
+            32 * this.scale / this.shadowHeight - 48
+        );
+        
         for (const partName in this.parts) {
             const part = this.parts[partName];
             for (const coord of part.coords) {
-                this.drawRect(...coord, 'rgba(0, 0, 0, 0.5)');
+                this.drawRect(
+                    ...coord,
+                    `rgba(0, 0, 0, ${shadowHeightSq * 0.5})`
+                );
             }
         }
+        
+        this.scale *= this.shadowHeight * this.shadowHeight;
     }
 
     drawPlane() {
@@ -172,7 +194,7 @@ class Plane {
         // Clearing the canvas before drawing
         this.ctx.clearRect(0, 0, this.width, this.height);
 
-        this.ctx.translate(this.width / 2 - 32*this.scale, this.height / 2 + 32*this.scale);
+        this.ctx.translate(this.width / 2, this.height / 2);
         this.ctx.rotate(this.angle);
         this.ctx.translate(-this.width / 2, -this.height / 2);
         this.drawShadow();
@@ -210,6 +232,12 @@ class Plane {
             this.parts[partName].color = newColor;
             this.draw();
         }
+    }
+
+    // Function to adjust the shadow height
+    setShadowHeight(newHeight) {
+        this.shadowHeight = newHeight;
+        this.draw();
     }
 
     resetDefaults() {

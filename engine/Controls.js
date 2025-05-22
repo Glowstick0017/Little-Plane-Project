@@ -127,6 +127,10 @@ function altimeterUpdate() {
     altimeterNeedleAnglePercent = altimeterNeedleAnglePercent;
     altimeterNeedleAnglePercent *= 100;
 
+    let adjustedShadowHeight = 1.01 - (altimeterNeedleAnglePercent / 100);
+    adjustedShadowHeight *= adjustedShadowHeight * adjustedShadowHeight;
+
+    plane.setShadowHeight(adjustedShadowHeight);
     updateAltimeterNeedle(altimeterNeedleAnglePercent);
 }
 

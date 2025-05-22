@@ -124,8 +124,6 @@ function cameraHeight(altitude) {
   return altitude / altitudeFactor;
 }
 
-console.log(cameraHeight(altitudeFromGround));
-
 // Baseline sea level
 function calculateSeaLevel(x, y) {
   // set values to variables so they can be adjusted (by slider?)
