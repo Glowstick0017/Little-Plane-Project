@@ -42,11 +42,11 @@ let posY = 0;
 $coordinates.innerHTML = "Coordinates: X=" + posX + ", Y=" + posY;
 
 // altitude of the plane
-let altitudeFromGround = 250;
+let altitudeFromGround = 200;
 let altitudeFactor = 50000;
 
 // update altitude display
-let displayAltitude = Math.round((altitudeFactor / altitudeFromGround));
+let displayAltitude = Math.round((altitudeFromGround));
 $altitude.innerHTML = "Altitude = " + displayAltitude;
 $settingsAltitude.innerHTML = "Altitude: " + displayAltitude;
 
@@ -119,6 +119,13 @@ function draw() {
   ctx.drawImage(buffer_canvas, 0, 0);
 }
 
+// Calculate the camera height from the altitude
+function cameraHeight(altitude) {
+  return altitude / altitudeFactor;
+}
+
+console.log(cameraHeight(altitudeFromGround));
+
 // Baseline sea level
 function calculateSeaLevel(x, y) {
   // set values to variables so they can be adjusted (by slider?)
@@ -126,15 +133,17 @@ function calculateSeaLevel(x, y) {
   
   let roundedPosX = Math.round(posX / quality) * quality;
   let roundedPosY = Math.round(posY / quality) * quality;
-
+  
   let adjustedX = roundedPosX - (width / 2);
   let adjustedY = roundedPosY - (height / 2);
+  
+  let camHeight = cameraHeight(altitudeFromGround);
 
   return (
     (
       perlin2(
-        (x + adjustedX) / altitudeFromGround,
-        (y + adjustedY) / altitudeFromGround
+        (x + adjustedX) * camHeight,
+        (y + adjustedY) * camHeight
       ) + mountainHeight
     ) / 2
   );

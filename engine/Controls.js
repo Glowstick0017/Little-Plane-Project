@@ -30,8 +30,8 @@ let maxSpeed = 1.5;
 let throttlePower = 0.5;
 
 // altitude based
-let minAltitude = 50;
-let maxAltitude = 500;
+let minAltitude = 100;
+let maxAltitude = 1000;
 let altSpeed = 1;
 
 //update dx and dy based on player angle
@@ -76,16 +76,21 @@ function formatKey(key) {
 
 // Elevate the sea level
 function elevateAltitude(dz) {
-    oldAltitude = altitudeFromGround;
+    let oldCamHeight = cameraHeight(altitudeFromGround);
+
     altitudeFromGround += dz;
+    altitudeFromGround = clamp(
+        altitudeFromGround,
+        minAltitude,
+        maxAltitude
+    );
 
-    altitudeFromGround = clamp(altitudeFromGround, minAltitude, maxAltitude);
+    let newCamHeight = cameraHeight(altitudeFromGround);
+    let camHeightRatio = newCamHeight / oldCamHeight;
+    
+    posX /= camHeightRatio;
+    posY /= camHeightRatio;
 
-    // adjust the position of the plane based on the new altitude
-    posX = (posX * altitudeFromGround) / oldAltitude;
-    posY = (posY * altitudeFromGround) / oldAltitude;
-
-    // Set the flag to redraw the canvas
     needsRedraw = true;
     altimeterUpdate();
 }
@@ -113,18 +118,13 @@ function speedometerUpdate() {
 }
 
 function altimeterUpdate() {
-    let displayAltitude = Math.round((altitudeFactor / altitudeFromGround));
+    let displayAltitude = Math.round(altitudeFromGround);
     $altitude.innerHTML = "Altitude = " + displayAltitude;
     $settingsAltitude.innerHTML = "Altitude: " + displayAltitude;
 
-    let adjustedMinAltitude = altitudeFactor / minAltitude;
-    let adjustedMaxAltitude = altitudeFactor / maxAltitude;
-    let adjustedAltitude = altitudeFactor / altitudeFromGround;
-
-    let altimeterNeedleAnglePercent = (adjustedAltitude - adjustedMinAltitude);
-    altimeterNeedleAnglePercent /= (adjustedMaxAltitude - adjustedMinAltitude);
-    altimeterNeedleAnglePercent = 1 - altimeterNeedleAnglePercent;
-    altimeterNeedleAnglePercent = Math.sqrt(altimeterNeedleAnglePercent);
+    let altimeterNeedleAnglePercent = (altitudeFromGround - minAltitude);
+    altimeterNeedleAnglePercent /= (maxAltitude - minAltitude);
+    altimeterNeedleAnglePercent = altimeterNeedleAnglePercent;
     altimeterNeedleAnglePercent *= 100;
 
     updateAltimeterNeedle(altimeterNeedleAnglePercent);
