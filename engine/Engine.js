@@ -17,6 +17,8 @@ const $seed = document.getElementById("seed");
 const $settings = document.getElementById("settings");
 const $settingsMenu = document.getElementById("settingsMenu");
 const $speed = document.getElementById("speed");
+const $altitude = document.getElementById("altitude");
+const $settingsAltitude = document.getElementById("settings-altitude");
 const $start = document.getElementById("start");
 const $ui = document.getElementById("ui");
 const $welcome = document.getElementById("welcome");
@@ -37,8 +39,16 @@ let buffer_ctx = buffer_canvas.getContext("2d");
 // position of current screen
 let posX = 0;
 let posY = 0;
-let altitudeFromGround = 300; // nice visual range: 250 - 500
 $coordinates.innerHTML = "Coordinates: X=" + posX + ", Y=" + posY;
+
+// altitude of the plane
+let altitudeFromGround = 200;
+let altitudeFactor = 50000;
+
+// update altitude display
+let displayAltitude = Math.round((altitudeFromGround));
+$altitude.innerHTML = "Altitude = " + displayAltitude;
+$settingsAltitude.innerHTML = "Altitude: " + displayAltitude;
 
 // block size by pixel, i wouldn't recommend going under 5, load times will be longer
 let quality = 10;
@@ -109,6 +119,11 @@ function draw() {
   ctx.drawImage(buffer_canvas, 0, 0);
 }
 
+// Calculate the camera height from the altitude
+function cameraHeight(altitude) {
+  return altitude / altitudeFactor;
+}
+
 // Baseline sea level
 function calculateSeaLevel(x, y) {
   // set values to variables so they can be adjusted (by slider?)
@@ -116,15 +131,17 @@ function calculateSeaLevel(x, y) {
   
   let roundedPosX = Math.round(posX / quality) * quality;
   let roundedPosY = Math.round(posY / quality) * quality;
-
+  
   let adjustedX = roundedPosX - (width / 2);
   let adjustedY = roundedPosY - (height / 2);
+  
+  let camHeight = cameraHeight(altitudeFromGround);
 
   return (
     (
       perlin2(
-        (x + adjustedX) / altitudeFromGround,
-        (y + adjustedY) / altitudeFromGround
+        (x + adjustedX) * camHeight,
+        (y + adjustedY) * camHeight
       ) + mountainHeight
     ) / 2
   );

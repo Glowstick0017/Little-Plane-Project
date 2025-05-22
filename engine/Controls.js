@@ -30,8 +30,8 @@ let maxSpeed = 1.5;
 let throttlePower = 0.5;
 
 // altitude based
-let minAltitude = 50;
-let maxAltitude = 500;
+let minAltitude = 100;
+let maxAltitude = 1000;
 let altSpeed = 1;
 
 //update dx and dy based on player angle
@@ -74,23 +74,25 @@ function formatKey(key) {
     return key.startsWith("Arrow") ? key : key.toLowerCase();
 }
 
-function smooth(value, quality) {
-    return Math.round(value / quality) * quality;
-}
-
 // Elevate the sea level
 function elevateAltitude(dz) {
-    oldAltitude = altitudeFromGround;
+    let oldCamHeight = cameraHeight(altitudeFromGround);
+
     altitudeFromGround += dz;
+    altitudeFromGround = clamp(
+        altitudeFromGround,
+        minAltitude,
+        maxAltitude
+    );
 
-    altitudeFromGround = clamp(altitudeFromGround, minAltitude, maxAltitude);
+    let newCamHeight = cameraHeight(altitudeFromGround);
+    let camHeightRatio = newCamHeight / oldCamHeight;
+    
+    posX /= camHeightRatio;
+    posY /= camHeightRatio;
 
-    // adjust the position of the plane based on the new altitude
-    posX = smooth((posX * altitudeFromGround) / oldAltitude, quality);
-    posY = smooth((posY * altitudeFromGround) / oldAltitude, quality);
-
-    // Set the flag to redraw the canvas
     needsRedraw = true;
+    altimeterUpdate();
 }
 
 function clamp(value, min, max) {
@@ -113,6 +115,23 @@ function speedometerUpdate() {
     speedometerNeedleAnglePercent *= 100;
 
     updateSpeedometerNeedle(speedometerNeedleAnglePercent);
+}
+
+function altimeterUpdate() {
+    let displayAltitude = Math.round(altitudeFromGround);
+    $altitude.innerHTML = "Altitude = " + displayAltitude;
+    $settingsAltitude.innerHTML = "Altitude: " + displayAltitude;
+
+    let altimeterNeedleAnglePercent = (altitudeFromGround - minAltitude);
+    altimeterNeedleAnglePercent /= (maxAltitude - minAltitude);
+    altimeterNeedleAnglePercent = altimeterNeedleAnglePercent;
+    altimeterNeedleAnglePercent *= 100;
+
+    let adjustedShadowHeight = 1.01 - (altimeterNeedleAnglePercent / 100);
+    adjustedShadowHeight *= adjustedShadowHeight * adjustedShadowHeight;
+
+    plane.setShadowHeight(adjustedShadowHeight);
+    updateAltimeterNeedle(altimeterNeedleAnglePercent * 1.5);
 }
 
 function throttleChange(updateFn) {
@@ -170,6 +189,7 @@ const verticalMapping = {
 function gameInit() {
     // update instruments
     speedometerUpdate();
+    altimeterUpdate();
 }
 
 // Game loop to handle movement and rendering
@@ -210,10 +230,15 @@ function gameLoop() {
     }
 
     moveRotate(dx, dy , keyPressedFlag)
+
     // Update displayed coordinates
-    $coords.innerHTML = `X = ${Math.round(posX / 10)} Y = ${Math.round((-1) * posY / 10)}`;
+    let coordFactor = altitudeFactor / (altitudeFromGround * 10);
+    let coordX = Math.round(posX / coordFactor);
+    let coordY = Math.round(posY / -coordFactor);
+
+    $coords.innerHTML = `X = ${coordX} Y = ${coordY}`;
     $coordinates.innerHTML =
-        `Coordinates: X= ${Math.round(posX / 10)} Y= ${Math.round((-1) * posY / 10)}`;
+        `Coordinates: X= ${coordX} Y= ${coordY}`;
 
   // Redraw the canvas if needed
   if (needsRedraw) {
