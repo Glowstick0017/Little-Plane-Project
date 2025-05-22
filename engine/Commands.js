@@ -94,8 +94,8 @@ const teleportCommand = new Command(
     if (isNaN(x) || !Number.isInteger(x) || isNaN(y) || !Number.isInteger(y)) {
       return "Invalid syntax `teleport <x> <y>`";
     } else {
-      posX = x * 10;
-      posY = -1 * y * 10;
+      posX = x * (altitudeFactor / (altitudeFromGround * 10));
+      posY = -y * (altitudeFactor / (altitudeFromGround * 10));
       draw();
       $coordinates.innerHTML =
         "Coordinates: X=" + posX / 10 + ", Y=" + (posY / 10) * -1;
