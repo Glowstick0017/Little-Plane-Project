@@ -81,18 +81,13 @@ function elevateAltitude(dz) {
 
     altitudeFromGround = clamp(altitudeFromGround, minAltitude, maxAltitude);
 
-    // update the altitude display
-    let displayAltitude = Math.round((1 / altitudeFromGround) * altitudeFactor);
-    $altitude.innerHTML = "Altitude = " + displayAltitude;
-    $settingsAltitude.innerHTML = "Altitude: " + displayAltitude;
-    altimeterUpdate();
-
     // adjust the position of the plane based on the new altitude
     posX = (posX * altitudeFromGround) / oldAltitude;
     posY = (posY * altitudeFromGround) / oldAltitude;
 
     // Set the flag to redraw the canvas
     needsRedraw = true;
+    altimeterUpdate();
 }
 
 function clamp(value, min, max) {
@@ -118,6 +113,10 @@ function speedometerUpdate() {
 }
 
 function altimeterUpdate() {
+    let displayAltitude = Math.round((altitudeFactor / altitudeFromGround));
+    $altitude.innerHTML = "Altitude = " + displayAltitude;
+    $settingsAltitude.innerHTML = "Altitude: " + displayAltitude;
+
     let adjustedMinAltitude = altitudeFactor / minAltitude;
     let adjustedMaxAltitude = altitudeFactor / maxAltitude;
     let adjustedAltitude = altitudeFactor / altitudeFromGround;

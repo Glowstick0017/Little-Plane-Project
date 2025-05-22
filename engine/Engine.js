@@ -46,7 +46,7 @@ let altitudeFromGround = 250;
 let altitudeFactor = 50000;
 
 // update altitude display
-let displayAltitude = Math.round((1 / altitudeFromGround) * altitudeFactor);
+let displayAltitude = Math.round((altitudeFactor / altitudeFromGround));
 $altitude.innerHTML = "Altitude = " + displayAltitude;
 $settingsAltitude.innerHTML = "Altitude: " + displayAltitude;
 

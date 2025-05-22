@@ -27,7 +27,7 @@ const speedCommand = new Command("SPEED", "SPEED <value>", 1, (args) => {
 const throttlePowerCommand = new Command("POWER", "POWER <value>", 1, (args) => {
   const throttlePowerVal = Number(args[0]);
   if (isNaN(throttlePowerVal) || !Number.isInteger(throttlePowerVal)) {
-    return "Invalid syntax `POWER <POWER>`";
+    return "Invalid syntax `power <power>`";
   } else if (throttlePowerVal > 20 || throttlePowerVal < 0) {
     return "Invalid input. Range 0-20";
   } else {
@@ -40,7 +40,7 @@ const throttlePowerCommand = new Command("POWER", "POWER <value>", 1, (args) => 
 const maxSpeedCommand = new Command("MAXSPEED", "MAXSPEED <value>", 1, (args) => {
   const maxSpeedVal = Number(args[0]);
   if (isNaN(maxSpeedVal) || !Number.isInteger(maxSpeedVal)) {
-    return "Invalid syntax `POWER <POWER>`";
+    return "Invalid syntax `maxspeed <maxspeed>`";
   } else if (maxSpeedVal > 20 || maxSpeedVal < 0) {
     return "Invalid input. Range 0-20";
   } else if (maxSpeedVal < minSpeed) {
@@ -56,7 +56,7 @@ const maxSpeedCommand = new Command("MAXSPEED", "MAXSPEED <value>", 1, (args) =>
 const minSpeedCommand = new Command("MINSPEED", "MINSPEED <value>", 1, (args) => {
   const minSpeedVal = Number(args[0]);
   if (isNaN(minSpeedVal) || !Number.isInteger(minSpeedVal)) {
-    return "Invalid syntax `POWER <POWER>`";
+    return "Invalid syntax `minspeed <minspeed>`";
   } else if (minSpeedVal > 20 || minSpeedVal < 0) {
     return "Invalid input. Range 0-20";
   } else if (minSpeedVal > maxSpeed) {
