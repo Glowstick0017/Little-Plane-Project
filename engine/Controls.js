@@ -131,7 +131,7 @@ function altimeterUpdate() {
     adjustedShadowHeight *= adjustedShadowHeight * adjustedShadowHeight;
 
     plane.setShadowHeight(adjustedShadowHeight);
-    updateAltimeterNeedle(altimeterNeedleAnglePercent);
+    updateAltimeterNeedle(altimeterNeedleAnglePercent * 1.5);
 }
 
 function throttleChange(updateFn) {
