@@ -118,13 +118,14 @@ function speedometerUpdate() {
 }
 
 function altimeterUpdate() {
-    let adjustedMinAltitude = (1 / minAltitude) * altitudeFactor;
-    let adjustedMaxAltitude = (1 / maxAltitude) * altitudeFactor;
-    let adjustedAltitude = (1 / altitudeFromGround) * altitudeFactor;
+    let adjustedMinAltitude = altitudeFactor / minAltitude;
+    let adjustedMaxAltitude = altitudeFactor / maxAltitude;
+    let adjustedAltitude = altitudeFactor / altitudeFromGround;
 
     let altimeterNeedleAnglePercent = (adjustedAltitude - adjustedMinAltitude);
     altimeterNeedleAnglePercent /= (adjustedMaxAltitude - adjustedMinAltitude);
     altimeterNeedleAnglePercent = 1 - altimeterNeedleAnglePercent;
+    altimeterNeedleAnglePercent = Math.sqrt(altimeterNeedleAnglePercent);
     altimeterNeedleAnglePercent *= 100;
 
     updateAltimeterNeedle(altimeterNeedleAnglePercent);
