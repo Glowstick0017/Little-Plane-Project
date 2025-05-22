@@ -165,6 +165,10 @@ class Plane {
             -32 * this.scale / this.shadowHeight + 48,
             32 * this.scale / this.shadowHeight - 48
         );
+
+        this.ctx.translate(this.width / 2, this.height / 2);
+        this.ctx.rotate(this.angle);
+        this.ctx.translate(-this.width / 2, -this.height / 2);
         
         for (const partName in this.parts) {
             const part = this.parts[partName];
@@ -194,9 +198,6 @@ class Plane {
         // Clearing the canvas before drawing
         this.ctx.clearRect(0, 0, this.width, this.height);
 
-        this.ctx.translate(this.width / 2, this.height / 2);
-        this.ctx.rotate(this.angle);
-        this.ctx.translate(-this.width / 2, -this.height / 2);
         this.drawShadow();
         this.ctx.resetTransform();
 
