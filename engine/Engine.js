@@ -36,6 +36,15 @@ buffer_canvas.width = canvas.width;
 buffer_canvas.height = canvas.height;
 let buffer_ctx = buffer_canvas.getContext("2d");
 
+let cloud_canvas = document.createElement('canvas');
+cloud_canvas.width = canvas.width;
+cloud_canvas.height = canvas.height;
+let cloud_ctx = cloud_canvas.getContext("2d");
+
+// Cloud speed
+let cloudSpeedX = 0.2 * Math.random() * 0;
+let cloudSpeedY = 0.2 * Math.random() * 0;
+
 // position of current screen
 let posX = 0;
 let posY = 0;
@@ -69,8 +78,80 @@ $seed.innerHTML = "Seed: " + seedVal;
 // initial draw
 draw();
 
-// Initial draw function
-function draw() {
+// Calculate the camera height from the altitude
+function cameraHeight(altitude) {
+  return altitude / altitudeFactor;
+}
+
+function adjustedPositions(xVal, yVal) {
+  let adjustedX = Math.round(xVal / quality) * quality - (width / 2);
+  let adjustedY = Math.round(yVal / quality) * quality - (height / 2);
+
+  return {
+    x: adjustedX,
+    y: adjustedY
+  }
+}
+
+// Baseline sea level
+function calculateSeaLevel(x, y) {
+  // set values to variables so they can be adjusted (by slider?)
+  let mountainHeight = 1; // nice visual range: 0 - 1.3
+  let { x: adjustedX, y: adjustedY } = adjustedPositions(posX, posY);
+  let camHeight = cameraHeight(altitudeFromGround);
+
+  return (
+    (
+      perlin2(
+        (x + adjustedX) * camHeight,
+        (y + adjustedY) * camHeight
+      ) + mountainHeight
+    ) / 2
+  );
+}
+
+// Calculate the cloud density
+function calculateCloudDensity(x, y) {
+  let xOffset = Date.now() * cloudSpeedX;
+  let yOffset = Date.now() * cloudSpeedY;
+
+  let { x: adjPosX, y: adjPosY } = adjustedPositions(posX, posY);
+  let { x: adjOffX, y: adjOffY } = adjustedPositions(xOffset, yOffset);
+
+  let adjustedX = adjPosX + adjOffX;
+  let adjustedY = adjPosY + adjOffY;
+  let camHeight = cameraHeight(altitudeFromGround - 500);
+
+  let noise = perlin2(
+    (x + adjustedX) * camHeight,
+    (y + adjustedY) * camHeight
+  );
+
+  let adjustedNoise = (1 + noise) / 2;
+  if (adjustedNoise < 0.6) adjustedNoise = 0;
+  
+  let visibilityFactor = 0;
+  
+  if (altitudeFromGround < 500) {
+    visibilityFactor = 0;
+  } else if (altitudeFromGround < 600) {
+    visibilityFactor = (altitudeFromGround - 500) / 100;
+  } else if (altitudeFromGround < 650) {
+    visibilityFactor = 1.8 - ((altitudeFromGround - 600) / 50);
+    visibilityFactor = Math.min(visibilityFactor, 1);
+  } else {
+    visibilityFactor = 0.8;
+  }
+  
+  adjustedNoise *= visibilityFactor;
+  return adjustedNoise;
+}
+
+setInterval(() => console.log(
+  (1 + (altitudeFromGround - 500) / 600) * (1 + (altitudeFromGround - 500) / 600)
+), 2000);
+// Draw terrain
+function drawTerrain() {
   const drawing_batch = new Map()
   const fixed_quality = quality
 
@@ -115,36 +196,44 @@ function draw() {
       );
     }
   }
+}
 
+// Draw clouds
+function drawClouds() {
+  const fixed_quality = quality
+
+  const drawOffsetX = (posX + fixed_quality / 2) % fixed_quality;
+  const drawOffsetY = (posY + fixed_quality / 2) % fixed_quality;
+
+  cloud_ctx.clearRect(0, 0, width, height);
+
+  for (let x = -fixed_quality; x < width + fixed_quality; x += fixed_quality) {
+    for (let y = -fixed_quality; y < height + fixed_quality; y += fixed_quality) {
+      const density = calculateCloudDensity(x, y);
+      const color = `rgba(255, 255, 255, ${density})`;
+      if (density === 0) continue;
+
+      cloud_ctx.fillStyle = color;
+      cloud_ctx.fillRect(
+        x - drawOffsetX,
+        y - drawOffsetY,
+        fixed_quality,
+        fixed_quality
+      );
+    }
+  }
+}
+
+// Initial draw function
+function draw() {
+  drawTerrain();
+  seed(HashToNumber(SHA256((seedVal + 200) + "")));
+  drawClouds();
+  seed(HashToNumber(SHA256(seedVal + "")));
+
+  ctx.clearRect(0, 0, width, height);
   ctx.drawImage(buffer_canvas, 0, 0);
-}
-
-// Calculate the camera height from the altitude
-function cameraHeight(altitude) {
-  return altitude / altitudeFactor;
-}
-
-// Baseline sea level
-function calculateSeaLevel(x, y) {
-  // set values to variables so they can be adjusted (by slider?)
-  let mountainHeight = 1.0; // nice visual range: 0 - 1.3
-  
-  let roundedPosX = Math.round(posX / quality) * quality;
-  let roundedPosY = Math.round(posY / quality) * quality;
-  
-  let adjustedX = roundedPosX - (width / 2);
-  let adjustedY = roundedPosY - (height / 2);
-  
-  let camHeight = cameraHeight(altitudeFromGround);
-
-  return (
-    (
-      perlin2(
-        (x + adjustedX) * camHeight,
-        (y + adjustedY) * camHeight
-      ) + mountainHeight
-    ) / 2
-  );
+  ctx.drawImage(cloud_canvas, 0, 0);
 }
 
 // Define terrain
