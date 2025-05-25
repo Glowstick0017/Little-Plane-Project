@@ -116,7 +116,7 @@ function calculateCloudDensity(x, y) {
   let yOffset = Date.now() * cloudSpeedY;
 
   let { x: adjPosX, y: adjPosY } = adjustedPositions(posX, posY);
-  let { x: adjOffX, y: adjOffY } = adjustedPositions(xOffset, yOffset);
+  let { x: adjOffX, y: adjOffY } = { x: xOffset, y: yOffset };
 
   let adjustedX = adjPosX + adjOffX;
   let adjustedY = adjPosY + adjOffY;
@@ -210,10 +210,9 @@ function drawClouds() {
   for (let x = -fixed_quality; x < width + fixed_quality; x += fixed_quality) {
     for (let y = -fixed_quality; y < height + fixed_quality; y += fixed_quality) {
       const density = calculateCloudDensity(x, y);
-      const color = `rgba(255, 255, 255, ${density})`;
       if (density === 0) continue;
 
-      cloud_ctx.fillStyle = color;
+      cloud_ctx.fillStyle = `rgba(255, 255, 255, ${density})`;
       cloud_ctx.fillRect(
         x - drawOffsetX,
         y - drawOffsetY,
