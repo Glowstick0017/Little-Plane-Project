@@ -42,8 +42,8 @@ cloud_canvas.height = canvas.height;
 let cloud_ctx = cloud_canvas.getContext("2d");
 
 // Cloud speed
-let cloudSpeedX = 0.2 * Math.random() * 0;
-let cloudSpeedY = 0.2 * Math.random() * 0;
+let cloudSpeedX = 0.2 * Math.random();
+let cloudSpeedY = 0.2 * Math.random();
 
 // position of current screen
 let posX = 0;
