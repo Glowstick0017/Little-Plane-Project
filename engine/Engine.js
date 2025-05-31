@@ -41,9 +41,12 @@ cloud_canvas.width = canvas.width;
 cloud_canvas.height = canvas.height;
 let cloud_ctx = cloud_canvas.getContext("2d");
 
-// Cloud speed
+// cloud related
 let cloudSpeedX = 0.2 * Math.random();
 let cloudSpeedY = 0.2 * Math.random();
+let cloudHeight = 300;
+let cloudTransitionStart = 100;
+let cloudTransitionEnd = 150;
 
 // position of current screen
 let posX = 0;
@@ -120,7 +123,7 @@ function calculateCloudDensity(x, y) {
 
   let adjustedX = adjPosX + adjOffX;
   let adjustedY = adjPosY + adjOffY;
-  let camHeight = cameraHeight(altitudeFromGround - 500);
+  let camHeight = cameraHeight(altitudeFromGround - cloudHeight);
 
   let noise = perlin2(
     (x + adjustedX) * camHeight,
@@ -132,15 +135,19 @@ function calculateCloudDensity(x, y) {
   
   let visibilityFactor = 0;
   
-  if (altitudeFromGround < 500) {
+  if (altitudeFromGround < cloudHeight) {
     visibilityFactor = 0;
-  } else if (altitudeFromGround < 600) {
-    visibilityFactor = (altitudeFromGround - 500) / 100;
-  } else if (altitudeFromGround < 650) {
-    visibilityFactor = 1.8 - ((altitudeFromGround - 600) / 50);
+  } else if (altitudeFromGround < cloudHeight + cloudTransitionStart) {
+    visibilityFactor = altitudeFromGround - cloudHeight;
+    visibilityFactor /= cloudTransitionStart;
+  } else if (altitudeFromGround < cloudHeight + cloudTransitionEnd) {
+    visibilityFactor = altitudeFromGround;
+    visibilityFactor -= cloudHeight + cloudTransitionStart;
+    visibilityFactor /= cloudTransitionEnd - cloudTransitionStart;
+    visibilityFactor = 2 - visibilityFactor;
     visibilityFactor = Math.min(visibilityFactor, 1);
   } else {
-    visibilityFactor = 0.8;
+    visibilityFactor = 1;
   }
   
   adjustedNoise *= visibilityFactor;
@@ -209,9 +216,15 @@ function drawClouds() {
 
   for (let x = -fixed_quality; x < width + fixed_quality; x += fixed_quality) {
     for (let y = -fixed_quality; y < height + fixed_quality; y += fixed_quality) {
-      const density = calculateCloudDensity(x, y);
+      let density = calculateCloudDensity(x, y);
+      density *= [
+        calculateCloudDensity(x + 1, y),
+        calculateCloudDensity(x - 1, y),
+        calculateCloudDensity(x, y + 1),
+        calculateCloudDensity(x, y - 1)
+      ].reduce((d1, d2) => d1 + d2, 0) / 4;
+      
       if (density === 0) continue;
-
       cloud_ctx.fillStyle = `rgba(255, 255, 255, ${density})`;
       cloud_ctx.fillRect(
         x - drawOffsetX,
