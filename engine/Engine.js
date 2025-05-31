@@ -154,9 +154,6 @@ function calculateCloudDensity(x, y) {
   return adjustedNoise;
 }
 
-setInterval(() => console.log(
-  (1 + (altitudeFromGround - 500) / 600) * (1 + (altitudeFromGround - 500) / 600)
-), 2000);
 // Draw terrain
 function drawTerrain() {
   const drawing_batch = new Map()
