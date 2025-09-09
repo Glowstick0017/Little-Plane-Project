@@ -32,8 +32,16 @@ let permutations = [151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 23
 let perm = new Array(512);
 let gradientP = new Array(512);
 
+let cachedSeeds = {};
+
 // seed definition function
 function seed(seed) {
+    if (cachedSeeds[seed]) {
+        perm = cachedSeeds[seed].perm;
+        gradientP = cachedSeeds[seed].gradientP;
+        return;
+    }
+
     if(seed > 0 && seed < 1) {
         // Scale the seed out
         seed *= 65536;
@@ -55,6 +63,12 @@ function seed(seed) {
         perm[i] = perm[i + 256] = v;
         gradientP[i] = gradientP[i + 256] = gradient3[v % 12];
     }
+
+    // cache the perm and gradientP arrays
+    cachedSeeds[seed] = {
+        perm: [...perm],
+        gradientP: [...gradientP]
+    };
 }
 
 // default seed

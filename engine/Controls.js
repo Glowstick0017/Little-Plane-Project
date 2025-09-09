@@ -76,23 +76,8 @@ function formatKey(key) {
 
 // Elevate the sea level
 function elevateAltitude(dz) {
-    let oldCamHeight = cameraHeight(altitudeFromGround);
-
-    altitudeFromGround += dz;
-    altitudeFromGround = clamp(
-        altitudeFromGround,
-        minAltitude,
-        maxAltitude
-    );
-
-    let newCamHeight = cameraHeight(altitudeFromGround);
-    let camHeightRatio = newCamHeight / oldCamHeight;
-    
-    posX /= camHeightRatio;
-    posY /= camHeightRatio;
-
+    engine.updateZoom(dz);
     needsRedraw = true;
-    altimeterUpdate();
 }
 
 function clamp(value, min, max) {
@@ -117,12 +102,12 @@ function speedometerUpdate() {
     updateSpeedometerNeedle(speedometerNeedleAnglePercent);
 }
 
-function altimeterUpdate() {
-    let displayAltitude = Math.round(altitudeFromGround);
+function altimeterUpdate(altitude) {
+    let displayAltitude = Math.round(altitude);
     $altitude.innerHTML = "Altitude = " + displayAltitude;
     $settingsAltitude.innerHTML = "Altitude: " + displayAltitude;
 
-    let altimeterNeedleAnglePercent = (altitudeFromGround - minAltitude);
+    let altimeterNeedleAnglePercent = (altitude - minAltitude);
     altimeterNeedleAnglePercent /= (maxAltitude - minAltitude);
     altimeterNeedleAnglePercent = altimeterNeedleAnglePercent;
     altimeterNeedleAnglePercent *= 100;
@@ -154,8 +139,8 @@ function moveRotate(dx, dy , keyPressedFlag) {
 
     // Update the position of plane based on the direction of movement, only if any of the keys is pressed
     if (keyPressedFlag) {
-        posX += dx * speed * 10 + 30 * dx * t;
-        posY += dy * speed * 10 + 30 * dy * t;
+        engine.applyOnX(x => x + dx * speed * 10 + 30 * dx * t);
+        engine.applyOnY(y => y + dy * speed * 10 + 30 * dy * t);
         // console.log(t);
     }
     // // Rotate the plane based on the direction of movement
@@ -189,7 +174,7 @@ const verticalMapping = {
 function gameInit() {
     // update instruments
     speedometerUpdate();
-    altimeterUpdate();
+    altimeterUpdate(200);
 }
 
 // Game loop to handle movement and rendering
@@ -231,21 +216,12 @@ function gameLoop() {
 
     moveRotate(dx, dy , keyPressedFlag)
 
-    // Update displayed coordinates
-    let coordFactor = altitudeFactor / (altitudeFromGround * 10);
-    let coordX = Math.round(posX / coordFactor);
-    let coordY = Math.round(posY / -coordFactor);
-
-    $coords.innerHTML = `X = ${coordX} Y = ${coordY}`;
-    $coordinates.innerHTML =
-        `Coordinates: X= ${coordX} Y= ${coordY}`;
-
-  // Redraw the canvas if needed
-  if (needsRedraw) {
-    ctx.clearRect(0, 0, $canvas.width, $canvas.height);
-    draw();
-    needsRedraw = false; // Reset the flag after drawing
-  }
+    // Redraw the canvas if needed
+    if (needsRedraw) {
+        ctx.clearRect(0, 0, $canvas.width, $canvas.height);
+        engine.draw();
+        needsRedraw = false; // Reset the flag after drawing
+    }
 
   requestAnimationFrame(gameLoop); // Queue the next iteration
 }

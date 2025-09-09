@@ -1,11 +1,14 @@
 // Seed command - spawns the player into the starting position of a new world.
 const seedCommand = new Command("SEED", "SEED <seed_value>", 1, (args) => {
   const newSeed = args[0];
-  seed(HashToNumber(SHA256(newSeed)));
-  posX = posY = 0;
+  
+  terrain.setSeed(HashToNumber(SHA256(newSeed)));
+  engine.updateX(0);
+  engine.updateY(0);
+  
   $result.value = "seed set to `" + newSeed + "`";
   $seed.innerHTML = "Seed: " + newSeed;
-  draw();
+  engine.draw();
   return "seed set to `" + newSeed + "`";
 });
 
@@ -77,7 +80,7 @@ const qualityCommand = new Command("QUALITY", "QUALITY <value>", 1, (args) => {
     return "Invalid input. Range 5-20";
   } else {
     quality = qualVal;
-    draw();
+    engine.draw();
     $quality.innerHTML = "Quality: " + quality + "px";
     return "Quality set to " + qualVal;
   }
@@ -91,16 +94,21 @@ const teleportCommand = new Command(
   (args) => {
     const x = Number(args[0]);
     const y = Number(args[1]);
-    if (isNaN(x) || !Number.isInteger(x) || isNaN(y) || !Number.isInteger(y)) {
+
+    let invalid = false;
+
+    invalid |= isNaN(x) || isNaN(y);
+    invalid |= !Number.isInteger(x) || !Number.isInteger(y);
+    
+    if (invalid) {
       return "Invalid syntax `teleport <x> <y>`";
-    } else {
-      posX = x * (altitudeFactor / (altitudeFromGround * 10));
-      posY = -y * (altitudeFactor / (altitudeFromGround * 10));
-      draw();
-      $coordinates.innerHTML =
-        "Coordinates: X=" + posX / 10 + ", Y=" + (posY / 10) * -1;
-      return "Teleported to " + x + " " + y;
     }
+
+    engine.updateX(x * (altitudeFactor / (altitudeFromGround * 10)));
+    engine.updateY(-y * (altitudeFactor / (altitudeFromGround * 10)));
+
+    engine.draw();
+    return "Teleported to " + x + " " + y;
   },
 );
 
@@ -109,12 +117,12 @@ const colorCommand = new Command("COLOR", "COLOR", 0, (args) => {
   if (color === 0) {
     color = 1;
     $color.innerHTML = "Color: " + color;
-    draw();
+    engine.draw();
     return "Color on.";
   } else {
     color = 0;
     $color.innerHTML = "Color: " + color;
-    draw();
+    engine.draw();
     return "Color off.";
   }
 });
