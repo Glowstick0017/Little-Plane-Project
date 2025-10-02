@@ -119,6 +119,8 @@ body {
   top: 25px;
   left: 25px;
   z-index: 100;
+  display: flex;
+  gap: 10px;
 }
 #hamburger {
   width: 50px;
@@ -186,6 +188,22 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+#speakerphone {
+  width: 50px;
+  height: 50px;
+  background-image: url("speakerphone.png");
+  background-size: cover;
+  cursor: pointer;
+}
+
+#speakerphone:not(.muted) {
+  background-position: top;
+}
+
+#speakerphone.muted {
+  background-position: bottom;
 }
 
 @font-face {
