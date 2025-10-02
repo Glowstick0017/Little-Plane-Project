@@ -131,8 +131,16 @@ function throttleChange(updateFn) {
         speed = clamp(speed, minSpeed, maxSpeed);
     }
 
+    const speedFactor = (speed - minSpeed) / (maxSpeed - minSpeed);
+    soundsEngine.setFrequencies(planeSound.map(f => [
+        f[0] * (1 + speedFactor),
+        f[1]
+    ]));
+
     speedometerUpdate();
 }
+
+throttleChange((s, tp) => s); // Initialize speed
 
 // Movement Rotation
 function moveRotate(dx, dy , keyPressedFlag) {
