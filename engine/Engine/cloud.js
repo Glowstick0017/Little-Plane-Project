@@ -15,6 +15,9 @@ function Cloud(
   let cloudSpeedX = 2 * Math.random();
   let cloudSpeedY = 2 * Math.random();
   
+  // Frame-rate independent cloud movement
+  let lastCloudUpdate = performance.now();
+  
   let cloudTransitionStart = 100;
   let cloudTransitionEnd = 150;
 
@@ -143,9 +146,26 @@ function Cloud(
     seed = updatedSeed;
   }
 
-  function moveCloud() {
-    applyOnX(x => x + cloudSpeedX);
-    applyOnY(y => y + cloudSpeedY);
+  function moveCloud(currentTime) {
+    // Initialize timestamp on first call
+    if (!currentTime) {
+      lastCloudUpdate = performance.now();
+      requestAnimationFrame(moveCloud);
+      return;
+    }
+    
+    // Calculate delta time for frame-rate independent movement
+    const deltaTime = (currentTime - lastCloudUpdate) / 1000;
+    lastCloudUpdate = currentTime;
+    
+    // Cap delta time to avoid huge jumps
+    const cappedDelta = Math.min(deltaTime, 0.1);
+    
+    // Normalize cloud movement to 60 FPS equivalent
+    const normalizedMovement = cappedDelta * 60;
+    
+    applyOnX(x => x + cloudSpeedX * normalizedMovement);
+    applyOnY(y => y + cloudSpeedY * normalizedMovement);
     requestAnimationFrame(moveCloud);
   }
 

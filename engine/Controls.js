@@ -24,6 +24,10 @@ let pause = true;
 let t = 0;
 let cooldown = 0;
 
+// Delta time tracking for frame-rate independent movement
+let lastFrameTime = performance.now();
+let deltaTime = 0;
+
 // speed of the plane
 let minSpeed = 0.5;
 let maxSpeed = 1.5;
@@ -152,9 +156,11 @@ function moveRotate(dx, dy , keyPressedFlag) {
 
     // Update the position of plane based on the direction of movement, only if any of the keys is pressed
     if (keyPressedFlag) {
-        engine.applyOnX(x => x + dx * speed * 10 + 30 * dx * t);
-        engine.applyOnY(y => y + dy * speed * 10 + 30 * dy * t);
-        // console.log(t);
+        // Use deltaTime to make movement frame-rate independent
+        // Movement speed is normalized to 60 FPS (deltaTime is in seconds, so multiply by speed factors)
+        const normalizedMovement = deltaTime * 60;
+        engine.applyOnX(x => x + dx * speed * 10 * normalizedMovement);
+        engine.applyOnY(y => y + dy * speed * 10 * normalizedMovement);
     }
     // // Rotate the plane based on the direction of movement
 
@@ -169,18 +175,18 @@ function moveRotate(dx, dy , keyPressedFlag) {
 
 // Dictionary to map input keys to change the playerAngle
 const horizontalMapping = {
-    [KEYS.A]: () => { playerAngle -= yawStrength , updateDirection()},
-    [KEYS.ARROW_LEFT]: () => { playerAngle -= yawStrength , updateDirection()},
-    [KEYS.D]: () => { playerAngle += yawStrength , updateDirection()},
-    [KEYS.ARROW_RIGHT]: () => { playerAngle += yawStrength , updateDirection()},
+    [KEYS.A]: () => { playerAngle -= yawStrength * deltaTime * 60 , updateDirection()},
+    [KEYS.ARROW_LEFT]: () => { playerAngle -= yawStrength * deltaTime * 60 , updateDirection()},
+    [KEYS.D]: () => { playerAngle += yawStrength * deltaTime * 60 , updateDirection()},
+    [KEYS.ARROW_RIGHT]: () => { playerAngle += yawStrength * deltaTime * 60 , updateDirection()},
 };
 
 // Dictionary to map input keys to toggle throttle
 const verticalMapping = {
-    [KEYS.W]: () => { throttleChange((s, tp) => s + tp) },
-    [KEYS.ARROW_UP]: () => { throttleChange((s, tp) => s + tp) },
-    [KEYS.S]: () => { throttleChange((s, tp) => s - tp) },
-    [KEYS.ARROW_DOWN]: () => { throttleChange((s, tp) => s - tp) },
+    [KEYS.W]: () => { throttleChange((s, tp) => s + tp * deltaTime * 60) },
+    [KEYS.ARROW_UP]: () => { throttleChange((s, tp) => s + tp * deltaTime * 60) },
+    [KEYS.S]: () => { throttleChange((s, tp) => s - tp * deltaTime * 60) },
+    [KEYS.ARROW_DOWN]: () => { throttleChange((s, tp) => s - tp * deltaTime * 60) },
 };
 
 // Function to initialize the game
@@ -191,7 +197,16 @@ function gameInit() {
 }
 
 // Game loop to handle movement and rendering
-function gameLoop() {
+function gameLoop(currentTime) {
+    // Calculate delta time in seconds
+    deltaTime = (currentTime - lastFrameTime) / 1000;
+    lastFrameTime = currentTime;
+    
+    // Cap delta time to avoid huge jumps (e.g., when tab is inactive)
+    if (deltaTime > 0.1) {
+        deltaTime = 0.1;
+    }
+    
     if (pause) {
         keysPressed = {};
     }
@@ -221,10 +236,12 @@ function gameLoop() {
     }
 
     if(keysPressed[KEYS.LT_SQ_BRACKET]){
-        elevateAltitude(-altSpeed);
+        // Make altitude change frame-rate independent
+        elevateAltitude(-altSpeed * deltaTime * 60);
     }
     else if(keysPressed[KEYS.RT_SQ_BRACKET]){
-        elevateAltitude(altSpeed);
+        // Make altitude change frame-rate independent
+        elevateAltitude(altSpeed * deltaTime * 60);
     }
 
     moveRotate(dx, dy , keyPressedFlag)
@@ -240,4 +257,4 @@ function gameLoop() {
 }
 
 gameInit(); // Initialize the game
-gameLoop(); // Initiate the game loop
+requestAnimationFrame(gameLoop); // Initiate the game loop with proper timestamp

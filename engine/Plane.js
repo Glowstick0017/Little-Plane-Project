@@ -18,7 +18,8 @@ class Plane {
 
         // Propeller rotation
         this.propellerState = 0;
-        this.propellerSpeed = 1;
+        this.propellerSpeed = 10; // Rotations per second (adjusted from frame-based to time-based)
+        this.lastPropellerUpdate = performance.now();
         this.propellerFrames = [
             [
                 [80, 0, 40, 10],
@@ -222,7 +223,12 @@ class Plane {
 
     // Function to rotate the propeller
     rotatePropeller() {
-        this.propellerState = (this.propellerState + this.propellerSpeed) % this.propellerFrames.length;
+        const currentTime = performance.now();
+        const deltaTime = (currentTime - this.lastPropellerUpdate) / 1000; // Convert to seconds
+        this.lastPropellerUpdate = currentTime;
+        
+        // Update propeller state based on time elapsed
+        this.propellerState = (this.propellerState + this.propellerSpeed * deltaTime) % this.propellerFrames.length;
         this.parts.propellerBlades.coords = this.propellerFrames[Math.floor(this.propellerState)];
         this.draw();
     }
@@ -271,7 +277,9 @@ if (localStorage.getItem("littlePlaneColors")) {
 }
 plane.draw();
 
-// always rotate the propeller
-setInterval(() => {
+// Always rotate the propeller using requestAnimationFrame for smooth, frame-rate independent animation
+function animatePropeller() {
     plane.rotatePropeller();
-}, 100);
+    requestAnimationFrame(animatePropeller);
+}
+animatePropeller();
