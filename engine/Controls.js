@@ -131,10 +131,15 @@ function throttleChange(updateFn) {
         speed = clamp(speed, minSpeed, maxSpeed);
     }
 
+    // More realistic speed-to-pitch mapping for propeller sound
     const speedFactor = (speed - minSpeed) / (maxSpeed - minSpeed);
-    soundsEngine.setFrequencies(planeSound.map(f => [
-        f[0] * (1 + speedFactor),
-        f[1]
+    // Gentler pitch progression for propeller
+    const pitchMultiplier = 0.8 + (speedFactor * 0.6);
+    
+    soundsEngine.setFrequencies(planeSound.map(([f, vol, waveType]) => [
+        f * pitchMultiplier,
+        vol * (0.85 + speedFactor * 0.3), // Subtle volume increase with speed
+        waveType
     ]));
 
     speedometerUpdate();
