@@ -36,11 +36,14 @@ const cloud = Cloud(
   MIN_ALTITUDE,
   MAX_ALTITUDE,
   CLOUD_HEIGHT,
-)
+);
+
+const timeCycle = TimeCycle();
 
 terrain.setSeed(HashToNumber(SHA256(seedVal + "")));
 cloud.setSeed(HashToNumber(SHA256((seedVal + 200) + "")));
 cloud.moveCloud();
+timeCycle.startTimeCycle();
 
 const engine = Engine(terrain, cloud);
 engine.draw();

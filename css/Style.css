@@ -206,6 +206,15 @@ body {
   background-position: bottom;
 }
 
+#timeCycle {
+  width: 100%;
+  height: 100%;
+  background: hsl(20deg 100% 50%);
+  opacity: 0;
+  z-index: 10;
+  position: relative;
+}
+
 @font-face {
   font-family: boxyFont;
   src: url("boxyFont.otf") format("opentype");
