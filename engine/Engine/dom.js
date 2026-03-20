@@ -24,3 +24,9 @@ const $planeColors = document.querySelectorAll(
   '.planeColors input[type="color"]'
 );
 
+const ELEMENTS = {
+  TIME_CYCLE: {
+    canvas: document.getElementById("timeCycle"),
+  }
+}
+
