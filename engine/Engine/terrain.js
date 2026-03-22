@@ -105,7 +105,6 @@ function Terrain(
     }
   }
 
-
   function updatePosX(updatedX) {
     pos.setX(updatedX);
     refreshCoordinate();
@@ -154,6 +153,26 @@ function Terrain(
     drawTerrain();
     return terrain_canvas;
   }
+
+  function positionUpdate() {
+    const pX = pos.getX();
+    const pY = pos.getY();
+
+    const xMapPx = `${-pX}px`;
+    const yMapPx = `${-pY}px`;
+
+    document.documentElement.style.setProperty("--multiplayer-x", xMapPx);
+    document.documentElement.style.setProperty("--multiplayer-y", yMapPx);
+
+    requestAnimationFrame(() => positionUpdate());
+  }
+
+  function getPosition() {
+    return {
+      x: pos.getX(),
+      y: pos.getY(),
+    }
+  }
   
   return {
     updatePosX,
@@ -163,6 +182,8 @@ function Terrain(
     updateZoom,
     setSeed,
     getTerrainCanvas,
+    getPosition,
+    positionUpdate,
   };
 }
 

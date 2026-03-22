@@ -1,8 +1,14 @@
+:root {
+  --multiplayer-x: 0px;
+  --multiplayer-y: 0px;
+}
+
 body {
   margin: 0px;
   padding: 0px;
   overflow: hidden;
 }
+
 #canvas-container {
   width: 100vw;
   height: 100vh;
@@ -10,15 +16,20 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 #canvas {
   width: max(1600px, 100%);
   height: max(800px, 100%);
   position: absolute;
   z-index: 0;
 }
+
 #planeCanvas {
-  width: clamp(37.5rem, 28.846rem + 46.154vw, 75rem);
-  height: clamp(18.75rem, 14.423rem + 23.077vw, 37.5rem);
+  width: 600px;
+  height: 600px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   position: absolute;
   z-index: 1;
   background-color: transparent;
@@ -34,6 +45,7 @@ body {
   justify-content: center;
   align-items: end;
 }
+
 #speedometerCanvas {
   width: 100%;
   height: 100%;
@@ -122,6 +134,7 @@ body {
   display: flex;
   gap: 10px;
 }
+
 #hamburger {
   width: 50px;
   height: 50px;
@@ -129,6 +142,7 @@ body {
   background-size: 50px 50px;
   cursor: pointer;
 }
+
 #nav {
   background: rgba(255, 255, 255, 0.8);
   border: solid #323c39 4px;
@@ -141,13 +155,16 @@ body {
   font-size: 16px;
   user-select: none;
 }
+
 #nav ul {
   list-style: none;
   padding: 0;
 }
+
 #nav li {
   cursor: pointer;
 }
+
 #nav li:hover {
   color: rgb(6, 173, 224);
 }
@@ -168,22 +185,27 @@ body {
   z-index: 150;
   display: block;
 }
+
 #customizeMenu {
   display: none;
   text-shadow: 1px 1px white;
 }
+
 #welcome {
   display: block;
   text-shadow: 1px 1px white;
   text-align: center;
 }
+
 #settingsMenu {
   display: none;
   text-shadow: 1px 1px white;
 }
+
 #start {
   cursor: pointer;
 }
+
 .planeColors {
   display: flex;
   flex-direction: column;
@@ -213,6 +235,27 @@ body {
   opacity: 0;
   z-index: 10;
   position: relative;
+}
+
+.mpPlaneCanvas {
+  --plane-x: 400px;
+  --plane-y: 400px;
+  width: 600px;
+  height: 600px;
+  top: calc(50% - var(--plane-y));
+  left: calc(50% + var(--plane-x));
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 1;
+  background-color: transparent;
+}
+
+.multiplayer {
+  position: absolute;
+  top: calc(50% + var(--multiplayer-y));
+  left: calc(50% + var(--multiplayer-x));
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 @font-face {

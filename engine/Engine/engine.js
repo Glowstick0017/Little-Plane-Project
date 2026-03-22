@@ -33,6 +33,10 @@ function Engine(
     ctx.drawImage(cloud.getCloudCanvas(), 0, 0);
   }
 
+  function getPosition() {
+    return { ...terrainInstance.getPosition() };
+  }
+
   return {
     updateX,
     updateY,
@@ -40,6 +44,7 @@ function Engine(
     applyOnY,
     updateZoom,
     draw,
+    getPosition,
   }
 }
 
