@@ -249,7 +249,7 @@ body {
   top: calc(50% - var(--plane-y) + var(--multiplayer-y));
   left: calc(50% + var(--plane-x) + var(--multiplayer-x));
   transform: translate(-50%, -50%) scale(var(--plane-scale));
-  opacity: max(0.1, calc(1 - (var(--plane-scale) - 1)));
+  opacity: max(0, calc(1.5 - (var(--plane-scale) - 1)));
   position: absolute;
   z-index: var(--plane-z-index);
   background-color: transparent;

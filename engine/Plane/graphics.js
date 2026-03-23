@@ -71,6 +71,7 @@ class PlaneGraphics {
   }
 
   draw() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
     this.drawShadow();
     this.rotatePropeller();
     
