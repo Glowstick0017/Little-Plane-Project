@@ -1,5 +1,7 @@
+const WS_URL = "wss://tlpp-mp.attaditya.space";
+
 function connectMultiplayer() {
-  const socket = new WebSocket("ws://localhost:3100");
+  const socket = new WebSocket(WS_URL);
   const log = (...args) => console.log("[multiplayer]", ...args);
   
   socket.onopen = (event) => {
