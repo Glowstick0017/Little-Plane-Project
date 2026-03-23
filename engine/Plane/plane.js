@@ -33,20 +33,24 @@ class Plane {
   }
 
   updateState() {
-    const QUALITY = quality;
-    const { x, y } = this.control.position;
+    const { x, y, altitude: alt } = this.control.position;
+    const altitude = engine.getPosition().altitude;
+    const coordFactor = ALTIUDE_FACTOR / (altitude * 10);
 
-    console.log(QUALITY);
+    const evalY = y * coordFactor;
+    const evalX = x * coordFactor;
+    const evalScale = alt / altitude;
+
+    const canvasStyle = this.domElements.canvas.style;
     
-    const evalY = -y;
-    const evalX = x;
+    canvasStyle.setProperty("--plane-x", `${evalX}px`);
+    canvasStyle.setProperty("--plane-y", `${evalY}px`);
+    canvasStyle.setProperty("--plane-z-index", `${Math.floor(alt)}`);
+    canvasStyle.setProperty("--plane-scale", `${evalScale}`);
     
     this.graphics.angle = this.control.angle;
     this.graphics.shadowHeight = this.control.altitude.value / 1000;
     
-    this.domElements.canvas.style.setProperty("--plane-x", `${evalX}px`);
-    this.domElements.canvas.style.setProperty("--plane-y", `${evalY}px`);
-
     requestAnimationFrame(() => this.updateState());
   }
 }

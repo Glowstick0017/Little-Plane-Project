@@ -142,6 +142,8 @@ function Terrain(
     applyOnY(y => y / camHeightRatio);
 
     updateAltimeterDisplay(altitude);
+    const style = document.documentElement.style;
+    style.setProperty("--self-altitude", Math.round(altitude));
   }
 
   function setSeed(updatedSeed) {
@@ -161,16 +163,23 @@ function Terrain(
     const xMapPx = `${-pX}px`;
     const yMapPx = `${-pY}px`;
 
-    document.documentElement.style.setProperty("--multiplayer-x", xMapPx);
-    document.documentElement.style.setProperty("--multiplayer-y", yMapPx);
+    const style = document.documentElement.style;
+    style.setProperty("--multiplayer-x", xMapPx);
+    style.setProperty("--multiplayer-y", yMapPx);
 
     requestAnimationFrame(() => positionUpdate());
   }
 
   function getPosition() {
+    const coordFactor = ALTIUDE_FACTOR / (altitude * 10);
+
+    const pX = pos.getX() / coordFactor;
+    const pY = pos.getY() / -coordFactor;
+
     return {
-      x: pos.getX(),
-      y: pos.getY(),
+      x: pX,
+      y: pY,
+      altitude,
     }
   }
   

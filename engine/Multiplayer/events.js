@@ -1,7 +1,7 @@
 function createMultiplayerPlane(planeId) {
   const plane = new Plane();
   const planeCanvas = document.createElement("canvas");
-  const canvasContainer = document.getElementById("mpPlayerCanvases");
+  const canvasContainer = document.getElementById("canvas-container");
   
   planeCanvas.classList.add("mpPlaneCanvas");
   canvasContainer.appendChild(planeCanvas);
@@ -42,6 +42,8 @@ function playerJoined({ player }) {
 function playerLeft({ playerId }) {
   console.log("[multiplayer]", "Player left:", playerId);
   if (!planeManager.planes[playerId]) return;
+  
+  planeManager.planes[playerId].domElements.canvas.remove();
   delete planeManager.planes[playerId];
 }
 

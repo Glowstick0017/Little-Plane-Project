@@ -1,4 +1,5 @@
 :root {
+  --self-altitude: 200;
   --multiplayer-x: 0px;
   --multiplayer-y: 0px;
 }
@@ -31,7 +32,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
-  z-index: 1;
+  z-index: var(--self-altitude);
   background-color: transparent;
 }
 
@@ -39,7 +40,7 @@ body {
   width: 100%;
   height: 100%;
   position: absolute;
-  z-index: 2;
+  z-index: 15000;
   background-color: transparent;
   display: flex;
   justify-content: center;
@@ -182,7 +183,7 @@ body {
   padding: 1rem;
   font-family: boxyFont;
   letter-spacing: 1px;
-  z-index: 150;
+  z-index: 15000;
   display: block;
 }
 
@@ -240,22 +241,18 @@ body {
 .mpPlaneCanvas {
   --plane-x: 400px;
   --plane-y: 400px;
+  --plane-z-index: 200;
+  --plane-scale: 1;
+  
   width: 600px;
   height: 600px;
-  top: calc(50% - var(--plane-y));
-  left: calc(50% + var(--plane-x));
-  transform: translate(-50%, -50%);
+  top: calc(50% - var(--plane-y) + var(--multiplayer-y));
+  left: calc(50% + var(--plane-x) + var(--multiplayer-x));
+  transform: translate(-50%, -50%) scale(var(--plane-scale));
+  opacity: max(0.1, calc(1 - (var(--plane-scale) - 1)));
   position: absolute;
-  z-index: 1;
+  z-index: var(--plane-z-index);
   background-color: transparent;
-}
-
-.multiplayer {
-  position: absolute;
-  top: calc(50% + var(--multiplayer-y));
-  left: calc(50% + var(--multiplayer-x));
-  transform: translate(-50%, -50%);
-  z-index: 1;
 }
 
 @font-face {
