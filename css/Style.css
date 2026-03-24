@@ -253,11 +253,7 @@ body {
   position: absolute;
   z-index: var(--plane-z-index);
   background-color: transparent;
-  transition:
-    top 0.1s linear,
-    left 0.1s linear,
-    transform 0.1s linear,
-    opacity 0.1s linear;
+  transition: none;
 }
 
 @font-face {
