@@ -44,6 +44,7 @@ terrain.setSeed(HashToNumber(SHA256(seedVal + "")));
 cloud.setSeed(HashToNumber(SHA256((seedVal + 200) + "")));
 cloud.moveCloud();
 timeCycle.startTimeCycle();
+terrain.positionUpdate();
 
 const engine = Engine(terrain, cloud);
 engine.draw();
