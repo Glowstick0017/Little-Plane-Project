@@ -114,6 +114,10 @@ class PlaneGraphics {
     this.shadowHeight = newHeight;
   }
 
+  setAngle(newAngle) {
+    this.angle = newAngle;
+  }
+
   resetDefaults() {
     this.parts["outer"].color = '#770619';
     this.parts["innerMain"].color = '#ac322e';

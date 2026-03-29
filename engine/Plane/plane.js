@@ -7,8 +7,10 @@ class Plane {
     this.domElements = null;
     this.control = {
       angle: 0,
-      position: { x: 0, y: 0 },
-      altitude: { value: 0 },
+      speed: 0,
+      lastUpdateTimestamp: Date.now(),
+      altitude: 0,
+      position: { startX: 0, startY: 0 },
     };
   }
 
@@ -32,25 +34,63 @@ class Plane {
     }
   }
 
+  updateGraphics() {
+    const { altitude, angle } = this.control;
+
+    let altimeterNeedleAnglePercent = (altitude - minAltitude);
+    altimeterNeedleAnglePercent /= (maxAltitude - minAltitude);
+    altimeterNeedleAnglePercent = altimeterNeedleAnglePercent;
+    altimeterNeedleAnglePercent *= 100;
+
+    let adjustedShadowHeight = 1.01 - (altimeterNeedleAnglePercent / 100);
+    adjustedShadowHeight *= adjustedShadowHeight * adjustedShadowHeight;
+
+    this.graphics.setShadowHeight(adjustedShadowHeight);
+    this.graphics.setAngle(angle);
+  }
+
   updateState() {
-    const { x, y, altitude: alt } = this.control.position;
-    const altitude = engine.getPosition().altitude;
-    const coordFactor = ALTIUDE_FACTOR / (altitude * 10);
+    const {
+      speed,
+      angle,
+      lastUpdateTimestamp,
+      altitude: planeAltitude,
+      position: { startX, startY },
+    } = this.control;
 
-    const evalY = y * coordFactor;
-    const evalX = x * coordFactor;
-    const evalScale = alt / altitude;
+    const dT = (Date.now() - lastUpdateTimestamp) * 0.6;
+    const dX = Math.sin(angle);
+    const dY = Math.cos(angle);
+    
+    const evalVel = speed * dT;
+    const evalAlt = ALTIUDE_FACTOR / (planeAltitude * 10);
+    
+    const xElapsed = dX * evalVel / evalAlt;
+    const yElapsed = dY * evalVel / evalAlt;
+    
+    const derivedX = startX + xElapsed;
+    const direvedY = startY + yElapsed;
+    
+    const globalAltitude = engine.getPosition().altitude;
+    const coordFactor = ALTIUDE_FACTOR / (globalAltitude * 10);
 
+    const evalScale = planeAltitude / globalAltitude;
+    const evalX = derivedX * coordFactor;
+    const evalY = direvedY * coordFactor;
+    
     const canvasStyle = this.domElements.canvas.style;
+    const styleProperties = {
+      "--plane-x": `${evalX}px`,
+      "--plane-y": `${evalY}px`,
+      "--plane-z-index": `${Math.floor(planeAltitude)}`,
+      "--plane-scale": `${evalScale}`,
+    };
+
+    for (let prop in styleProperties) {
+      canvasStyle.setProperty(prop, styleProperties[prop]);
+    }
     
-    canvasStyle.setProperty("--plane-x", `${evalX}px`);
-    canvasStyle.setProperty("--plane-y", `${evalY}px`);
-    canvasStyle.setProperty("--plane-z-index", `${Math.floor(alt)}`);
-    canvasStyle.setProperty("--plane-scale", `${evalScale}`);
-    
-    this.graphics.angle = this.control.angle;
-    this.graphics.shadowHeight = this.control.altitude.value / 1000;
-    
+    this.updateGraphics();
     requestAnimationFrame(() => this.updateState());
   }
 }

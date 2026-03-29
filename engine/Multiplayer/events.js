@@ -16,7 +16,7 @@ function createMultiplayerPlane(planeId) {
   planeManager.planes[planeId] = plane;
 }
 
-function joinRoom({ roomId, seed, self, players }) {
+function joinRoom({ roomId, seed, self, players }, callbacks=[]) {
   console.log("[multiplayer]", `Joined room: ${roomId}`);
   console.log("[multiplayer]", `Room seed: ${seed}`);
   console.log("[multiplayer]", `Your player ID: ${self.id}`);
@@ -32,28 +32,31 @@ function joinRoom({ roomId, seed, self, players }) {
     if (player.id === self.id) continue;
     createMultiplayerPlane(player.id);
   }
+
+  callbacks.forEach(cb => cb());
 }
 
-function playerJoined({ player }) {
+function playerJoined({ player }, callbacks=[]) {
   console.log("[multiplayer]", "Player joined:", player.id);
   createMultiplayerPlane(player.id);
+  callbacks.forEach(cb => cb());
 }
 
-function playerLeft({ playerId }) {
+function playerLeft({ playerId }, callbacks=[]) {
   console.log("[multiplayer]", "Player left:", playerId);
   if (!planeManager.planes[playerId]) return;
   
   planeManager.planes[playerId].domElements.canvas.remove();
   delete planeManager.planes[playerId];
+  callbacks.forEach(cb => cb());
 }
 
-function planeState({ playerId, state }) {
+function planeState({ playerId, state }, callbacks=[]) {
   const plane = planeManager.planes[playerId];
   if (!plane) return;
 
-  plane.control.angle = state.angle;
-  plane.control.position = state.position;
-  plane.control.altitude.value = state.altitude;
+  plane.control = state;
+  callbacks.forEach(cb => cb());
 }
 
 const MP_EVENTS = {
