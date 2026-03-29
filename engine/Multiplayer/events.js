@@ -16,12 +16,17 @@ function createMultiplayerPlane(planeId) {
   planeManager.planes[planeId] = plane;
 }
 
-function joinRoom({ roomId, seed, self, players }, callbacks=[]) {
+function joinRoom({ roomId, seed, time, self, players }, callbacks=[]) {
   console.log("[multiplayer]", `Joined room: ${roomId}`);
   console.log("[multiplayer]", `Room seed: ${seed}`);
   console.log("[multiplayer]", `Your player ID: ${self.id}`);
   
   terrain.setSeed(HashToNumber(SHA256(seed)));
+  cloud.setSeed(HashToNumber(SHA256((seed + 200) + "")));
+  
+  timeCycle.setTime(time);
+  cloud.updateEpoch(time);
+
   engine.updateX(0);
   engine.updateY(0);
   
