@@ -41,6 +41,7 @@ class MultiplayerHandler {
     this.events = {};
     this.callbacks = {};
     this.unregisterWindowEvents();
+    this.disconnectCleanup();
   }
 
   registerDefaultCallbacks() {
@@ -70,6 +71,11 @@ class MultiplayerHandler {
         this.listenState.bind(this)
       )
     );
+  }
+
+  disconnectCleanup() {
+    const mpPlaneCanvases = document.querySelectorAll(".mpPlaneCanvas");
+    mpPlaneCanvases.forEach(canvas => canvas.remove());
   }
 }
 
