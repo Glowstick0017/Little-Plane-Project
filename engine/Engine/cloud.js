@@ -1,3 +1,8 @@
+function cloudSpeed(seed, direction) {
+  const numSeed = HashToNumber(SHA256(seed + "cloud" + direction));
+  return 0.5 + (numSeed % 1000) / 1000 * 2;
+}
+
 function Cloud(
   getPerlinValue,
   applySeed,
@@ -12,11 +17,11 @@ function Cloud(
   let altitude = MIN_ALTITUDE - CLOUD_HEIGHT;
   let seed = 0;
 
-  let cloudSpeedX = 2 * Math.random();
-  let cloudSpeedY = 2 * Math.random();
-  
-  // Frame-rate independent cloud movement
-  let lastCloudUpdate = performance.now();
+  let cloudSpeedX = cloudSpeed(seed, "x");
+  let cloudSpeedY = cloudSpeed(seed, "y");
+  let cloudEpoch = performance.now();
+  let cloudOffX = 0;
+  let cloudOffY = 0;
   
   let cloudTransitionStart = 100;
   let cloudTransitionEnd = 150;
@@ -144,29 +149,28 @@ function Cloud(
 
   function setSeed(updatedSeed) {
     seed = updatedSeed;
+    cloudSpeedX = cloudSpeed(seed, "x");
+    cloudSpeedY = cloudSpeed(seed, "y");
   }
 
-  function moveCloud(currentTime) {
-    // Initialize timestamp on first call
-    if (!currentTime) {
-      lastCloudUpdate = performance.now();
-      requestAnimationFrame(moveCloud);
-      return;
-    }
-    
-    // Calculate delta time for frame-rate independent movement
-    const deltaTime = (currentTime - lastCloudUpdate) / 1000;
-    lastCloudUpdate = currentTime;
-    
-    // Cap delta time to avoid huge jumps
-    const cappedDelta = Math.min(deltaTime, 0.1);
-    
-    // Normalize cloud movement to 60 FPS equivalent
-    const normalizedMovement = cappedDelta * 60;
-    
-    applyOnX(x => x + cloudSpeedX * normalizedMovement);
-    applyOnY(y => y + cloudSpeedY * normalizedMovement);
-    requestAnimationFrame(moveCloud);
+  function updateEpoch(newEpoch) {
+    cloudEpoch = newEpoch;
+  }
+
+  function moveCloud() {
+    const currentTime = performance.now();
+    const elapsedTime = (currentTime - cloudEpoch) / 10;
+
+    const finalPosX = cloudSpeedX * elapsedTime;
+    const finalPosY = cloudSpeedY * elapsedTime;
+
+    pos.applyOnX(x => x + finalPosX - cloudOffX);
+    pos.applyOnY(y => y + finalPosY - cloudOffY);
+
+    cloudOffX = finalPosX;
+    cloudOffY = finalPosY;
+
+    requestAnimationFrame(() => moveCloud());
   }
 
   function getCloudCanvas() {
@@ -182,6 +186,7 @@ function Cloud(
     applyOnY,
     moveCloud,
     updateZoom,
+    updateEpoch,
     setSeed,
     getCloudCanvas,
   }

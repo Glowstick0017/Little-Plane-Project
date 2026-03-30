@@ -127,6 +127,40 @@ const colorCommand = new Command("COLOR", "COLOR", 0, (args) => {
   }
 });
 
+// Multiplayer connect command - connects to the multiplayer server and joins the lobby.
+const multiplayerConnectCommand = new Command(
+  "MULTIPLAYER",
+  [
+    "MULTIPLAYER <CONNECT/DISCONNECT>",
+    "Connects/Disconnects the Multiplayer Server"
+  ].join("\n"),
+  1,
+  (args) => {
+    const action = args[0].toLowerCase();
+    if (action === "connect") {
+      connectMultiplayer();
+      return "Connecting to multiplayer server...";
+    } else if (action === "disconnect") {
+      multiplayerHandler.disconnect();
+      return "Disconnecting from multiplayer server...";
+    } else {
+      return "Invalid syntax `multiplayer <connect/disconnect>`";
+    }
+  }
+)
+
+// Multiplayer join room command - joins a specific room on the multiplayer server.
+const multiplayerJoinRoomCommand = new Command(
+  "JOINROOM",
+  "JOINROOM <room_id>",
+  1,
+  (args) => {
+    const roomId = args[0];
+    multiplayerHandler.actions.joinRoom(roomId);
+    return "Joining room " + roomId + "...";
+  }
+)
+
 const helpCommand = new Command(
   "HELP",
   "list all commands and their usage",
@@ -153,4 +187,6 @@ handler.register(minSpeedCommand);
 handler.register(qualityCommand);
 handler.register(teleportCommand);
 handler.register(colorCommand);
+handler.register(multiplayerConnectCommand);
+handler.register(multiplayerJoinRoomCommand);
 handler.register(helpCommand);
