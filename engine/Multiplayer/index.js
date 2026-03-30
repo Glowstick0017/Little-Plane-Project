@@ -8,8 +8,7 @@ function connectMultiplayer() {
   
   socket.onopen = (event) => {
     log("Connected");
-    multiplayerHandler.actions.joinRoom("default-room");
-    multiplayerHandler.actions.sendPlaneState();
+    multiplayerHandler.actions.joinRoom("lobby");
   };
 
   socket.onclose = (event) => {
@@ -28,30 +27,4 @@ function connectMultiplayer() {
 
   return socket;
 }
-
-connectMultiplayer();
-
-window.addEventListener("mousedown", () => {
-  multiplayerHandler.actions.sendPlaneState();
-});
-
-window.addEventListener("keydown", () => {
-  multiplayerHandler.actions.sendPlaneState();
-});
-
-window.addEventListener("mousepress", () => {
-  multiplayerHandler.actions.sendPlaneState();
-});
-
-window.addEventListener("keypress", () => {
-  multiplayerHandler.actions.sendPlaneState();
-});
-
-window.addEventListener("mouseup", () => {
-  multiplayerHandler.actions.sendPlaneState();
-});
-
-window.addEventListener("keyup", () => {
-  multiplayerHandler.actions.sendPlaneState();
-});
 

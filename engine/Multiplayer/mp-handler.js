@@ -4,6 +4,10 @@ class MultiplayerHandler {
     this.actions = {};
     this.events = MP_EVENTS;
     this.callbacks = {};
+    this.stateEvents = [
+      "mousedown", "mousepress", "mouseup",
+      "keydown", "keypress", "keyup",
+    ];
   }
 
   connect(socket) {
@@ -27,6 +31,7 @@ class MultiplayerHandler {
     }
 
     this.registerDefaultCallbacks();
+    this.registerWindowEvents();
   }
 
   disconnect() {
@@ -35,12 +40,36 @@ class MultiplayerHandler {
     this.actions = {};
     this.events = {};
     this.callbacks = {};
+    this.unregisterWindowEvents();
   }
 
   registerDefaultCallbacks() {
     this.callbacks = {
       joinRoom: [ () => this.actions.sendPlaneState() ],
     };
+  }
+
+  listenState() {
+    if (!this.socket) return;
+    this.actions.sendPlaneState();
+  }
+
+  registerWindowEvents() {
+    this.stateEvents.forEach(
+      (eventType) => window.addEventListener(
+        eventType,
+        this.listenState.bind(this)
+      )
+    );
+  }
+
+  unregisterWindowEvents() {
+    this.stateEvents.forEach(
+      (eventType) => window.removeEventListener(
+        eventType,
+        this.listenState.bind(this)
+      )
+    );
   }
 }
 
